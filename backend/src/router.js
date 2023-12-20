@@ -6,7 +6,6 @@ const router = express.Router();
 // Define Your API Routes Here
 /* ************************************************************************* */
 
-
 // Import Controllers module for handling all-related operations
 const usersControllers = require("./controllers/usersControllers");
 const assignmentsControllers = require("./controllers/assignmentsControllers");
