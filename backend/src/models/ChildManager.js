@@ -61,14 +61,14 @@ class ChildManager extends AbstractManager {
   // TODO: Implement the update operation to modify an existing child
 
   async update(
-    id,
     firstName,
     lastName,
     dateOfBirth,
     walker,
     nameOfDoctor,
     allergies,
-    alimentation
+    alimentation,
+    id
   ) {
     const [rows] = await this.database.query(
       `UPDATE ${this.table} SET first_name= ?, last_name= ?, date_of_birth= ?, walker= ?, name_of_doctor= ?, allergies= ?, alimentation= ? WHERE id= ?`,
@@ -92,7 +92,7 @@ class ChildManager extends AbstractManager {
 
   async delete(id) {
     const [rows] = await this.database.query(
-      `DELETE FROM movies where id = ?", [id]`,
+      `DELETE FROM ${this.table} where id = ?`,
       [id]
     );
 
