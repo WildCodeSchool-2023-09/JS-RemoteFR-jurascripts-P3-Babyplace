@@ -18,7 +18,6 @@ router.put("/child/:id", childControllers.edit);
 router.post("/child", childControllers.add);
 router.delete("/child/:id", childControllers.destroy);
 
-
 // parents
 
 router.get("/parents", parentsControllers.browse);

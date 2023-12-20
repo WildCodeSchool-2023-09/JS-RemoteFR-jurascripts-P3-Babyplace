@@ -8,7 +8,6 @@ const ParentsManager = require("./models/ParentsManager");
 const StructureManager = require("./models/StructureManager");
 const ChildManager = require("./models/ChildManager");
 
-
 const managers = [
   ParentsManager,
   StructureManager,
