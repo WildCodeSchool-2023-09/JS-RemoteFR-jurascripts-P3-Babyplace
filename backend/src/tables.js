@@ -3,9 +3,15 @@
 /* ************************************************************************* */
 
 // Import the manager modules responsible for handling data operations on the tables
+
+const ParentsManager = require("./models/ParentsManager");
+const StructureManager = require("./models/StructureManager");
 const ChildManager = require("./models/ChildManager");
 
+
 const managers = [
+  ParentsManager,
+  StructureManager,
   ChildManager,
   // Add other managers here
 ];
