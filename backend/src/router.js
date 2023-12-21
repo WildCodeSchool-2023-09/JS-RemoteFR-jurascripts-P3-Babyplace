@@ -13,6 +13,7 @@ const disponibilitiesControllers = require("./controllers/disponibilitiesControl
 const childControllers = require("./controllers/childControllers");
 const parentsControllers = require("./controllers/parentsController");
 const structuresControllers = require("./controllers/stucturesControllers");
+const documentsControllers = require("./controllers/documentsController");
 
 // Route to get a list of users
 router.get("/users", usersControllers.browse);
@@ -62,6 +63,13 @@ router.post("/structures", structuresControllers.add);
 router.put("/structures/:id", structuresControllers.edit);
 router.delete("/structures/:id", structuresControllers.destroy);
 
+// documents
+
+router.get("/documents", documentsControllers.browse);
+router.get("/documents/:id", documentsControllers.read);
+router.post("/documents", documentsControllers.add);
+router.put("/documents/:id", documentsControllers.edit);
+router.delete("/documents/:id", documentsControllers.destroy);
 /* ************************************************************************* */
 
 module.exports = router;
