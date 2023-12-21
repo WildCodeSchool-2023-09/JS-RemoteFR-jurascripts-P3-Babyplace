@@ -37,30 +37,19 @@ const read = async (req, res, next) => {
 // The E of BREAD - Edit (Update) operation
 // This operation is not yet implemented
 const edit = async (req, res, next) => {
-  const { id } = req.params;
-  const firstName = req.body.first_name;
-  const lastName = req.body.last_name;
-  const dateOfBirth = req.body.date_of_birth;
-  const { walker } = req.body;
-  const { allergies } = req.body;
-  const { alimentation } = req.body;
   try {
-    const childResult = await tables.child.update(
-      id,
-      firstName,
-      lastName,
-      dateOfBirth,
-      walker,
-      allergies,
-      alimentation
-    );
-
-    if (childResult.affectedRows === 0) {
+    const child = req.body;
+    const { id } = req.params;
+    const [result] = await tables.child.update({ ...child, id });
+    if (result.affectedRows === 0) {
       res.sendStatus(404);
     } else {
       res.sendStatus(204);
     }
+    next();
   } catch (err) {
+    console.error(err);
+    res.status(500);
     next(err);
   }
 };
@@ -77,7 +66,7 @@ const add = async (req, res, next) => {
     // Respond with HTTP 201 (Created) and the ID of the newly inserted child
     res.status(201).json({ insertId });
   } catch (err) {
-    res.status(500).json({ message: "hello fredo" });
+    res.status(500).json({ message: "Added a baby" });
     next(err);
   }
 };

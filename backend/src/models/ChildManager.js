@@ -60,7 +60,7 @@ class ChildManager extends AbstractManager {
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing child
 
-  async update(
+  async update({
     firstName,
     lastName,
     dateOfBirth,
@@ -68,8 +68,8 @@ class ChildManager extends AbstractManager {
     nameOfDoctor,
     allergies,
     alimentation,
-    id
-  ) {
+    id,
+  }) {
     const [rows] = await this.database.query(
       `UPDATE ${this.table} SET first_name= ?, last_name= ?, date_of_birth= ?, walker= ?, name_of_doctor= ?, allergies= ?, alimentation= ? WHERE id= ?`,
       [
