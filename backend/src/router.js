@@ -7,17 +7,17 @@ const router = express.Router();
 /* ************************************************************************* */
 
 // Import itemControllers module for handling item-related operations
-const itemControllers = require("./controllers/itemControllers");
 
-// Route to get a list of items
-router.get("/items", itemControllers.browse);
+const employeesControllers = require("./controllers/employeesControllers");
 
-// Route to get a specific item by ID
-router.get("/items/:id", itemControllers.read);
+// Route for employees
+router.get("/employees", employeesControllers.browse);
+router.get("/employees/:id", employeesControllers.read);
+router.put("/employees/:id", employeesControllers.edit);
+router.post("/employees", employeesControllers.add);
+router.delete("/employees/:id", employeesControllers.destroy);
 
-// Route to add a new item
-router.post("/items", itemControllers.add);
-
+// Route for documents
 /* ************************************************************************* */
 
 module.exports = router;
