@@ -39,7 +39,7 @@ create table parents (
   phone_number varchar(15),
   email varchar(100),
   profession varchar(100),
-  constraint fk_parents_users foreign key (user_id) references users(id) ON DELETE CASCADE
+  constraint fk_parents_users foreign key (user_id) references users(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 create table child (
@@ -52,7 +52,7 @@ create table child (
   name_of_doctor varchar(100),
   allergies text,
   alimentation enum('All', 'Vegan', 'Vegetarian', 'Halal', 'Kosher'),
-  constraint fk_child_parents foreign key (parents_id) references parents(id) ON DELETE CASCADE
+  constraint fk_child_parents foreign key (parents_id) references parents(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 create table structures (
@@ -70,7 +70,7 @@ create table structures (
   welcomes text,
   experiences text,
   prices decimal(10,2),
-  constraint fk_structures_users foreign key (user_id) references users(id) ON DELETE CASCADE
+  constraint fk_structures_users foreign key (user_id) references users(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 create table employees (
@@ -82,6 +82,7 @@ create table employees (
   max_children_capacity int,
   constraint fk_employees_structures foreign key (structure_id) references structures(id)
   ON DELETE CASCADE
+  ON UPDATE CASCADE
 );
 
 create table documents (
@@ -122,6 +123,7 @@ create table employees_disponibilities (
   number_of_places int,
   constraint fk_employees_disponibilities_employees foreign key (employee_id) references employees(id)
   ON DELETE CASCADE
+  ON UPDATE CASCADE
 );
 
 create table employees_assignments (
@@ -130,7 +132,9 @@ create table employees_assignments (
 employee_id int,
 constraint fk_employees_assignements_employees foreign key (employee_id) references employees(id)
 ON DELETE CASCADE
+ON UPDATE CASCADE
 );
 
 alter table documents 
-add constraint fk_documents_reservation foreign key (reservation_folder_id) references reservation(id);
+add constraint fk_documents_reservation foreign key (reservation_folder_id) references reservation(id) ON DELETE CASCADE
+ON UPDATE CASCADE;
