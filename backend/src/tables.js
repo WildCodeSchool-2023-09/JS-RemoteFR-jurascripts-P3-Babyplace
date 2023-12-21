@@ -12,6 +12,7 @@ const DocumentsManager = require("./models/DocumentsManager");
 const UsersManager = require("./models/UsersManager");
 const AssignmentsManager = require("./models/AssignmentsManager");
 const DisponibilitiesManager = require("./models/DisponibilitiesManager");
+const EmployeesManager = require("./models/EmployeesManager");
 
 const managers = [
   ParentsManager,
@@ -22,6 +23,7 @@ const managers = [
   UsersManager,
   AssignmentsManager,
   DisponibilitiesManager,
+  EmployeesManager,
   // Add other managers here
 ];
 

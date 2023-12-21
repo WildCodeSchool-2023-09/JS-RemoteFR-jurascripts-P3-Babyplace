@@ -15,6 +15,7 @@ const parentsControllers = require("./controllers/parentsController");
 const structuresControllers = require("./controllers/stucturesControllers");
 const reservationControllers = require("./controllers/reservationControllers");
 const documentsControllers = require("./controllers/documentsController");
+const employeesControllers = require("./controllers/employeesControllers");
 
 // users
 router.get("/users", usersControllers.browse);
@@ -72,6 +73,14 @@ router.post("/documents", documentsControllers.add);
 router.put("/documents/:id", documentsControllers.edit);
 router.delete("/documents/:id", documentsControllers.destroy);
 
+// Route for employees
+router.get("/employees", employeesControllers.browse);
+router.get("/employees/:id", employeesControllers.read);
+router.put("/employees/:id", employeesControllers.edit);
+router.post("/employees", employeesControllers.add);
+router.delete("/employees/:id", employeesControllers.destroy);
+
+// Route for documents
 /* ************************************************************************* */
 
 module.exports = router;
