@@ -14,7 +14,6 @@ const AssignmentsManager = require("./models/AssignmentsManager");
 const DisponibilitiesManager = require("./models/DisponibilitiesManager");
 const EmployeesManager = require("./models/EmployeesManager");
 
-
 const managers = [
   ParentsManager,
   StructureManager,
