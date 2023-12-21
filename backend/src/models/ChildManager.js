@@ -46,7 +46,7 @@ class ChildManager extends AbstractManager {
     );
 
     // Return the first row of the result, which represents the child
-    return [rows];
+    return rows[0];
   }
 
   async readAll() {
@@ -54,13 +54,13 @@ class ChildManager extends AbstractManager {
     const [rows] = await this.database.query(`SELECT * FROM ${this.table}`);
 
     // Return the array of items
-    return [rows];
+    return rows;
   }
 
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing child
 
-  async update(
+  async update({
     firstName,
     lastName,
     dateOfBirth,
@@ -68,8 +68,8 @@ class ChildManager extends AbstractManager {
     nameOfDoctor,
     allergies,
     alimentation,
-    id
-  ) {
+    id,
+  }) {
     const [rows] = await this.database.query(
       `UPDATE ${this.table} SET first_name= ?, last_name= ?, date_of_birth= ?, walker= ?, name_of_doctor= ?, allergies= ?, alimentation= ? WHERE id= ?`,
       [

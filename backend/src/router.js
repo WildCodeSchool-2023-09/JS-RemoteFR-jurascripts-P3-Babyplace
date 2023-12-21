@@ -13,31 +13,28 @@ const disponibilitiesControllers = require("./controllers/disponibilitiesControl
 const childControllers = require("./controllers/childControllers");
 const parentsControllers = require("./controllers/parentsController");
 const structuresControllers = require("./controllers/stucturesControllers");
+const reservationControllers = require("./controllers/reservationControllers");
 const documentsControllers = require("./controllers/documentsController");
 
-// Route to get a list of users
+// users
 router.get("/users", usersControllers.browse);
-router.get("/assignments", assignmentsControllers.browse);
-router.get("/disponibilities", disponibilitiesControllers.browse);
-
-// Route to get a specific user by ID
 router.get("/users/:id", usersControllers.read);
-router.get("/assignments/:id", assignmentsControllers.read);
-router.get("/disponibilities/:id", disponibilitiesControllers.read);
-
-// Route to add a new user
-router.post("/users", usersControllers.add);
-router.post("/assignments", assignmentsControllers.add);
-router.post("/disponibilities", disponibilitiesControllers.add);
-
-// Route to edit a user
 router.put("/users/:id", usersControllers.edit);
-router.put("/assignments/:id", assignmentsControllers.edit);
-router.put("/disponibilities/:id", disponibilitiesControllers.edit);
-
-// Route to destroy user
+router.post("/users", usersControllers.add);
 router.delete("/users/:id", usersControllers.destroy);
+
+// assignments
+router.get("/assignments", assignmentsControllers.browse);
+router.get("/assignments/:id", assignmentsControllers.read);
+router.put("/assignments/:id", assignmentsControllers.edit);
+router.post("/assignments", assignmentsControllers.add);
 router.delete("/assignments/:id", assignmentsControllers.destroy);
+
+// disponibilites
+router.get("/disponibilities", disponibilitiesControllers.browse);
+router.get("/disponibilities/:id", disponibilitiesControllers.read);
+router.put("/disponibilities/:id", disponibilitiesControllers.edit);
+router.post("/disponibilities", disponibilitiesControllers.add);
 router.delete("/disponibilities/:id", disponibilitiesControllers.destroy);
 
 // child
@@ -48,7 +45,6 @@ router.post("/child", childControllers.add);
 router.delete("/child/:id", childControllers.destroy);
 
 // parents
-
 router.get("/parents", parentsControllers.browse);
 router.get("/parents/:id", parentsControllers.read);
 router.put("/parents/:id", parentsControllers.edit);
@@ -56,20 +52,26 @@ router.post("/parents", parentsControllers.add);
 router.delete("/parents/:id", parentsControllers.destroy);
 
 // structures
-
 router.get("/structures", structuresControllers.browse);
 router.get("/structures/:id", structuresControllers.read);
 router.post("/structures", structuresControllers.add);
 router.put("/structures/:id", structuresControllers.edit);
 router.delete("/structures/:id", structuresControllers.destroy);
 
-// documents
+// reservation
+router.get("/reservation", reservationControllers.browse);
+router.get("/reservation/:id", reservationControllers.read);
+router.put("/reservation/:id", reservationControllers.edit);
+router.post("/reservation", reservationControllers.add);
+router.delete("/reservation/:id", reservationControllers.destroy);
 
+// documents
 router.get("/documents", documentsControllers.browse);
 router.get("/documents/:id", documentsControllers.read);
 router.post("/documents", documentsControllers.add);
 router.put("/documents/:id", documentsControllers.edit);
 router.delete("/documents/:id", documentsControllers.destroy);
+
 /* ************************************************************************* */
 
 module.exports = router;

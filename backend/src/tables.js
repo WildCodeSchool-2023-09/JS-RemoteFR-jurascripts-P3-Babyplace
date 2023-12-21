@@ -7,6 +7,7 @@
 const ParentsManager = require("./models/ParentsManager");
 const StructureManager = require("./models/StructureManager");
 const ChildManager = require("./models/ChildManager");
+const ReservationManager = require("./models/ReservationManager");
 const DocumentsManager = require("./models/DocumentsManager");
 const UsersManager = require("./models/UsersManager");
 const AssignmentsManager = require("./models/AssignmentsManager");
@@ -16,6 +17,7 @@ const managers = [
   ParentsManager,
   StructureManager,
   ChildManager,
+  ReservationManager,
   DocumentsManager,
   UsersManager,
   AssignmentsManager,
