@@ -10,6 +10,7 @@ const router = express.Router();
 const childControllers = require("./controllers/childControllers");
 const parentsControllers = require("./controllers/parentsController");
 const structuresControllers = require("./controllers/stucturesControllers");
+const reservationControllers = require("./controllers/reservationControllers");
 
 // child
 router.get("/child", childControllers.browse);
@@ -34,6 +35,13 @@ router.post("/structures", structuresControllers.add);
 router.put("/structures/:id", structuresControllers.edit);
 router.delete("/structures/:id", structuresControllers.destroy);
 
+// reservation
+
+router.get("/reservation", reservationControllers.browse);
+router.get("/reservation/:id", reservationControllers.read);
+router.put("/reservation/:id", reservationControllers.edit);
+router.post("/reservation", reservationControllers.add);
+router.delete("/reservation/:id", reservationControllers.destroy);
 /* ************************************************************************* */
 
 module.exports = router;

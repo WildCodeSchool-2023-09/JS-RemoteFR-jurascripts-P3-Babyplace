@@ -46,7 +46,7 @@ class ChildManager extends AbstractManager {
     );
 
     // Return the first row of the result, which represents the child
-    return [rows];
+    return rows[0];
   }
 
   async readAll() {
@@ -54,7 +54,7 @@ class ChildManager extends AbstractManager {
     const [rows] = await this.database.query(`SELECT * FROM ${this.table}`);
 
     // Return the array of items
-    return [rows];
+    return rows;
   }
 
   // The U of CRUD - Update operation
