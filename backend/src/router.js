@@ -17,7 +17,6 @@ const reservationControllers = require("./controllers/reservationControllers");
 const documentsControllers = require("./controllers/documentsController");
 const employeesControllers = require("./controllers/employeesControllers");
 
-
 // users
 router.get("/users", usersControllers.browse);
 router.get("/users/:id", usersControllers.read);
