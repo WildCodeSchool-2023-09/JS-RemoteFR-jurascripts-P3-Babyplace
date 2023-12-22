@@ -1,0 +1,46 @@
+@use "_variables.scss";
+@use "_mixins.scss";
+
+.homeContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+.logo {
+  width: 30vw;
+  height: auto;
+  margin-bottom: 5vh;
+}
+
+.choiceConnection {
+  color: whitesmoke;
+  margin-bottom: 5vh;
+  font-size: calc(30px + 0.5vw);
+}
+
+.buttons {
+  margin-bottom: 10vh;
+}
+
+.espaceBtn {
+  min-width: 15vw;
+  height: auto;
+  padding: 2svh;
+  background-color: orange;
+  border-radius: 20px;
+  border: none;
+  color: whitesmoke;
+  font-size: calc(10px + 0.5vw);
+  margin: 0 5vw;
+  cursor: pointer;
+}
+
+.imgConnexion {
+  width: 30vw;
+  height: auto;
+}
+
+//Media queries 1024px, 768px
