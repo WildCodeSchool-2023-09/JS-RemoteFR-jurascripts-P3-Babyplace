@@ -1,7 +1,15 @@
-body {
-  margin: 0;
+#root {
+  width: 100%;
+  background: linear-gradient(
+    148.74deg,
+    rgba(71, 79, 255) 2.49%,
+    rgba(89, 84, 249) 13.34%,
+    rgb(227, 122, 204) 99.05%
+  );
 }
 
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
