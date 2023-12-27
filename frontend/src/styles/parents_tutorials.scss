@@ -1,0 +1,85 @@
+@use "_variables.scss";
+@use "_mixins.scss";
+
+.parentTutorialContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  .parentContainer {
+    .imgConnexionParent1 {
+      display: block;
+      margin: 0 auto;
+      width: 80%;
+      margin-top: 1rem;
+    }
+
+    .imgConnexionParent2 {
+      display: block;
+      margin: 0 auto;
+      width: 70%;
+      margin-top: 1rem;
+    }
+  }
+
+  .parentTutorial {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    margin-bottom: 1rem;
+    color: whitesmoke;
+
+    .parentTitle {
+      font-size: 1.7rem;
+      text-align: center;
+    }
+
+    .parentsObject {
+      font-size: 1.2rem;
+      text-align: center;
+    }
+  }
+
+  .parentButton {
+    display: flex;
+
+    .previous {
+      background-color: transparent;
+      border: 0;
+      color: whitesmoke;
+      padding: 10px;
+      font-size: 1rem;
+
+      a {
+        color: whitesmoke;
+        text-decoration: none;
+      }
+    }
+
+    .next {
+      background-color: transparent;
+      border: 0;
+      color: whitesmoke;
+      padding: 10px;
+      font-size: 1.1rem;
+      margin-left: auto;
+    }
+    .next .btn {
+      margin: 10px;
+      padding: 5px 10px;
+      font-size: 16px;
+      text-align: center;
+      border: 0.1rem solid black;
+      background-color: rgb(59, 10, 59);
+      color: whitesmoke;
+      border-radius: 5rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: whitesmoke;
+      color: black;
+    }
+  }
+}
