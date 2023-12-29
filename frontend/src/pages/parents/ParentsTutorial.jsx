@@ -1,18 +1,16 @@
 import "../../styles/parents_tutorials.scss";
-// import { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import tutorial from "../../constants/dataGen";
 import { logo, home } from "../../assets";
 
 function ParentsTutorial() {
-  // const [nextText, setNextText] = useState(false);
+  const [tutorialText, setTutorialText] = useState(0);
 
-  //   const tutorialNext = `Réservez une place en moins de
-  // 60 secondes et obtenez une solution
-  // de garde, même pour le lendemain !`;
-
-  // const handleNextClick = () => {
-  //   setNextText(true);
-  // };
+  const handleNextClick = () => {
+    const nextText = (tutorialText + 1) % tutorial.length;
+    setTutorialText(nextText);
+  };
 
   return (
     <div className="parentTutorialContainer">
@@ -22,9 +20,7 @@ function ParentsTutorial() {
       </div>
       <div className="parentTutorial">
         <h1 className="parentTitle">Garde d’enfant à la demande</h1>
-        <p className="parentsObject">
-          Trouver un.e professionnel.le de la garde d’enfant
-        </p>
+        <p className="parentsObject">{tutorial[tutorialText].text}</p>
       </div>
       <div className="parentButton">
         <button className="previous" type="submit">
@@ -32,7 +28,7 @@ function ParentsTutorial() {
         </button>
         <div className="next">
           Suivant
-          <button className="btn" type="submit">
+          <button className="btn" type="submit" onClick={handleNextClick}>
             <Link to="/parents/rules">&gt;</Link>
           </button>
         </div>

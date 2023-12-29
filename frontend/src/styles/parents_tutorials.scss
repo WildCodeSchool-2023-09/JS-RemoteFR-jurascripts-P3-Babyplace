@@ -4,7 +4,7 @@
 .parentTutorialContainer {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 110vh;
 
   .parentContainer {
     .imgConnexionParent1 {
@@ -27,16 +27,16 @@
     display: flex;
     flex-direction: column;
     gap: 3rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     color: whitesmoke;
 
     .parentTitle {
-      font-size: 1.7rem;
+      font-size: 1.5rem;
       text-align: center;
     }
 
     .parentsObject {
-      font-size: 1.2rem;
+      font-size: 1rem;
       text-align: center;
     }
   }
@@ -76,6 +76,10 @@
       color: whitesmoke;
       border-radius: 5rem;
       transition: background-color 0.3s ease;
+      a {
+        color: whitesmoke;
+        text-decoration: none;
+      }
     }
 
     .btn:hover {

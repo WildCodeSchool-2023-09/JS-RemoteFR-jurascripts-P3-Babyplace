@@ -5,6 +5,7 @@ import "./App.css";
 import App from "./App";
 import NotFound from "./pages/NotFound";
 import StructureConnexion from "./pages/structure/StructureConnexion";
+import ParentsInscription from "./pages/parents/ParentsInscription";
 import ParentsConnexion from "./pages/parents/ParentsConnexion";
 import ParentsTutorial from "./pages/parents/ParentsTutorial";
 
@@ -13,6 +14,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <Router>
       <Routes>
         <Route path="/" element={<App />} />
+        <Route path="/parents/subscribe" element={<ParentsInscription />} />
         <Route path="/parents/connexion" element={<ParentsConnexion />} />
         <Route path="/parents/rules" element={<ParentsTutorial />} />
         <Route path="/pro/connexion" element={<StructureConnexion />} />

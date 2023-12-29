@@ -6,7 +6,7 @@ import { logo, home } from "../../assets";
 const MAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%_-]).{8,23}$/;
 
-function ParentsConnexion() {
+function ParentsInscription() {
   const mailRef = useRef();
   const errRef = useRef();
 
@@ -69,12 +69,12 @@ function ParentsConnexion() {
       <div className="parentContainer">
         <div className="titleParentConnexion">
           <img className="logoParent" src={logo} alt="logoParent" />
-          <span className="parent">Me connecter sur BabyPlace</span>
+          <span className="parent">Je m'inscris sur BabyPlace</span>
         </div>
         <div className="spaceContainer">
           <h3 className="spaceConnexion">
-            Vous n'avez pas de compte ?{" "}
-            <Link to="/parents/subscribe">Cliquez-ici</Link>
+            Vous avez déjà un compte ?{" "}
+            <Link to="/parents/connexion">Cliquez-ici</Link>
           </h3>
           <section>
             <p
@@ -141,8 +141,8 @@ function ParentsConnexion() {
             </form>
           </section>
           <label className="checkboxCGU">
-            <input type="checkbox" id="checkbox" />
-            Se souvenir de votre mot de passe
+            <input type="checkbox" id="checkbox" /> J'accepte les{" "}
+            <a href="/NotFound">conditions générales d'utilisation.</a>
           </label>
         </div>
       </div>
@@ -154,11 +154,11 @@ function ParentsConnexion() {
           type="submit"
           onClick={handleSubmit}
         >
-          <Link to="/NotFound">&gt;</Link>
+          <Link to="/parents/rules">&gt;</Link>
         </button>
       </div>
     </div>
   );
 }
 
-export default ParentsConnexion;
+export default ParentsInscription;
