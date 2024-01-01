@@ -9,6 +9,7 @@ import babyplacePro from "./structure/babyplace_pro.svg";
 import email from "./structure/email.svg";
 import gears from "./structure/gears.svg";
 import reservation from "./structure/reservation.svg";
+import menu from "./structure/menu.svg";
 
 // ------------------------------------------------------------------------------------------
 
@@ -20,4 +21,5 @@ export const iconsNavbar = {
   email,
   gears,
   reservation,
+  menu,
 };
