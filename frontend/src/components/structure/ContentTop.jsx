@@ -6,6 +6,7 @@ function ContentTop({ toggleSidebar }) {
   const handleToggleSidebar = () => {
     toggleSidebar();
   };
+
   return (
     <div className="main-content-top">
       <button

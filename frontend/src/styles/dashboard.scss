@@ -10,4 +10,12 @@
     justify-content: center;
     align-items: center;
   }
+
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    width: calc(100vw - 280px);
+    height: 100vh;
+    overflow-y: auto;
+  }
 }
