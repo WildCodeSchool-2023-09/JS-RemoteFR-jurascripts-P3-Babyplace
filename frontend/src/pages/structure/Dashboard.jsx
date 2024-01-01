@@ -12,7 +12,7 @@ function Dashboard() {
   };
   return (
     <div className="dashboard-ctn-main">
-      <Sidebar />
+      {isSidebarOpen && <Sidebar />}
       <div className="main-content">
         <ContentTop toggleSidebar={toggleSidebar} />
         <ContentMain />

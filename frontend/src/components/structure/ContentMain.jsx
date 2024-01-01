@@ -5,14 +5,47 @@ function ContentMain() {
   const [cards, setCards] = useState([
     {
       id: 1,
+      babyName: "Nathan",
+      age: "18mois",
+      parentName: "Dan Scott",
+      status: "En attente",
+      arrival: "2024-01-01T08:00:00Z",
+      departure: "2024-01-01T17:00:00Z",
+      totalHours: "10h",
+      totalPrice: "100€",
+    },
+    {
+      id: 2,
       babyName: "Alice",
       age: "2ans",
-      parentName: "John Doe",
+      parentName: "Sarah Connor",
       status: "En attente",
       arrival: "2024-01-01T08:00:00Z",
       departure: "2024-01-01T17:00:00Z",
       totalHours: "9h",
       totalPrice: "90€",
+    },
+    {
+      id: 3,
+      babyName: "Bruno",
+      age: "6mois",
+      parentName: "John Doe",
+      status: "En attente",
+      arrival: "2024-01-01T08:00:00Z",
+      departure: "2024-01-01T17:00:00Z",
+      totalHours: "7h",
+      totalPrice: "70€",
+    },
+    {
+      id: 4,
+      babyName: "Franck",
+      age: "4ans",
+      parentName: "Sarah Doe",
+      status: "En attente",
+      arrival: "2024-01-01T08:00:00Z",
+      departure: "2024-01-01T17:00:00Z",
+      totalHours: "4h",
+      totalPrice: "40€",
     },
   ]);
 
@@ -41,35 +74,35 @@ function ContentMain() {
               <button
                 type="button"
                 className="btn-accept"
-                onClick={() => handleStatusChange(card.id, "accepted")}
+                onClick={() => handleStatusChange(card.id, "Accepté")}
               >
-                Accept
+                Accepter
               </button>
               <button
                 type="button"
                 className="btn-reject"
-                onClick={() => handleStatusChange(card.id, "rejected")}
+                onClick={() => handleStatusChange(card.id, "Refusé")}
               >
-                Reject
+                Refuser
               </button>
             </>
           )}
-          {card.status === "accepted" && (
+          {card.status === "Accepté" && (
             <button
               type="button"
               className="btn-modify"
               onClick={() => handleStatusChange(card.id, "modified")}
             >
-              Modify Status
+              Modifier
             </button>
           )}
-          {card.status === "rejected" && (
+          {card.status === "Refusé" && (
             <button
               type="button"
               className="btn-modify"
               onClick={() => handleStatusChange(card.id, "modified")}
             >
-              Modify Status
+              Modifier
             </button>
           )}
         </div>

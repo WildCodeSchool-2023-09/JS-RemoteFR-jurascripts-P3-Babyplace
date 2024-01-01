@@ -3,7 +3,7 @@
 .content-main {
   display: flex;
   flex-wrap: wrap;
-  width: 100vw;
+  width: calc(100vw - 280px);
   gap: 20px;
   padding: 20px;
   background-color: $bg-dashboard-content-main;
@@ -14,14 +14,15 @@
     align-items: center;
     background: $clr-white;
     border-radius: 8px;
+    margin: auto;
     padding: 16px;
     width: 80%;
 
-    &.accepted {
+    &.Accepté {
       background-color: $clr-accepted;
     }
 
-    &.rejected {
+    &.Refusé {
       background-color: $clr-rejected;
     }
 
