@@ -1,10 +1,20 @@
-import React from "react";
 import "../../styles/navbar.scss";
+import {
+  IoPerson,
+  IoSearch,
+  IoNotifications,
+  IoHomeSharp,
+  IoGrid,
+} from "react-icons/io5";
 
 function NavBar() {
   return (
     <div className="navbar">
-      <h1>navbar</h1>
+      <IoHomeSharp />
+      <IoSearch />
+      <IoPerson />
+      <IoNotifications />
+      <IoGrid />
     </div>
   );
 }
