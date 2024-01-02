@@ -7,13 +7,21 @@ function Reservation() {
       <img src={logo} alt="a logo of website" />
       <h1> Demande réservation</h1>
       <form action="submit">
-        <input type="text" placeholder="Nom" />
-        <input type="text" placeholder="Prénom" />
-        <input type="text" name="" id="" placeholder="Prénom de l'enfant" />
-        <input type="text" placeholder="Email" />
-        <input type="text" placeholder="Adresse,CP,Ville" />
-        <input type="number" name="" id="" placeholder="Téléphone mobile" />
-        <button type="submit">Créer dossier réservation</button>
+        <input type="text" name="lastname" placeholder="Nom" />
+        <input type="text" name="firstname" placeholder="Prénom" />
+        <input
+          type="text"
+          name="nameOfChildren"
+          placeholder="Prénom de l'enfant"
+        />
+        <input type="text" name="email" placeholder="Email" />
+        <input type="text" name="adress" placeholder="Adresse,CP,Ville" />
+        <input
+          type="number"
+          name="phoneNumber"
+          placeholder="Téléphone mobile"
+        />
+        <button type="button">Créer dossier réservation</button>
       </form>
     </div>
   );
