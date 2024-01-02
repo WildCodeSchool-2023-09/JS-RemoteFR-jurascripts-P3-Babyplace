@@ -10,11 +10,11 @@ import {
 function NavBar() {
   return (
     <div className="navbar">
-      <IoHomeSharp />
-      <IoSearch />
-      <IoPerson />
-      <IoNotifications />
-      <IoGrid />
+      <IoHomeSharp className="icons" />
+      <IoSearch className="icons" />
+      <IoPerson className="icons" />
+      <IoNotifications className="icons" />
+      <IoGrid className="icons" />
     </div>
   );
 }
