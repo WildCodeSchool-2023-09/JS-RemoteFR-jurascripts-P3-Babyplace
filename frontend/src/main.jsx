@@ -7,6 +7,7 @@ import NotFound from "./pages/NotFound";
 import StructureConnexion from "./pages/structure/StructureConnexion";
 import Reservation from "./components/parents/Reservation";
 import ReservationTunnel from "./components/parents/ReservationTunnel";
+import Folders from "./components/parents/Folders";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -16,6 +17,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/pro/connexion" element={<StructureConnexion />} />
         <Route path="/reservation" element={<Reservation />} />
         <Route path="/reservation/creation" element={<ReservationTunnel />} />
+        <Route path="/folders" element={<Folders />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
