@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { iconsNavbar } from "../../assets";
-import navLinks from "../../constants/dataGen";
+import { navLinks } from "../../constants/dataGen";
 import "../../styles/sidebar.scss";
 
 function Sidebar() {
