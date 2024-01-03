@@ -1,0 +1,158 @@
+@use "_variables.scss";
+@use "_mixins.scss";
+
+.parentConnexionContainer {
+  display: block;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  min-height: 100svh;
+
+  .parentContainer {
+    .titleParentConnexion {
+      display: flex;
+      flex-direction: column;
+      color: whitesmoke;
+      gap: 1.3rem;
+    }
+
+    .logoParent {
+      width: 50%;
+      margin: auto;
+      height: auto;
+    }
+
+    .parent {
+      text-align: center;
+      font-size: 1.5rem;
+    }
+
+    .spaceContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 0.1rem;
+
+      .spaceConnexion {
+        color: #f6f6f6;
+        margin-top: 0.3rem;
+        font-size: 0.8rem;
+      }
+
+      section {
+        width: 100%;
+        padding: 10px 20px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        cursor: pointer;
+        margin: auto;
+        opacity: 100%;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        flex-grow: 1;
+        padding-bottom: 1rem;
+        gap: 1rem;
+      }
+
+      input[type="mail"],
+      input[type="password"] {
+        border-radius: 0.5rem;
+        background-color: transparent;
+        padding: 2vh 2vw;
+        color: antiquewhite;
+        border: 0.1rem solid rgb(38, 37, 37);
+        font-size: 1rem;
+      }
+
+      ::placeholder {
+        color: antiquewhite;
+        font-size: 1rem;
+      }
+
+      .instructions {
+        font-size: 0.75rem;
+        border-radius: 0.5rem;
+        background: #514c4c;
+        color: #fff;
+        padding: 0.25rem;
+        position: relative;
+        bottom: -10px;
+        margin-bottom: 1rem;
+      }
+
+      .offscreen {
+        position: absolute;
+        left: -9999px;
+      }
+
+      .hide {
+        display: none;
+      }
+
+      .valid {
+        color: limegreen;
+        margin-left: 0.25rem;
+      }
+
+      .invalid {
+        color: rgb(172, 20, 20);
+        margin-left: 0.25rem;
+      }
+
+      .errmsg {
+        color: antiquewhite;
+        font-weight: bold;
+        padding: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .checkboxCGU {
+        width: 100%;
+        text-align: center;
+        color: antiquewhite;
+        font-size: 0.8rem;
+        a {
+          color: black;
+        }
+      }
+    }
+  }
+
+  .linksConnexion {
+    text-align: right;
+    margin-top: 1rem;
+
+    .imgConnexionParent {
+      display: block;
+      width: 60%;
+      margin: 0 auto;
+    }
+
+    .parentConnexionBtn {
+      padding: 10px 20px;
+      font-size: 16px;
+      text-align: center;
+      text-decoration: none;
+      border: 0.1rem solid black;
+      background-color: rgb(59, 10, 59);
+      color: violet;
+      border-radius: 5rem;
+      transition: background-color 0.3s ease;
+      margin-bottom: 0.5rem;
+
+      a {
+        color: whitesmoke;
+      }
+    }
+
+    .parentConnexionBtn:hover {
+      background-color: antiquewhite;
+    }
+  }
+}
