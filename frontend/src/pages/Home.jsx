@@ -8,9 +8,12 @@ function Home() {
       <img className="logo" src={logo} alt="logo" />
       <h5 className="choiceConnection"> Vous êtes : </h5>
       <div className="buttons">
-        <button type="button" className="espaceBtn">
-          Un parent
-        </button>
+        <Link to="/parents/subscribe">
+          <button type="button" className="espaceBtn">
+            Un Parent
+          </button>
+        </Link>
+
         <Link to="/pro/connexion">
           <button type="button" className="espaceBtn">
             Une structure
