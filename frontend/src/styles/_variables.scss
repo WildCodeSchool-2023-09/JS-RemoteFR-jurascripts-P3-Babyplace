@@ -5,7 +5,11 @@ $bg-gen: linear-gradient(
   rgb(227, 122, 204) 99.05%
 );
 $bg-dashboard: #f5f5f5;
+$clr-bg-active: #fe6c00;
+$clr-white: #fff;
 
 $fs-h1: calc(0.5em + 3vw);
 $fs-h2: calc(0.5em + 1vw);
 $fs-p: calc(0.5em + 0.5vw);
+
+$transition-default: all 300ms ease-in-out;
