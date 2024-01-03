@@ -64,26 +64,21 @@
       padding: 10px;
       font-size: 1.1rem;
       margin-left: auto;
-    }
-    .next .btn {
-      margin: 10px;
-      padding: 5px 10px;
-      font-size: 16px;
-      text-align: center;
-      border: 0.1rem solid black;
-      background-color: rgb(59, 10, 59);
-      color: whitesmoke;
-      border-radius: 5rem;
-      transition: background-color 0.3s ease;
-      a {
+      .btn {
+        margin: 10px;
+        padding: 5px 10px;
+        font-size: 16px;
+        text-align: center;
+        border: 0.1rem solid black;
+        background-color: rgb(59, 10, 59);
         color: whitesmoke;
-        text-decoration: none;
+        border-radius: 5rem;
+        transition: background-color 0.3s ease;
+        &:hover {
+          background-color: whitesmoke;
+          color: black;
+        }
       }
-    }
-
-    .btn:hover {
-      background-color: whitesmoke;
-      color: black;
     }
   }
 }

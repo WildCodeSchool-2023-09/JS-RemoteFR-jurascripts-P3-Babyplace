@@ -1,15 +1,14 @@
 import "../../styles/parents_tutorials.scss";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import tutorial from "../../constants/dataGen";
+import { tutorial } from "../../constants/dataGen";
 import { logo, parents } from "../../assets";
 
 function ParentsTutorial() {
   const [tutorialText, setTutorialText] = useState(0);
 
   const handleNextClick = () => {
-    const nextText = (tutorialText + 1) % tutorial.length;
-    setTutorialText(nextText);
+    setTutorialText(tutorialText + 1);
   };
 
   return (
@@ -28,9 +27,17 @@ function ParentsTutorial() {
         </button>
         <div className="next">
           Suivant
-          <button className="btn" type="submit" onClick={handleNextClick}>
-            <Link to="/parents/rules">&gt;</Link>
-          </button>
+          {tutorialText < 1 ? (
+            <button className="btn" type="submit" onClick={handleNextClick}>
+              &gt;
+            </button>
+          ) : (
+            <Link to="/reservation">
+              <button className="btn" type="submit">
+                &gt;
+              </button>
+            </Link>
+          )}
         </div>
       </div>
     </div>

@@ -9,7 +9,7 @@ import {
 
 function NavBar() {
   return (
-    <nav className="navbar">
+    <nav className="navbar_parents">
       <IoHomeSharp className="icons" />
       <IoSearch className="icons" />
       <IoPerson className="icons" />
