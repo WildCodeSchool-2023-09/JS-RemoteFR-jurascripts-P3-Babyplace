@@ -2,7 +2,7 @@ import "../../styles/parents_tutorials.scss";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import tutorial from "../../constants/dataGen";
-import { logo, home } from "../../assets";
+import { logo, parents } from "../../assets";
 
 function ParentsTutorial() {
   const [tutorialText, setTutorialText] = useState(0);
@@ -15,7 +15,7 @@ function ParentsTutorial() {
   return (
     <div className="parentTutorialContainer">
       <div className="parentContainer">
-        <img className="imgConnexionParent1" src={home} alt="imgparent" />
+        <img className="imgConnexionParent1" src={parents} alt="imgparent" />
         <img className="imgConnexionParent2" src={logo} alt="imgparent" />
       </div>
       <div className="parentTutorial">

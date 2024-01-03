@@ -3,23 +3,21 @@
 
 .parentConnexionContainer {
   display: block;
-  width: 100%;
+  width: 100vw;
   justify-content: center;
   align-items: center;
+  min-height: 100svh;
 
   .parentContainer {
-    padding: 5vh 5vw;
-
     .titleParentConnexion {
       display: flex;
       flex-direction: column;
       color: whitesmoke;
-      margin-bottom: 1vh;
       gap: 1.3rem;
     }
 
     .logoParent {
-      width: 60%;
+      width: 50%;
       margin: auto;
       height: auto;
     }
@@ -128,6 +126,7 @@
 
   .linksConnexion {
     text-align: right;
+    margin-top: 1rem;
 
     .imgConnexionParent {
       display: block;
