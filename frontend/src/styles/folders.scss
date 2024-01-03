@@ -1,6 +1,7 @@
 .folders {
   min-height: 100svh;
   margin: auto;
+  margin-bottom: 60px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -37,6 +38,7 @@
     border-style: none;
     color: white;
     padding: 15px;
+    margin-bottom: 10px;
     border-radius: 15px;
     text-align: center;
     cursor: pointer;
