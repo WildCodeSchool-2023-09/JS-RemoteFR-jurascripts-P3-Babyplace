@@ -1,6 +1,7 @@
 import logo from "./logo_baby.png";
 import home from "./img_connexion_home.png";
 import connexion from "./connexion_desktop.png";
+import avatar from "./avatar.png";
 import parents from "./parents_logo.png";
 import agenda from "./structure/agenda.svg";
 import babyplacePro from "./structure/babyplace_pro.svg";
@@ -18,4 +19,4 @@ export const iconsNavbar = {
   menu,
 };
 
-export { logo, home, connexion, parents };
+export { logo, home, connexion, parents, avatar };

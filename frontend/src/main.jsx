@@ -5,6 +5,9 @@ import "./App.css";
 import App from "./App";
 import NotFound from "./pages/NotFound";
 import StructureConnexion from "./pages/structure/StructureConnexion";
+import Reservation from "./components/parents/Reservation";
+import ReservationTunnel from "./components/parents/ReservationTunnel";
+import Folders from "./components/parents/Folders";
 import Dashboard from "./pages/structure/Dashboard";
 import ParentsInscription from "./pages/parents/ParentsInscription";
 import ParentsConnexion from "./pages/parents/ParentsConnexion";
@@ -19,6 +22,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/parents/connexion" element={<ParentsConnexion />} />
         <Route path="/parents/rules" element={<ParentsTutorial />} />
         <Route path="/pro/connexion" element={<StructureConnexion />} />
+        <Route path="/reservation" element={<Reservation />} />
+        <Route path="/reservation/creation" element={<ReservationTunnel />} />
+        <Route path="/folders" element={<Folders />} />
         <Route path="/pro/dashboard" element={<Dashboard />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
