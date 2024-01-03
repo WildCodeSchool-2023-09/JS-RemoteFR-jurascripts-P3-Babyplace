@@ -5,9 +5,14 @@ $bg-gen: linear-gradient(
   rgb(227, 122, 204) 99.05%
 );
 $bg-dashboard: #f5f5f5;
+$bg-dashboard-content-main: #dedada;
+
 $clr-bg-active: #fe6c00;
 $clr-white: #fff;
 $clr-grey: #5d5b5b;
+$clr-border: #5d5b5b;
+$clr-accepted: #2dcd7a;
+$clr-rejected: #ef3672;
 
 $fs-h1: calc(0.5em + 3vw);
 $fs-h2: calc(0.5em + 1vw);

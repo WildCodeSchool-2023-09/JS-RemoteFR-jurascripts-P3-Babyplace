@@ -4,7 +4,11 @@ import navLinks from "../../constants/dataGen";
 import "../../styles/sidebar.scss";
 
 function Sidebar() {
-  const [activeLinkIndex] = useState(1);
+  const [activeLinkIndex, setActiveLinkIndex] = useState(0);
+
+  const handleClickLink = (index) => {
+    setActiveLinkIndex(index);
+  };
 
   return (
     <div className="sidebar">
@@ -14,13 +18,14 @@ function Sidebar() {
 
       <nav className="navbar">
         <ul className="nav-list">
-          {navLinks.map((navLink) => (
+          {navLinks.map((navLink, index) => (
             <li className="nav-item" key={navLink.id}>
               <a
-                href={`# ${navLink.id}`}
+                href={`#${navLink.id}`}
                 className={`nav-link ${
-                  navLink.id === activeLinkIndex ? "active" : null
+                  index === activeLinkIndex ? "active" : ""
                 }`}
+                onClick={() => handleClickLink(index)}
               >
                 <img
                   src={navLink.img}

@@ -5,12 +5,14 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  width: 100vw;
+  width: calc(100vw - 280px);
 
   .content-top-left {
     display: flex;
     align-items: center;
     margin: 16px 12px;
+    background: none;
+    border: none;
     img {
       width: 22px;
       cursor: pointer;
