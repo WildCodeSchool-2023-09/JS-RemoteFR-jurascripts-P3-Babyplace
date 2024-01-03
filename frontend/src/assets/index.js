@@ -20,4 +20,3 @@ export const iconsNavbar = {
 };
 
 export { logo, home, connexion, parents, avatar };
-
