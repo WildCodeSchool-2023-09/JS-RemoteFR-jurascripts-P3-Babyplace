@@ -1,0 +1,29 @@
+@import "variables.scss";
+
+.main-content-top {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: calc(100vw - 280px);
+  background-color: $clr-white;
+
+  .content-top-left {
+    display: flex;
+    align-items: center;
+    margin: 16px 12px;
+    background: none;
+    border: none;
+    img {
+      width: 22px;
+      cursor: pointer;
+    }
+
+    .content-top-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-left: 16px;
+      color: $clr-grey;
+    }
+  }
+}

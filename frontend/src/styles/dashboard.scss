@@ -1,0 +1,21 @@
+@import "variables.scss";
+
+.dashboard-ctn-main {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background-color: $bg-dashboard;
+  h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    width: calc(100vw - 280px);
+    height: 100vh;
+    overflow-y: auto;
+  }
+}
