@@ -1,0 +1,12 @@
+@import "variables.scss";
+
+.dashboard-ctn-main {
+  width: 100vw;
+  height: 100vh;
+  background-color: $bg-dashboard;
+  h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

@@ -1,4 +1,5 @@
 import "../../styles/structure_connexion.scss";
+import { Link } from "react-router-dom";
 import { connexion } from "../../assets";
 
 function StructureConnexion() {
@@ -32,7 +33,7 @@ function StructureConnexion() {
           <a href="/NotFound">conditions générales d'utilisation.</a>
         </label>
         <button className="structureConnexionBtn" type="submit">
-          Se connecter
+          <Link to="/pro/dashboard">Se connecter</Link>
         </button>
         <div className="linksConnexion">
           <a className="forgetPwdLink" href="/NotFound">
