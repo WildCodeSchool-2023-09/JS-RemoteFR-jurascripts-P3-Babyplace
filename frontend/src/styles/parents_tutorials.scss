@@ -59,13 +59,11 @@
 
     .next {
       background-color: transparent;
-      border: 0;
       color: whitesmoke;
-      padding: 10px;
-      font-size: 1.1rem;
-      margin-left: auto;
+      margin: auto;
+      margin-left: 12rem;
       .btn {
-        margin: 10px;
+        margin-left: 0.5rem;
         padding: 5px 10px;
         font-size: 16px;
         text-align: center;
@@ -73,7 +71,7 @@
         background-color: rgb(59, 10, 59);
         color: whitesmoke;
         border-radius: 5rem;
-        transition: background-color 0.3s ease;
+
         &:hover {
           background-color: whitesmoke;
           color: black;
