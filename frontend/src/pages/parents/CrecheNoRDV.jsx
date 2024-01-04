@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   background,
   balade,
@@ -8,8 +8,11 @@ import {
   wifi,
 } from "../../assets/parents/creche";
 import "../../styles/crecheNoRDV.scss";
+import Modal from "./Modal";
 
 function CrecheNoRDV() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="creche">
       <div className="title" id="title">
@@ -94,9 +97,10 @@ function CrecheNoRDV() {
               <span className="note">(indemnité d'entretien)</span>
             </div>
 
-            <button type="button" onClick={() => handlClick()}>
+            <button type="button" onClick={() => setIsOpen(true)}>
               Réserver
             </button>
+            <Modal open={isOpen} onClose={() => setIsOpen(false)} />
           </div>
         </div>
       </div>

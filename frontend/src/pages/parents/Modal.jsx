@@ -46,6 +46,10 @@ function Modal({ open, onClose }) {
             sur ordonnance ou protocole.
           </p>
         </div>
+        <form action="form">
+          <label htmlFor="check">Lorem ipsum dolor sit amet.</label>
+          <input type="checkbox" name="check" id="check" />
+        </form>
         <button type="button" onClick={onClose}>
           J'ai compris !
         </button>
