@@ -24,13 +24,13 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/parents/connexion" element={<ParentsConnexion />} />
         <Route path="/parents/rules" element={<ParentsTutorial />} />
         <Route path="/pro/connexion" element={<StructureConnexion />} />
-        <Route path="/reservation" element={<Reservation />} />
-        <Route path="/reservation/creation" element={<ReservationTunnel />} />
-        <Route path="/reservation/creation/creche" element={<Creche />} />
+        <Route path="/parents/reservation" element={<Reservation />} />
         <Route
-          path="/reservation/creation/crechenotfound"
-          element={<CrecheNoRDV />}
+          path="/parents/reservation/creation"
+          element={<ReservationTunnel />}
         />
+        <Route path="/parents/creche" element={<Creche />} />
+        <Route path="/parents/crechenotfound" element={<CrecheNoRDV />} />
         <Route path="/folders" element={<Folders />} />
         <Route path="/pro/dashboard" element={<Dashboard />} />
         <Route path="*" element={<NotFound />} />
