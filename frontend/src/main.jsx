@@ -12,6 +12,7 @@ import Dashboard from "./pages/structure/Dashboard";
 import ParentsInscription from "./pages/parents/ParentsInscription";
 import ParentsConnexion from "./pages/parents/ParentsConnexion";
 import ParentsTutorial from "./pages/parents/ParentsTutorial";
+import Creche from "./pages/parents/Creche";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -24,6 +25,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/pro/connexion" element={<StructureConnexion />} />
         <Route path="/reservation" element={<Reservation />} />
         <Route path="/reservation/creation" element={<ReservationTunnel />} />
+        <Route path="/reservation/creation/creche" element={<Creche />} />
         <Route path="/folders" element={<Folders />} />
         <Route path="/pro/dashboard" element={<Dashboard />} />
         <Route path="*" element={<NotFound />} />
