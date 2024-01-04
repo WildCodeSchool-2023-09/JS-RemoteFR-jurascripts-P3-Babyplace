@@ -31,7 +31,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         />
         <Route path="/parents/creche" element={<Creche />} />
         <Route path="/parents/crechenotfound" element={<CrecheNoRDV />} />
-        <Route path="/folders" element={<Folders />} />
+        <Route path="/parents/folders" element={<Folders />} />
         <Route path="/pro/dashboard" element={<Dashboard />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

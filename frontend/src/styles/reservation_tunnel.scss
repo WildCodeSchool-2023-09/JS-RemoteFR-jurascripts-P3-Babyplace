@@ -26,16 +26,20 @@
     font-style: normal;
     letter-spacing: 0.1em;
   }
-  button {
-    width: 70%;
-    background-color: orange;
-    font-size: 14px;
-    font-weight: 600;
-    border-style: none;
-    color: white;
-    padding: 15px;
-    border-radius: 15px;
-    text-align: center;
+  .link-res {
+    width: 75%;
+    height: 60px;
+    button {
+      width: 100%;
+      background-color: orange;
+      font-size: 14px;
+      font-weight: 600;
+      border-style: none;
+      color: white;
+      padding: 15px;
+      border-radius: 15px;
+      text-align: center;
+    }
   }
   .later_text {
     display: flex;
