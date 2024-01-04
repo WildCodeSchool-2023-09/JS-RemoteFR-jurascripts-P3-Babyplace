@@ -23,9 +23,8 @@ function Creche() {
         <span className="parentale">crèche parentale</span>
       </div>
       <div className="creche_container">
-        <div className="creche_img">
-          <img src={background} alt="creche" />
-        </div>
+        <img src={background} alt="creche" className="creche_img" />
+
         <div className="creche_description">
           <h2>Présentation</h2>
           <p>
