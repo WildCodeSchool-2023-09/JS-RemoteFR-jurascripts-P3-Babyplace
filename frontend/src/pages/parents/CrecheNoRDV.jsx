@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   background,
   balade,
@@ -7,15 +7,9 @@ import {
   tea,
   wifi,
 } from "../../assets/parents/creche";
-import "../../styles/creche.scss";
+import "../../styles/crecheNoRDV.scss";
 
-function Creche() {
-  const [modale, setModale] = useState(false);
-
-  const handlClick = () => {
-    setModale(!modale);
-  };
-
+function CrecheNoRDV() {
   return (
     <div className="creche">
       <div className="title" id="title">
@@ -49,14 +43,10 @@ function Creche() {
           </div>
           <div className="disponibility">
             <h2>Disponibilités</h2>
-            <ul>
-              <li>Lundi</li>
-              <li>Mardi</li>
-              <li>Mercredi</li>
-              <li>Jeudi</li>
-              <li>Vendredi</li>
-              <li>Samedi</li>
-            </ul>
+            <div className="discontainer">
+              <h3>Prochaine disponibilité le</h3>
+              <span>Lundi 08 janvier 2024</span>
+            </div>
           </div>
           <div className="experiences">
             <h2>Expérience</h2>
@@ -120,4 +110,4 @@ function Creche() {
   );
 }
 
-export default Creche;
+export default CrecheNoRDV;

@@ -5,6 +5,7 @@
 }
 
 .creche {
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
   .title {
@@ -28,10 +29,9 @@
   }
   .creche_container {
     display: grid;
-    // border: 2px solid red;
     width: 92%;
     margin: 0 auto;
-    // border-radius: 10px;
+    border-radius: 10px;
 
     .creche_img {
       img {
