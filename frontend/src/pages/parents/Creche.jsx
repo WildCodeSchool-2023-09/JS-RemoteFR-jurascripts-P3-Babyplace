@@ -8,13 +8,10 @@ import {
   wifi,
 } from "../../assets/parents/creche";
 import "../../styles/creche.scss";
+import Modal from "./Modal";
 
 function Creche() {
-  const [modale, setModale] = useState(false);
-
-  const handlClick = () => {
-    setModale(!modale);
-  };
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="creche">
@@ -104,9 +101,10 @@ function Creche() {
               <span className="note">(indemnité d'entretien)</span>
             </div>
 
-            <button type="button" onClick={() => handlClick()}>
+            <button type="button" onClick={() => setIsOpen(true)}>
               Réserver
             </button>
+            <Modal open={isOpen} onClose={() => setIsOpen(false)} />
           </div>
         </div>
       </div>
