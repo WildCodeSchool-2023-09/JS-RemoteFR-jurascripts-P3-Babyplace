@@ -1,4 +1,4 @@
-import React from "react";
+import PropTypes from "prop-types";
 import "../../styles/modal.scss";
 import { info } from "../../assets/parents/creche";
 
@@ -53,5 +53,10 @@ function Modal({ open, onClose }) {
     </div>
   );
 }
+
+Modal.propTypes = {
+  open: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+};
 
 export default Modal;
