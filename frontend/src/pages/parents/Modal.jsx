@@ -1,8 +1,9 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import "../../styles/modal.scss";
 import { info } from "../../assets/parents/creche";
 
-function Modal({ open, onClose }) {
+function Modal({ open }) {
   if (!open) return null;
   return (
     <div className="modal_box">
@@ -50,9 +51,9 @@ function Modal({ open, onClose }) {
           <label htmlFor="check">Lorem ipsum dolor sit amet.</label>
           <input type="checkbox" name="check" id="check" />
         </form>
-        <button type="button" onClick={onClose}>
-          J'ai compris !
-        </button>
+        <Link to="/parents/reservation">
+          <button type="button">J'ai compris !</button>
+        </Link>
       </div>
     </div>
   );
@@ -60,7 +61,6 @@ function Modal({ open, onClose }) {
 
 Modal.propTypes = {
   open: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
 };
 
 export default Modal;

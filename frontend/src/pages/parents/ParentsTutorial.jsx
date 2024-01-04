@@ -32,7 +32,7 @@ function ParentsTutorial() {
               &gt;
             </button>
           ) : (
-            <Link to="/reservation">
+            <Link to="/parents/creche">
               <button className="btn" type="submit">
                 &gt;
               </button>

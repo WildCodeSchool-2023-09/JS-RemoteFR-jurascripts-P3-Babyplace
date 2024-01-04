@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { home, logo } from "../../assets";
 import "../../styles/reservation_tunnel.scss";
 
@@ -16,7 +17,9 @@ function ReservationTunnel() {
         L'accueil en structure collective nécessite que vous remplissiez des
         informations administratives obligatoires.
       </p>
-      <button type="button">Compléter mon dossier</button>
+      <Link to="/parents/folders" className="link-res">
+        <button type="button">Compléter mon dossier</button>
+      </Link>
 
       <div className="later_text">
         <a href="/NotFound">Je complèterais plus tard </a>
