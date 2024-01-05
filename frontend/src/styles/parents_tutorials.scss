@@ -9,7 +9,7 @@
   .parentContainer {
     .imgConnexionParent1 {
       display: block;
-      margin: 0 auto;
+      margin: auto;
       width: 60%;
       margin-top: 1rem;
     }
@@ -17,7 +17,7 @@
     .imgConnexionParent2 {
       display: block;
       margin: 0 auto;
-      width: 70%;
+      width: 50%;
     }
   }
 
@@ -25,54 +25,62 @@
     padding: 10px;
     display: flex;
     flex-direction: column;
-    gap: 3rem;
-    margin-bottom: 1rem;
+    margin-bottom: 5rem;
     color: whitesmoke;
 
     .parentTitle {
       font-size: 1.5rem;
       text-align: center;
     }
-
-    .parentsObject {
-      font-size: 1rem;
-      text-align: center;
-    }
   }
 
-  .parentButton {
+  .parentsObject {
     display: flex;
+    flex-direction: column;
 
-    .previous {
-      background-color: transparent;
-      border: 0;
-      color: whitesmoke;
-      padding: 10px;
+    .parentsText {
       font-size: 1rem;
-      margin-left: 1rem;
-
-      a {
-        color: whitesmoke;
-        text-decoration: none;
-      }
+      text-align: center;
+      color: whitesmoke;
     }
 
-    .next {
-      background-color: transparent;
-      color: whitesmoke;
-      margin: auto;
-      margin-left: 12rem;
-      .btn {
-        margin-left: 0.5rem;
-        padding: 5px 10px;
-        font-size: 16px;
-        text-align: center;
-        border: 0.1rem solid black;
-        background-color: rgb(59, 10, 59);
-        color: whitesmoke;
-        border-radius: 5rem;
+    .parentButton {
+      position: fixed;
+      bottom: 5%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
 
-        &:hover {
+      .previous {
+        background-color: transparent;
+        border: 0;
+        color: whitesmoke;
+        font-size: 1rem;
+        margin-left: 2rem;
+
+        a {
+          color: whitesmoke;
+          text-decoration: none;
+        }
+      }
+
+      .next {
+        background-color: transparent;
+        border: 0;
+        color: whitesmoke;
+        font-size: 1rem;
+        margin-right: 2rem;
+
+        .btn {
+          margin-left: 0.5rem;
+          padding: 10px 15px;
+          text-align: center;
+          border: 0.1rem solid black;
+          background-color: rgb(59, 10, 59);
+          color: whitesmoke;
+          border-radius: 5rem;
+        }
+        .btn:hover {
           background-color: whitesmoke;
           color: black;
         }

@@ -19,25 +19,27 @@ function ParentsTutorial() {
       </div>
       <div className="parentTutorial">
         <h1 className="parentTitle">Garde d’enfant à la demande</h1>
-        <p className="parentsObject">{tutorial[tutorialText].text}</p>
       </div>
-      <div className="parentButton">
-        <button className="previous" type="submit">
-          <Link to="/parents/rules">Passer</Link>
-        </button>
-        <div className="next">
-          Suivant
-          {tutorialText < 1 ? (
-            <button className="btn" type="submit" onClick={handleNextClick}>
-              &gt;
-            </button>
-          ) : (
-            <Link to="/parents/creche">
-              <button className="btn" type="submit">
+      <div className="parentsObject">
+        <p className="parentsText">{tutorial[tutorialText].text}</p>
+        <div className="parentButton">
+          <button className="previous" type="submit">
+            <Link to="/parents/creche">Passer</Link>
+          </button>
+          <div className="next">
+            Suivant
+            {tutorialText < 1 ? (
+              <button className="btn" type="submit" onClick={handleNextClick}>
                 &gt;
               </button>
-            </Link>
-          )}
+            ) : (
+              <Link to="/parents/creche">
+                <button className="btn" type="submit">
+                  &gt;
+                </button>
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </div>
