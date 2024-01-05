@@ -38,18 +38,6 @@ function ParentsInscription() {
     setErrMsg("");
   }, [mail, pwd]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const v1 = MAIL_REGEX.test(mail);
-    const v2 = PWD_REGEX.test(pwd);
-    if (!v1 || !v2) {
-      setErrMsg("Invalid Entry");
-      return;
-    }
-    console.info(mail, pwd);
-  };
-
   const updateButton = () => {
     const button = document.getElementById("button");
     button.disabled = !validPwd;
@@ -84,77 +72,85 @@ function ParentsInscription() {
             >
               {errMsg}
             </p>
-            <form>
-              <label htmlFor="mail">
+            <form id="form_subscribe">
+              <label id="form_sub" htmlFor="mail_subscribe">
                 <span className={validMail ? "valid" : "hide"}>Correct</span>
                 <span className={validMail || !mail ? "hide" : "invalid"}>
                   Incorrect
                 </span>
+                <input
+                  type="mail"
+                  id="mail_subscribe"
+                  name="mail"
+                  placeholder="Email"
+                  ref={mailRef}
+                  autoComplete="off"
+                  onChange={(e) => setMail(e.target.value)}
+                  required
+                  aria-invalid={validMail ? "false" : "true"}
+                  aria-describedby="uidnote"
+                  onFocus={() => setMailFocus(true)}
+                  onBlur={() => setMailFocus(false)}
+                />
+                <p
+                  id="uidnote"
+                  className={
+                    mailFocus && mail && !validMail
+                      ? "instructions"
+                      : "offscreen"
+                  }
+                >
+                  Doit contenir @ et .
+                </p>
               </label>
-              <input
-                type="mail"
-                placeholder="Email"
-                ref={mailRef}
-                autoComplete="off"
-                onChange={(e) => setMail(e.target.value)}
-                required
-                aria-invalid={validMail ? "false" : "true"}
-                aria-describedby="uidnote"
-                onFocus={() => setMailFocus(true)}
-                onBlur={() => setMailFocus(false)}
-              />
-              <p
-                id="uidnote"
-                className={
-                  mailFocus && mail && !validMail ? "instructions" : "offscreen"
-                }
-              >
-                Doit contenir @ et .
-              </p>
 
-              <label htmlFor="password">
+              <label id="form_pass" htmlFor="password_sub">
                 <span className={validPwd ? "valid" : "hide"}>Correct</span>
                 <span className={validPwd || !mail ? "hide" : "invalid"}>
                   Incorrect
                 </span>
+                <input
+                  type="password"
+                  id="password_sub"
+                  name="password"
+                  placeholder="Mot de passe"
+                  onChange={(e) => setPwd(e.target.value)}
+                  required
+                  aria-invalid={validPwd ? "false" : "true"}
+                  onFocus={() => setPwdFocus(true)}
+                  onBlur={() => setPwdFocus(false)}
+                />
+                <p
+                  id="pwdnote"
+                  className={
+                    pwdFocus && !validPwd ? "instructions" : "offscreen"
+                  }
+                >
+                  8 à 24 caractères.
+                  <br />
+                  Doit inclure une lettre majuscule, un chiffre et un caractère
+                  special
+                  <br />
+                </p>
               </label>
-              <input
-                type="password"
-                id="password"
-                placeholder="Mot de passe"
-                onChange={(e) => setPwd(e.target.value)}
-                required
-                aria-invalid={validPwd ? "false" : "true"}
-                onFocus={() => setPwdFocus(true)}
-                onBlur={() => setPwdFocus(false)}
-              />
-              <p
-                id="pwdnote"
-                className={pwdFocus && !validPwd ? "instructions" : "offscreen"}
-              >
-                8 à 24 caractères.
-                <br />
-                Doit inclure une lettre majuscule, un chiffre et un caractère
-                special
-                <br />
-              </p>
             </form>
           </section>
-          <label className="checkboxCGU">
-            <input type="checkbox" id="checkbox" /> J'accepte les{" "}
+          <label id="form_check" className="checkboxCGU" htmlFor="checkbox">
+            <input
+              type="checkbox"
+              className="input_check"
+              name="checkbox"
+              id="checkbox"
+            />{" "}
+            J'accepte les{" "}
             <a href="/NotFound">conditions générales d'utilisation.</a>
           </label>
         </div>
       </div>
       <div className="linksConnexion">
         <img className="imgConnexionParent" src={home} alt="imgparent" />
-        <button
-          className="parentConnexionBtn"
-          id="button"
-          type="submit"
-          onClick={handleSubmit}
-        >
-          <Link to="/parents/rules">&gt;</Link>
+        <button className="parentConnexionBtn" id="button" type="submit">
+          <Link to="/parents/rules">Connexion</Link>
         </button>
       </div>
     </div>
