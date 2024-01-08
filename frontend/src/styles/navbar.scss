@@ -1,0 +1,30 @@
+.navbar_parents {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background-color: whitesmoke;
+  height: 60px;
+  padding: 0 10px;
+  border-top: 1px solid lightgrey;
+  position: fixed;
+  bottom: 0;
+  .icons {
+    width: auto;
+    height: 50px;
+    padding: 10px;
+    color: lightgray;
+
+    &:hover {
+      color: rgb(130, 88, 249);
+      border-radius: 10px;
+      background-color: rgba(130, 88, 249, 25%);
+      transition: all ease-in-out 400ms;
+    }
+    &:active {
+      color: rgb(130, 88, 249);
+      border-radius: 10px;
+      background-color: rgba(130, 88, 249, 25%);
+    }
+  }
+}

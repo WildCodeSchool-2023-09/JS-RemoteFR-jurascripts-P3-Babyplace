@@ -1,0 +1,162 @@
+@use "_variables.scss";
+@use "_mixins.scss";
+
+.parentConnexionContainer {
+  display: block;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  min-height: 100svh;
+
+  .parentContainer {
+    .titleParentConnexion {
+      display: flex;
+      flex-direction: column;
+      color: whitesmoke;
+      gap: 1.3rem;
+    }
+
+    .logoParent {
+      width: 50%;
+      margin: auto;
+      height: auto;
+    }
+
+    .parent {
+      text-align: center;
+      font-size: 1.5rem;
+    }
+
+    .spaceContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 0.1rem;
+
+      .spaceConnexion {
+        color: #f6f6f6;
+        margin-top: 0.3rem;
+        font-size: 0.8rem;
+      }
+
+      section {
+        width: 100%;
+        padding: 10px 20px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        cursor: pointer;
+        margin: auto;
+        opacity: 100%;
+
+        label {
+          display: flex;
+          flex-direction: column;
+          padding-bottom: 1rem;
+          gap: 1rem;
+
+          input[type="mail"],
+          input[type="password"] {
+            border-radius: 0.5rem;
+            background-color: transparent;
+            text-align: center;
+            color: antiquewhite;
+            border: 0.1rem solid rgb(38, 37, 37);
+            font-size: 1rem;
+            padding: 0.8rem 0.1rem;
+          }
+
+          ::placeholder {
+            color: antiquewhite;
+            margin: auto;
+          }
+
+          .instructions {
+            font-size: 0.75rem;
+            border-radius: 0.5rem;
+            background: #514c4c;
+            color: #fff;
+            padding: 0.25rem;
+            position: relative;
+            bottom: -10px;
+            margin-bottom: 1rem;
+          }
+
+          .offscreen {
+            position: absolute;
+            left: -9999px;
+          }
+
+          .hide {
+            display: none;
+          }
+
+          .valid {
+            color: limegreen;
+          }
+
+          .invalid {
+            color: rgb(172, 20, 20);
+          }
+
+          .errmsg {
+            color: antiquewhite;
+            font-weight: bold;
+          }
+        }
+      }
+      .checkboxCGU {
+        text-align: center;
+        color: antiquewhite;
+        font-size: 0.8rem;
+        a {
+          color: black;
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+
+  .linksConnexion {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 1rem;
+
+    .imgConnexionParent {
+      width: 50%;
+      margin: auto;
+      margin-bottom: 1rem;
+    }
+
+    .parentConnexionBtn {
+      width: 50%;
+      padding: 0.5rem;
+      font-size: 1rem;
+      margin-top: 1rem;
+      margin: auto;
+      text-align: center;
+      justify-content: center;
+      text-decoration: none;
+      border: 0.1rem solid black;
+      background-color: rgb(59, 10, 59);
+      color: violet;
+      border-radius: 5rem;
+
+      a {
+        color: whitesmoke;
+        text-decoration: none;
+      }
+    }
+
+    .parentConnexionBtn:hover {
+      background-color: antiquewhite;
+      color: rgb(59, 10, 59);
+      a {
+        color: rgb(59, 10, 59);
+        text-decoration: none;
+      }
+    }
+  }
+}

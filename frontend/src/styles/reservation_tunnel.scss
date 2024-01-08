@@ -1,0 +1,68 @@
+.reservation_tunnel {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  margin: 0 auto;
+  .logo_website {
+    width: 60px;
+    height: 40px;
+    padding: 2%;
+    margin-top: 10px;
+  }
+  .logo_reservation {
+    width: 280px;
+  }
+  h2 {
+    padding: 5px;
+    font-size: 22.5px;
+    text-align: center;
+    font-weight: 200;
+  }
+  p {
+    padding: 0 50px;
+    font-style: normal;
+    letter-spacing: 0.1em;
+  }
+  .link-res {
+    width: 75%;
+    height: 60px;
+    button {
+      width: 100%;
+      background-color: orange;
+      font-size: 14px;
+      font-weight: 600;
+      border-style: none;
+      color: white;
+      padding: 15px;
+      border-radius: 15px;
+      text-align: center;
+    }
+  }
+  .later_text {
+    display: flex;
+    margin-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    a {
+      padding-right: 20px;
+      text-decoration: none;
+      color: white;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 25px;
+      height: 25px;
+      background-color: rgb(130, 88, 249);
+      border-radius: 9999px;
+    }
+  }
+}

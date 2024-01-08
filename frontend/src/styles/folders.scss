@@ -1,0 +1,83 @@
+.folders {
+  min-height: 100svh;
+  margin: auto;
+  margin-bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: white;
+  align-items: center;
+  img {
+    width: 175px;
+    height: 175px;
+    object-fit: cover;
+    padding: 20px;
+    margin-top: 30px;
+    border-radius: 50%;
+  }
+  h2 {
+    font-size: 22.5px;
+    text-align: center;
+    font-weight: 200;
+  }
+  h3 {
+    width: 80%;
+    text-align: center;
+    font-size: 15px;
+  }
+  .profile_sentence {
+    width: 80%;
+    letter-spacing: 0.05em;
+    text-align: center;
+  }
+  button {
+    width: 40%;
+    background-color: orange;
+    font-size: 14px;
+    font-weight: 600;
+    border-style: none;
+    color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    text-align: center;
+    cursor: pointer;
+  }
+  .children,
+  .parents,
+  .inscription {
+    width: 90%;
+    height: 75px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    line-height: 1.5;
+    cursor: pointer;
+    span {
+      text-align: end;
+    }
+  }
+  .children {
+    background: linear-gradient(
+      90deg,
+      rgba(0, 212, 255, 0.85) 70%,
+      rgba(0, 212, 255, 0.2665441176470589) 70%
+    );
+  }
+  .parents {
+    background: linear-gradient(
+      90deg,
+      rgba(66, 236, 163, 0.85) 50%,
+      rgba(66, 236, 163, 0.2413340336134454) 50%
+    );
+  }
+  .inscription {
+    background: linear-gradient(
+      90deg,
+      rgba(244, 120, 127, 0.85) 40%,
+      rgba(244, 120, 127, 0.2413340336134454) 40%
+    );
+  }
+}
