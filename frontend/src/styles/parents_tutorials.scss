@@ -88,3 +88,12 @@
     }
   }
 }
+@media screen and (min-width: 1024px) {
+  .parentTutorialContainer {
+    .parentContainer {
+      margin-right: auto;
+      margin-left: auto;
+      width: 30%;
+    }
+  }
+}

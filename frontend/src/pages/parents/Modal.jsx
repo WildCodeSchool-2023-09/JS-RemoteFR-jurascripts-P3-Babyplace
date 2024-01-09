@@ -51,7 +51,7 @@ function Modal({ open }) {
           <label htmlFor="check">Lorem ipsum dolor sit amet.</label>
           <input type="checkbox" name="check" id="check" />
         </form>
-        <Link to="/parents/reservation">
+        <Link to="/parents/crechedetails">
           <button type="button">J'ai compris !</button>
         </Link>
       </div>

@@ -8,6 +8,7 @@ import StructureConnexion from "./pages/structure/StructureConnexion";
 import Reservation from "./components/parents/Reservation";
 import ReservationTunnel from "./components/parents/ReservationTunnel";
 import Folders from "./components/parents/Folders";
+import CrecheDetails from "./components/parents/CrecheDetails";
 import Dashboard from "./pages/structure/Dashboard";
 import ParentsInscription from "./pages/parents/ParentsInscription";
 import ParentsConnexion from "./pages/parents/ParentsConnexion";
@@ -31,6 +32,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         />
         <Route path="/parents/creche" element={<Creche />} />
         <Route path="/parents/crechenotfound" element={<CrecheNoRDV />} />
+        <Route path="/parents/crechedetails" element={<CrecheDetails />} />
         <Route path="/parents/folders" element={<Folders />} />
         <Route path="/pro/dashboard" element={<Dashboard />} />
         <Route path="*" element={<NotFound />} />
