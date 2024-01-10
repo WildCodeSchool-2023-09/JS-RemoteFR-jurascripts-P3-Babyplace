@@ -23,8 +23,10 @@ import CrecheNoRDV from "./pages/parents/CrecheNoRDV";
 import Home from "./pages/Home";
 
 const isAuthenticated = () => {
-  const token = localStorage.getItem("auth");
-  return !!token;
+  const structureToken = localStorage.getItem("auth");
+  const parentToken = localStorage.getItem("userToken");
+
+  return !!structureToken || !!parentToken;
 };
 
 const router = createBrowserRouter([
