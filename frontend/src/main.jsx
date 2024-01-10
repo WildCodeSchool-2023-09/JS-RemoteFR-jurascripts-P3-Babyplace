@@ -16,6 +16,7 @@ import ParentsConnexion from "./pages/parents/ParentsConnexion";
 import ParentsTutorial from "./pages/parents/ParentsTutorial";
 import Creche from "./pages/parents/Creche";
 import CrecheNoRDV from "./pages/parents/CrecheNoRDV";
+import CrecheDetails from "./components/parents/CrecheDetails";
 import Home from "./pages/Home";
 
 const router = createBrowserRouter([
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
       {
         path: "/parents/crechenotfound",
         element: <CrecheNoRDV />,
+      },
+      {
+        path: "/parents/crechedetails",
+        element: <CrecheDetails />,
       },
       {
         path: "/parents/folders",
