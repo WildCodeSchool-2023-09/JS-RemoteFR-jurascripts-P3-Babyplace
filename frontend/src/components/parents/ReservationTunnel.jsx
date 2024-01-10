@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { home, logo } from "../../assets";
 import "../../styles/reservation_tunnel.scss";
+import NavBar from "./NavBar";
 
 function ReservationTunnel() {
   return (
@@ -25,6 +26,7 @@ function ReservationTunnel() {
         <a href="/NotFound">Je complèterais plus tard </a>
         <span>&gt;</span>
       </div>
+      <NavBar />
     </div>
   );
 }

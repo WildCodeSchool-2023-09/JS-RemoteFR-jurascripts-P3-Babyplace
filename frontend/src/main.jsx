@@ -9,6 +9,7 @@ import Reservation from "./components/parents/Reservation";
 import ReservationTunnel from "./components/parents/ReservationTunnel";
 import Folders from "./components/parents/Folders";
 import Dashboard from "./pages/structure/Dashboard";
+import Profile from "./components/parents/Profile";
 import ParentsInscription from "./pages/parents/ParentsInscription";
 import ParentsConnexion from "./pages/parents/ParentsConnexion";
 import ParentsTutorial from "./pages/parents/ParentsTutorial";
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "/pro/connexion",
         element: <StructureConnexion />,
+      },
+      {
+        path: "parents/profile",
+        element: <Profile />,
       },
       {
         path: "/parents/reservation",
