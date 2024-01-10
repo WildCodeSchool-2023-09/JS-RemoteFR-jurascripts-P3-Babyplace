@@ -1,6 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 import "./App.css";
 import App from "./App";
 import NotFound from "./pages/NotFound";
@@ -17,6 +21,11 @@ import ParentsTutorial from "./pages/parents/ParentsTutorial";
 import Creche from "./pages/parents/Creche";
 import CrecheNoRDV from "./pages/parents/CrecheNoRDV";
 import Home from "./pages/Home";
+
+const isAuthenticated = () => {
+  const token = localStorage.getItem("auth");
+  return !!token;
+};
 
 const router = createBrowserRouter([
   {
@@ -38,7 +47,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/parents/rules",
-        element: <ParentsTutorial />,
+        element: isAuthenticated() ? <ParentsTutorial /> : <Navigate to="/" />,
       },
       {
         path: "/pro/login",
@@ -49,32 +58,36 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
-        path: "parents/profile",
-        element: <Profile />,
+        path: "/parents/profile",
+        element: isAuthenticated() ? <Profile /> : <Navigate to="/" />,
       },
       {
         path: "/parents/reservation",
-        element: <Reservation />,
+        element: isAuthenticated() ? <Reservation /> : <Navigate to="/" />,
       },
       {
         path: "/parents/reservation/creation",
-        element: <ReservationTunnel />,
+        element: isAuthenticated() ? (
+          <ReservationTunnel />
+        ) : (
+          <Navigate to="/" />
+        ),
       },
       {
         path: "/parents/creche",
-        element: <Creche />,
+        element: isAuthenticated() ? <Creche /> : <Navigate to="/" />,
       },
       {
         path: "/parents/crechenotfound",
-        element: <CrecheNoRDV />,
+        element: isAuthenticated() ? <CrecheNoRDV /> : <Navigate to="/" />,
       },
       {
         path: "/parents/folders",
-        element: <Folders />,
+        element: isAuthenticated() ? <Folders /> : <Navigate to="/" />,
       },
       {
         path: "/pro/dashboard",
-        element: <Dashboard />,
+        element: isAuthenticated() ? <Dashboard /> : <Navigate to="/" />,
       },
     ],
   },
