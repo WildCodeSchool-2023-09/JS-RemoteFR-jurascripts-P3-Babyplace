@@ -20,6 +20,7 @@
       width: 50%;
       margin: auto;
       height: auto;
+      margin-top: 1rem;
     }
 
     .parent {
@@ -129,34 +130,62 @@
       margin: auto;
       margin-bottom: 1rem;
     }
+  }
+  .parentConnexionBtn {
+    width: 50%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    margin-top: 1rem;
+    margin: auto;
+    text-align: center;
+    justify-content: center;
+    text-decoration: none;
+    border: 0.1rem solid black;
+    background-color: rgb(59, 10, 59);
+    color: violet;
+    border-radius: 5rem;
 
-    .parentConnexionBtn {
-      width: 50%;
-      padding: 0.5rem;
-      font-size: 1rem;
-      margin-top: 1rem;
-      margin: auto;
-      text-align: center;
-      justify-content: center;
+    a {
+      color: whitesmoke;
       text-decoration: none;
-      border: 0.1rem solid black;
-      background-color: rgb(59, 10, 59);
-      color: violet;
-      border-radius: 5rem;
+    }
+  }
 
-      a {
-        color: whitesmoke;
-        text-decoration: none;
+  .parentConnexionBtn:hover {
+    background-color: antiquewhite;
+    color: rgb(59, 10, 59);
+    a {
+      color: rgb(59, 10, 59);
+      text-decoration: none;
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .parentConnexionContainer {
+    min-height: 100svh;
+    .parentContainer {
+      .titleParentConnexion {
+        margin: auto;
+        width: 40%;
+        .logoParent {
+          margin-top: 1rem;
+        }
+      }
+
+      form {
+        margin: auto;
+        width: 50%;
       }
     }
+  }
+  .linksConnexion {
+    margin-right: auto;
+    margin-left: auto;
+    width: 40%;
 
-    .parentConnexionBtn:hover {
-      background-color: antiquewhite;
-      color: rgb(59, 10, 59);
-      a {
-        color: rgb(59, 10, 59);
-        text-decoration: none;
-      }
+    .parentConnexionBtn {
+      position: relative;
     }
   }
 }

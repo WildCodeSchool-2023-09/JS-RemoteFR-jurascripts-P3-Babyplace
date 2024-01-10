@@ -1,11 +1,25 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import "../../styles/parents_connexion.scss";
 import { logo, home } from "../../assets";
 
 function ParentsConnexion() {
   const emailRef = useRef();
   const passwordRef = useRef();
+
+  const [validPwd, setValidPwd] = useState(false);
+
+  const updateButton = () => {
+    const button = document.getElementById("button");
+    if (button) {
+      button.disabled = !validPwd;
+      button.style.opacity = button.disabled ? 0.5 : 1;
+    }
+  };
+
+  useEffect(() => {
+    updateButton();
+  }, [validPwd]);
 
   // Hook pour la navigation
   const navigate = useNavigate();
@@ -61,23 +75,37 @@ function ParentsConnexion() {
           <section>
             <form onSubmit={handleSubmit}>
               <div>
-                <label htmlFor="email">email</label>{" "}
-                <input
-                  ref={emailRef}
-                  autoComplete="off"
-                  type="email"
-                  id="email"
-                />
+                <label id="form-co-mail" htmlFor="email-co">
+                  {" "}
+                  <input
+                    ref={emailRef}
+                    autoComplete="off"
+                    type="mail"
+                    id="email-co"
+                    placeholder="Email"
+                    required
+                    aria-describedby="uidnote"
+                  />
+                </label>
               </div>
               <div>
-                <label htmlFor="password">password</label>{" "}
-                <input type="password" id="password" ref={passwordRef} />
+                <label id="form-co-pass" htmlFor="password-co">
+                  {" "}
+                  <input
+                    type="password"
+                    id="password-co"
+                    placeholder="Mot de Passe"
+                    ref={passwordRef}
+                    onChange={(e) => setValidPwd(e.target.value)}
+                  />
+                </label>
               </div>
               <div className="linksConnexion">
                 <button
                   className="parentConnexionBtn"
                   id="button"
                   type="submit"
+                  disabled={!validPwd}
                 >
                   Connexion
                 </button>
