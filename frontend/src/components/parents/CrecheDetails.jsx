@@ -106,7 +106,6 @@ function CrecheDetails() {
                   className="slider"
                   onChange={switchButton}
                 />
-                {/* <span className="slider" /> */}
               </label>
             </li>
             <li className="indemnities-list">
@@ -122,7 +121,6 @@ function CrecheDetails() {
                   className="slider"
                   onChange={handleMode}
                 />
-                {/* <span className="slider" /> */}
               </label>
             </li>
           </div>
@@ -132,7 +130,7 @@ function CrecheDetails() {
               <li className="note">8 h de garde*</li>
             </ul>
 
-            <Link to="*">
+            <Link to="/parents/reservation">
               <button type="button" className="btn-detail">
                 Suivant
               </button>
