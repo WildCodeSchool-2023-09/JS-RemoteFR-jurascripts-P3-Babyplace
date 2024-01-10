@@ -22,7 +22,7 @@ function Sidebar() {
           {navLinks.map((navLink, index) => (
             <li className="nav-item" key={navLink.id}>
               <Link
-                to={`#${navLink.url}`}
+                to={`${navLink.url}`}
                 className={`nav-link ${
                   index === activeLinkIndex ? "active" : null
                 }`}

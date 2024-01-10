@@ -1,7 +1,7 @@
-import React from "react";
+import "../../styles/calendar.scss";
 
 function Calendar() {
-  return <div>Calendar</div>;
+  return <div className="calendar-ctn">Calendar</div>;
 }
 
 export default Calendar;
