@@ -4,6 +4,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import App from "./App";
 import NotFound from "./pages/NotFound";
+import Login from "./pages/structure/Login";
+import Register from "./pages/structure/Register";
 import Reservation from "./components/parents/Reservation";
 import ReservationTunnel from "./components/parents/ReservationTunnel";
 import Folders from "./components/parents/Folders";
@@ -36,6 +38,14 @@ const router = createBrowserRouter([
       {
         path: "/parents/rules",
         element: <ParentsTutorial />,
+      },
+      {
+        path: "/pro/login",
+        element: <Login />,
+      },
+      {
+        path: "/pro/register",
+        element: <Register />,
       },
       {
         path: "/parents/reservation",
