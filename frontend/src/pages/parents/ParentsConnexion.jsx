@@ -1,56 +1,50 @@
-import { useRef, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useRef } from "react";
 import "../../styles/parents_connexion.scss";
 import { logo, home } from "../../assets";
 
-const MAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%_-]).{8,23}$/;
-
 function ParentsConnexion() {
-  const mailRef = useRef();
-  const errRef = useRef();
+  const emailRef = useRef();
+  const passwordRef = useRef();
 
-  const [mail, setMail] = useState("");
-  const [validMail, setValidMail] = useState(false);
-  const [mailFocus, setMailFocus] = useState(false);
+  // Hook pour la navigation
+  const navigate = useNavigate();
 
-  const [pwd, setPwd] = useState("");
-  const [validPwd, setValidPwd] = useState(false);
-  const [pwdFocus, setPwdFocus] = useState(false);
+  // Gestionnaire de soumission du formulaire
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-  const [errMsg, setErrMsg] = useState("");
+    try {
+      // Appel à l'API pour demander une connexion
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/users/login`,
+        {
+          method: "post",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: emailRef.current.value,
+            password: passwordRef.current.value,
+            profile: "Parent",
+          }),
+        }
+      );
 
-  useEffect(() => {
-    mailRef.current.focus();
-  }, []);
+      // Redirection vers la page de connexion si la création réussit
+      if (response.status === 200) {
+        const auth = await response.json();
+        // stocker le token dans le local storage
+        localStorage.setItem("userToken", auth.token);
 
-  useEffect(() => {
-    const result = MAIL_REGEX.test(mail);
-    setValidMail(result);
-  }, [mail]);
-
-  useEffect(() => {
-    const result = PWD_REGEX.test(pwd);
-    setValidPwd(result);
-  }, [pwd]);
-
-  useEffect(() => {
-    setErrMsg("");
-  }, [mail, pwd]);
-
-  const updateButton = () => {
-    const button = document.getElementById("button");
-    button.disabled = !validPwd;
-    button.style.opacity = button.disabled ? 0.5 : 1;
+        navigate("/parents/creche");
+      } else {
+        // Log des détails de la réponse en cas d'échec
+        console.info(response);
+      }
+    } catch (err) {
+      // Log des erreurs possibles
+      console.error(err);
+    }
   };
-
-  useEffect(() => {
-    updateButton();
-  }, []);
-
-  useEffect(() => {
-    updateButton();
-  }, [pwd, mail]);
 
   return (
     <div className="parentConnexionContainer">
@@ -65,73 +59,29 @@ function ParentsConnexion() {
             <Link to="/parents/subscribe">Cliquez-ici</Link>
           </h3>
           <section>
-            <p
-              ref={errRef}
-              className={errMsg ? "errmsg" : "offscreen"}
-              aria-live="assertive"
-            >
-              {errMsg}
-            </p>
-            <form id="form_connexion">
-              <label id="form_connex" htmlFor="mail_connexion">
-                <span className={validMail ? "valid" : "hide"}>Correct</span>
-                <span className={validMail || !mail ? "hide" : "invalid"}>
-                  Incorrect
-                </span>
+            <form onSubmit={handleSubmit}>
+              <div>
+                <label htmlFor="email">email</label>{" "}
                 <input
-                  type="mail"
-                  id="mail_connexion"
-                  name="mail"
-                  placeholder="Email"
-                  ref={mailRef}
+                  ref={emailRef}
                   autoComplete="off"
-                  onChange={(e) => setMail(e.target.value)}
-                  required
-                  aria-invalid={validMail ? "false" : "true"}
-                  aria-describedby="uidnote"
-                  onFocus={() => setMailFocus(true)}
-                  onBlur={() => setMailFocus(false)}
+                  type="email"
+                  id="email"
                 />
-                <p
-                  id="uidnote"
-                  className={
-                    mailFocus && mail && !validMail
-                      ? "instructions"
-                      : "offscreen"
-                  }
+              </div>
+              <div>
+                <label htmlFor="password">password</label>{" "}
+                <input type="password" id="password" ref={passwordRef} />
+              </div>
+              <div className="linksConnexion">
+                <button
+                  className="parentConnexionBtn"
+                  id="button"
+                  type="submit"
                 >
-                  Doit contenir @ et .
-                </p>
-              </label>
-
-              <label id="form_pas" htmlFor="password_connexion">
-                <span className={validPwd ? "valid" : "hide"}>Correct</span>
-                <span className={validPwd || !mail ? "hide" : "invalid"}>
-                  Incorrect
-                </span>
-                <input
-                  type="password"
-                  id="password_connexion"
-                  placeholder="Mot de passe"
-                  onChange={(e) => setPwd(e.target.value)}
-                  required
-                  aria-invalid={validPwd ? "false" : "true"}
-                  onFocus={() => setPwdFocus(true)}
-                  onBlur={() => setPwdFocus(false)}
-                />
-                <p
-                  id="pwdnote"
-                  className={
-                    pwdFocus && !validPwd ? "instructions" : "offscreen"
-                  }
-                >
-                  8 à 24 caractères.
-                  <br />
-                  Doit inclure une lettre majuscule, un chiffre et un caractère
-                  special
-                  <br />
-                </p>
-              </label>
+                  Connexion
+                </button>
+              </div>
             </form>
           </section>
           <label id="form_connexion" className="checkboxCGU">
@@ -142,9 +92,6 @@ function ParentsConnexion() {
       </div>
       <div className="linksConnexion">
         <img className="imgConnexionParent" src={home} alt="imgparent" />
-        <button className="parentConnexionBtn" id="button" type="submit">
-          <Link to="/parents/creche">Connexion</Link>
-        </button>
       </div>
     </div>
   );

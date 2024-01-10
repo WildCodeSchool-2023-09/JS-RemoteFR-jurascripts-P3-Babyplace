@@ -1,56 +1,59 @@
-import { useRef, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../../styles/parents_connexion.scss";
 import { logo, home } from "../../assets";
 
-const MAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%_-]).{8,23}$/;
-
 function ParentsInscription() {
-  const mailRef = useRef();
-  const errRef = useRef();
+  const emailRef = useRef();
 
-  const [mail, setMail] = useState("");
-  const [validMail, setValidMail] = useState(false);
-  const [mailFocus, setMailFocus] = useState(false);
+  // États pour le mot de passe et la confirmation du mot de passe
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const [pwd, setPwd] = useState("");
-  const [validPwd, setValidPwd] = useState(false);
-  const [pwdFocus, setPwdFocus] = useState(false);
+  // Hook pour la navigation
+  const navigate = useNavigate();
 
-  const [errMsg, setErrMsg] = useState("");
-
-  useEffect(() => {
-    mailRef.current.focus();
-  }, []);
-
-  useEffect(() => {
-    const result = MAIL_REGEX.test(mail);
-    setValidMail(result);
-  }, [mail]);
-
-  useEffect(() => {
-    const result = PWD_REGEX.test(pwd);
-    setValidPwd(result);
-  }, [pwd]);
-
-  useEffect(() => {
-    setErrMsg("");
-  }, [mail, pwd]);
-
-  const updateButton = () => {
-    const button = document.getElementById("button");
-    button.disabled = !validPwd;
-    button.style.opacity = button.disabled ? 0.5 : 1;
+  // Gestionnaire de changement du mot de passe
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
   };
 
-  useEffect(() => {
-    updateButton();
-  }, []);
+  // Gestionnaire de changement de la confirmation du mot de passe
+  const handleConfirmPasswordChange = (event) => {
+    setConfirmPassword(event.target.value);
+  };
 
-  useEffect(() => {
-    updateButton();
-  }, [pwd, mail]);
+  // Gestionnaire de soumission du formulaire
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      // Appel à l'API pour créer un nouvel utilisateur
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/users`,
+        {
+          method: "post",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: emailRef.current.value.toString(),
+            password,
+            profile: "Parent",
+          }),
+        }
+      );
+
+      // Redirection vers la page de connexion si la création réussit
+      if (response.status === 201) {
+        navigate("/parents/rules");
+      } else {
+        // Log des détails de la réponse en cas d'échec
+        console.info(response);
+      }
+    } catch (err) {
+      // Log des erreurs possibles
+      console.error(err);
+    }
+  };
 
   return (
     <div className="parentConnexionContainer">
@@ -65,74 +68,46 @@ function ParentsInscription() {
             <Link to="/parents/connexion">Cliquez-ici</Link>
           </h3>
           <section>
-            <p
-              ref={errRef}
-              className={errMsg ? "errmsg" : "offscreen"}
-              aria-live="assertive"
-            >
-              {errMsg}
-            </p>
-            <form id="form_subscribe">
-              <label id="form_sub" htmlFor="mail_subscribe">
-                <span className={validMail ? "valid" : "hide"}>Correct</span>
-                <span className={validMail || !mail ? "hide" : "invalid"}>
-                  Incorrect
-                </span>
+            <form onSubmit={handleSubmit}>
+              <div>
+                {/* Champ pour l'email */}
+                <label htmlFor="email">email</label>{" "}
                 <input
-                  type="mail"
-                  id="mail_subscribe"
-                  name="mail"
-                  placeholder="Email"
-                  ref={mailRef}
+                  ref={emailRef}
                   autoComplete="off"
-                  onChange={(e) => setMail(e.target.value)}
-                  required
-                  aria-invalid={validMail ? "false" : "true"}
-                  aria-describedby="uidnote"
-                  onFocus={() => setMailFocus(true)}
-                  onBlur={() => setMailFocus(false)}
+                  type="email"
+                  id="email"
                 />
-                <p
-                  id="uidnote"
-                  className={
-                    mailFocus && mail && !validMail
-                      ? "instructions"
-                      : "offscreen"
-                  }
-                >
-                  Doit contenir @ et .
-                </p>
-              </label>
-
-              <label id="form_pass" htmlFor="password_sub">
-                <span className={validPwd ? "valid" : "hide"}>Correct</span>
-                <span className={validPwd || !mail ? "hide" : "invalid"}>
-                  Incorrect
-                </span>
+              </div>
+              <div>
+                {/* Champ pour le mot de passe */}
+                <label htmlFor="password">password</label>{" "}
                 <input
                   type="password"
-                  id="password_sub"
-                  name="password"
-                  placeholder="Mot de passe"
-                  onChange={(e) => setPwd(e.target.value)}
-                  required
-                  aria-invalid={validPwd ? "false" : "true"}
-                  onFocus={() => setPwdFocus(true)}
-                  onBlur={() => setPwdFocus(false)}
-                />
-                <p
-                  id="pwdnote"
-                  className={
-                    pwdFocus && !validPwd ? "instructions" : "offscreen"
-                  }
-                >
-                  8 à 24 caractères.
-                  <br />
-                  Doit inclure une lettre majuscule, un chiffre et un caractère
-                  special
-                  <br />
-                </p>
-              </label>
+                  id="password"
+                  value={password}
+                  onChange={handlePasswordChange}
+                />{" "}
+                {/* Indicateur de force du mot de passe */}
+                {password.length >= 8 ? "✅" : "❌"}{" "}
+                {`length: ${password.length} >= 8`}
+              </div>
+              <div>
+                {/* Champ pour la confirmation du mot de passe */}
+                <label htmlFor="confirm-password">confirm password</label>{" "}
+                <input
+                  type="password"
+                  id="confirm-password"
+                  value={confirmPassword}
+                  onChange={handleConfirmPasswordChange}
+                />{" "}
+                {/* Indicateur de correspondance avec le mot de passe */}
+                {password === confirmPassword ? "✅" : "❌"}
+              </div>
+              {/* Bouton de soumission du formulaire */}
+              <button className="parentConnexionBtn" id="button" type="submit">
+                Connexion
+              </button>
             </form>
           </section>
           <label id="form_check" className="checkboxCGU" htmlFor="checkbox">
