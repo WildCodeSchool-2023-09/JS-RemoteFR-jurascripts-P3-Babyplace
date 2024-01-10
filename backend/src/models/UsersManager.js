@@ -8,7 +8,7 @@ class usersManager extends AbstractManager {
   // C
   async create({
     email,
-    password,
+    hashedPassword,
     profile,
     confirmationInscription,
     confirmationDateSent,
@@ -16,10 +16,10 @@ class usersManager extends AbstractManager {
     lastConnection,
   }) {
     const [rows] = await this.database.query(
-      `INSERT INTO ${this.table} (email, password, profile, confirmation_inscription, confirmation_date_sent, created_date, last_connection) VALUES (?,?,?,?,?,?,?)`,
+      `INSERT INTO ${this.table} (email, hashed_password, profile, confirmation_inscription, confirmation_date_sent, created_date, last_connection) VALUES (?,?,?,?,?,?,?)`,
       [
         email,
-        password,
+        hashedPassword,
         profile,
         confirmationInscription,
         confirmationDateSent,
@@ -47,7 +47,7 @@ class usersManager extends AbstractManager {
   // U
   async update({
     email,
-    password,
+    hashedPassword,
     profile,
     confirmationInscription,
     confirmationDateSent,
@@ -56,10 +56,10 @@ class usersManager extends AbstractManager {
     id,
   }) {
     const [rows] = await this.database.query(
-      `UPDATE ${this.table} SET email=?, password=?, profile=?, confirmation_inscription=?, confirmation_date_sent=?, created_date=?, last_connection=? WHERE id=?`,
+      `UPDATE ${this.table} SET email=?, hashed_password=?, profile=?, confirmation_inscription=?, confirmation_date_sent=?, created_date=?, last_connection=? WHERE id=?`,
       [
         email,
-        password,
+        hashedPassword,
         profile,
         confirmationInscription,
         confirmationDateSent,

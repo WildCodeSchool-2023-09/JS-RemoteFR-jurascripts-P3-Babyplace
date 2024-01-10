@@ -14,7 +14,7 @@ drop table if exists users;
 create table users (
   id int auto_increment primary key,
   email varchar(100) unique not null,
-  password text not null,
+  hashed_password text not null,
   profile enum('Structure', 'Parent', 'Employee') not null,
   confirmation_inscription boolean,
   confirmation_date_sent datetime,
