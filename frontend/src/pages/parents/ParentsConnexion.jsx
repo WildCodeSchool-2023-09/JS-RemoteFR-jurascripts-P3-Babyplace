@@ -49,7 +49,7 @@ function ParentsConnexion() {
         // stocker le token dans le local storage
         localStorage.setItem("userToken", auth.token);
 
-        navigate("/parents/creche");
+        navigate("/parents/creche", { replace: true });
       } else {
         // Log des détails de la réponse en cas d'échec
         console.info(response);

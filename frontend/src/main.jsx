@@ -24,8 +24,10 @@ import CrecheDetails from "./components/parents/CrecheDetails";
 import Home from "./pages/Home";
 
 const isAuthenticated = () => {
-  const token = localStorage.getItem("auth");
-  return !!token;
+  const structureToken = localStorage.getItem("auth");
+  const parentToken = localStorage.getItem("userToken");
+
+  return !!structureToken || !!parentToken;
 };
 
 const router = createBrowserRouter([
