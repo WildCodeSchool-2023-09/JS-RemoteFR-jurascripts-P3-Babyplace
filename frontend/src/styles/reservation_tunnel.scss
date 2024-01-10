@@ -23,19 +23,21 @@
   }
   p {
     padding: 0 50px;
-    font-style: normal;
-    letter-spacing: 0.1em;
+    font-size: 18px;
+    font-weight: bold;
   }
   .link-res {
     width: 75%;
     height: 60px;
     button {
       width: 100%;
-      background-color: orange;
+      background-color: rgba($color: orange, $alpha: 0.8);
       font-size: 14px;
-      font-weight: 600;
+      text-decoration: underline;
       border-style: none;
       color: white;
+      font-size: 18px;
+      font-weight: bold;
       padding: 15px;
       border-radius: 15px;
       text-align: center;
