@@ -6,6 +6,9 @@ const router = express.Router();
 // Define Your API Routes Here
 /* ************************************************************************* */
 
+// Import auth services for security operations
+const { hashPassword, verifyToken } = require("./services/auth");
+
 // Import Controllers module for handling all-related operations
 const usersControllers = require("./controllers/usersControllers");
 const assignmentsControllers = require("./controllers/assignmentsControllers");
@@ -17,11 +20,17 @@ const reservationControllers = require("./controllers/reservationControllers");
 const documentsControllers = require("./controllers/documentsController");
 const employeesControllers = require("./controllers/employeesControllers");
 
+// auth
+// Import authControllers module for handling auth-related operations
+const authControllers = require("./controllers/authControllers");
+
+router.post("/users/login", authControllers.login);
+
 // users
 router.get("/users", usersControllers.browse);
 router.get("/users/:id", usersControllers.read);
 router.put("/users/:id", usersControllers.edit);
-router.post("/users", usersControllers.add);
+router.post("/users", hashPassword, usersControllers.add);
 router.delete("/users/:id", usersControllers.destroy);
 
 // assignments
@@ -49,14 +58,14 @@ router.delete("/child/:id", childControllers.destroy);
 router.get("/parents", parentsControllers.browse);
 router.get("/parents/:id", parentsControllers.read);
 router.put("/parents/:id", parentsControllers.edit);
-router.post("/parents", parentsControllers.add);
+router.post("/parents", verifyToken, parentsControllers.add);
 router.delete("/parents/:id", parentsControllers.destroy);
 
 // structures
 router.get("/structures", structuresControllers.browse);
 router.get("/structures/:id", structuresControllers.read);
-router.post("/structures", structuresControllers.add);
 router.put("/structures/:id", structuresControllers.edit);
+router.post("/structures", verifyToken, structuresControllers.add);
 router.delete("/structures/:id", structuresControllers.destroy);
 
 // reservation
@@ -80,7 +89,6 @@ router.put("/employees/:id", employeesControllers.edit);
 router.post("/employees", employeesControllers.add);
 router.delete("/employees/:id", employeesControllers.destroy);
 
-// Route for documents
 /* ************************************************************************* */
 
 module.exports = router;
