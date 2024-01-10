@@ -19,6 +19,7 @@
     .logoParent {
       width: 50%;
       margin: auto;
+      height: auto;
       margin-top: 1rem;
     }
 
@@ -49,7 +50,6 @@
         cursor: pointer;
         margin: auto;
         opacity: 100%;
-        margin-bottom: 1rem;
 
         label {
           display: flex;
@@ -131,7 +131,6 @@
       margin-bottom: 1rem;
     }
   }
-
   .parentConnexionBtn {
     width: 50%;
     padding: 0.5rem;
@@ -158,6 +157,35 @@
     a {
       color: rgb(59, 10, 59);
       text-decoration: none;
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .parentConnexionContainer {
+    min-height: 100svh;
+    .parentContainer {
+      .titleParentConnexion {
+        margin: auto;
+        width: 40%;
+        .logoParent {
+          margin-top: 1rem;
+        }
+      }
+
+      form {
+        margin: auto;
+        width: 50%;
+      }
+    }
+  }
+  .linksConnexion {
+    margin-right: auto;
+    margin-left: auto;
+    width: 40%;
+
+    .parentConnexionBtn {
+      position: relative;
     }
   }
 }
