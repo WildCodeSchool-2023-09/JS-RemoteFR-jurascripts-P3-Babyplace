@@ -1,10 +1,30 @@
 import { iconsNavbar } from "../assets";
 
 export const navLinks = [
-  { id: 1, title: "Liste des demandes", img: iconsNavbar.reservation },
-  { id: 2, title: "Agenda", img: iconsNavbar.agenda },
-  { id: 3, title: "Email", img: iconsNavbar.email },
-  { id: 4, title: "Compte", img: iconsNavbar.gears },
+  {
+    id: 1,
+    title: "Liste des demandes",
+    img: iconsNavbar.reservation,
+    url: "/pro/dashboard/reservationdashboard",
+  },
+  {
+    id: 2,
+    title: "Agenda",
+    img: iconsNavbar.agenda,
+    url: "/pro/dashboard/agenda",
+  },
+  {
+    id: 3,
+    title: "Email",
+    img: iconsNavbar.email,
+    url: "/pro/dashboard/reservationdashboard",
+  },
+  {
+    id: 4,
+    title: "Compte",
+    img: iconsNavbar.gears,
+    url: "/pro/dashboard/agenda",
+  },
 ];
 
 export const tutorial = [

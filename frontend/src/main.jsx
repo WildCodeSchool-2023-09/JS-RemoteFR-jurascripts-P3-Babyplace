@@ -15,6 +15,8 @@ import ParentsTutorial from "./pages/parents/ParentsTutorial";
 import Creche from "./pages/parents/Creche";
 import CrecheNoRDV from "./pages/parents/CrecheNoRDV";
 import Home from "./pages/Home";
+import ReservationDashboard from "./components/structure/ReservationDashboard";
+import Calendar from "./components/structure/Calendar";
 
 const router = createBrowserRouter([
   {
@@ -65,6 +67,16 @@ const router = createBrowserRouter([
       {
         path: "/pro/dashboard",
         element: <Dashboard />,
+        children: [
+          {
+            path: "reservationdashboard",
+            element: <ReservationDashboard />,
+          },
+          {
+            path: "agenda",
+            element: <Calendar />,
+          },
+        ],
       },
     ],
   },

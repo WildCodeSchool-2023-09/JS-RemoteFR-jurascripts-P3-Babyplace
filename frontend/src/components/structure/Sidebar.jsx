@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { iconsNavbar } from "../../assets";
 import { navLinks } from "../../constants/dataGen";
 import "../../styles/sidebar.scss";
@@ -20,10 +21,10 @@ function Sidebar() {
         <ul className="nav-list">
           {navLinks.map((navLink, index) => (
             <li className="nav-item" key={navLink.id}>
-              <a
-                href={`#${navLink.id}`}
+              <Link
+                to={`#${navLink.url}`}
                 className={`nav-link ${
-                  index === activeLinkIndex ? "active" : ""
+                  index === activeLinkIndex ? "active" : null
                 }`}
                 onClick={() => handleClickLink(index)}
               >
@@ -33,7 +34,7 @@ function Sidebar() {
                   alt={navLink.title}
                 />
                 <span className="nav-link-text">{navLink.title}</span>
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
