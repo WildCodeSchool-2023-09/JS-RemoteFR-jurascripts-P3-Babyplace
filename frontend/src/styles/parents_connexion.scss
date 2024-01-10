@@ -19,7 +19,7 @@
     .logoParent {
       width: 50%;
       margin: auto;
-      height: auto;
+      margin-top: 1rem;
     }
 
     .parent {
@@ -49,6 +49,7 @@
         cursor: pointer;
         margin: auto;
         opacity: 100%;
+        margin-bottom: 1rem;
 
         label {
           display: flex;
@@ -129,34 +130,34 @@
       margin: auto;
       margin-bottom: 1rem;
     }
+  }
 
-    .parentConnexionBtn {
-      width: 50%;
-      padding: 0.5rem;
-      font-size: 1rem;
-      margin-top: 1rem;
-      margin: auto;
-      text-align: center;
-      justify-content: center;
+  .parentConnexionBtn {
+    width: 50%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    margin-top: 1rem;
+    margin: auto;
+    text-align: center;
+    justify-content: center;
+    text-decoration: none;
+    border: 0.1rem solid black;
+    background-color: rgb(59, 10, 59);
+    color: violet;
+    border-radius: 5rem;
+
+    a {
+      color: whitesmoke;
       text-decoration: none;
-      border: 0.1rem solid black;
-      background-color: rgb(59, 10, 59);
-      color: violet;
-      border-radius: 5rem;
-
-      a {
-        color: whitesmoke;
-        text-decoration: none;
-      }
     }
+  }
 
-    .parentConnexionBtn:hover {
-      background-color: antiquewhite;
+  .parentConnexionBtn:hover {
+    background-color: antiquewhite;
+    color: rgb(59, 10, 59);
+    a {
       color: rgb(59, 10, 59);
-      a {
-        color: rgb(59, 10, 59);
-        text-decoration: none;
-      }
+      text-decoration: none;
     }
   }
 }

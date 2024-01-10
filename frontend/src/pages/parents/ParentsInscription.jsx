@@ -1,27 +1,62 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../styles/parents_connexion.scss";
 import { logo, home } from "../../assets";
 
+const MAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PWD_REGEX =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%_*?&-])[A-Za-z\d@$!%_*?&-]{8,24}$/;
+
 function ParentsInscription() {
   const emailRef = useRef();
+  const errRef = useRef();
+
+  // Etat pour le email et sa validation
+  const [mail, setMail] = useState("");
+  const [validMail, setValidMail] = useState(false);
+  const [mailFocus, setMailFocus] = useState(false);
 
   // États pour le mot de passe et la confirmation du mot de passe
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordFocus, setPasswordFocus] = useState(false);
+
+  const [errMsg, setErrMsg] = useState("");
+
+  useEffect(() => {
+    emailRef.current.focus();
+  }, []);
+
+  useEffect(() => {
+    const result = MAIL_REGEX.test(mail);
+    setValidMail(result);
+  }, [mail]);
+
+  useEffect(() => {
+    const result = PWD_REGEX.test(password);
+    setConfirmPassword(result);
+  }, [password]);
+
+  useEffect(() => {
+    setErrMsg("");
+  }, [mail, password]);
+
+  const updateButton = () => {
+    const button = document.getElementById("button");
+    button.disabled = !confirmPassword;
+    button.style.opacity = button.disabled ? 0.5 : 1;
+  };
+
+  useEffect(() => {
+    updateButton();
+  }, []);
+
+  useEffect(() => {
+    updateButton();
+  }, [password, mail]);
 
   // Hook pour la navigation
   const navigate = useNavigate();
-
-  // Gestionnaire de changement du mot de passe
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
-
-  // Gestionnaire de changement de la confirmation du mot de passe
-  const handleConfirmPasswordChange = (event) => {
-    setConfirmPassword(event.target.value);
-  };
 
   // Gestionnaire de soumission du formulaire
   const handleSubmit = async (event) => {
@@ -68,41 +103,84 @@ function ParentsInscription() {
             <Link to="/parents/connexion">Cliquez-ici</Link>
           </h3>
           <section>
-            <form onSubmit={handleSubmit}>
+            <p
+              ref={errRef}
+              className={errMsg ? "errmsg" : "offscreen"}
+              aria-live="assertive"
+            >
+              {errMsg}
+            </p>
+            <form id="form_subscribe" onSubmit={handleSubmit}>
               <div>
-                {/* Champ pour l'email */}
-                <label htmlFor="email">email</label>{" "}
-                <input
-                  ref={emailRef}
-                  autoComplete="off"
-                  type="email"
-                  id="email"
-                />
+                <label id="form-sub-mail" htmlFor="email_sub">
+                  <span className={validMail ? "valid" : "hide"}>Correcte</span>
+                  <span className={validMail || !mail ? "hide" : "invalid"}>
+                    Incorrecte
+                  </span>
+                  <input
+                    ref={emailRef}
+                    autoComplete="off"
+                    type="mail"
+                    placeholder="Email"
+                    id="email_sub"
+                    name="email"
+                    onChange={(e) => setMail(e.target.value)}
+                    required
+                    aria-invalid={validMail ? "false" : "true"}
+                    aria-describedby="uidnote"
+                    onFocus={() => setMailFocus(true)}
+                    onBlur={() => setMailFocus(false)}
+                  />
+                  <p
+                    id="uidnote"
+                    className={
+                      mailFocus && mail && !validMail
+                        ? "instructions"
+                        : "offscreen"
+                    }
+                  >
+                    Doit contenir @ et .
+                  </p>
+                </label>{" "}
               </div>
               <div>
                 {/* Champ pour le mot de passe */}
-                <label htmlFor="password">password</label>{" "}
-                <input
-                  type="password"
-                  id="password"
-                  value={password}
-                  onChange={handlePasswordChange}
-                />{" "}
-                {/* Indicateur de force du mot de passe */}
-                {password.length >= 8 ? "✅" : "❌"}{" "}
-                {`length: ${password.length} >= 8`}
-              </div>
-              <div>
-                {/* Champ pour la confirmation du mot de passe */}
-                <label htmlFor="confirm-password">confirm password</label>{" "}
-                <input
-                  type="password"
-                  id="confirm-password"
-                  value={confirmPassword}
-                  onChange={handleConfirmPasswordChange}
-                />{" "}
-                {/* Indicateur de correspondance avec le mot de passe */}
-                {password === confirmPassword ? "✅" : "❌"}
+                <label id="form_pass" htmlFor="password_sub">
+                  <span className={confirmPassword ? "valid" : "hide"}>
+                    Correcte
+                  </span>
+                  <span
+                    className={confirmPassword || !mail ? "hide" : "invalid"}
+                  >
+                    Incorrecte
+                  </span>
+                  <input
+                    type="password"
+                    id="password_sub"
+                    value={password}
+                    name="password"
+                    placeholder="Mot de passe"
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    aria-invalid={confirmPassword ? "false" : "true"}
+                    onFocus={() => setPasswordFocus(true)}
+                    onBlur={() => setPasswordFocus(false)}
+                  />{" "}
+                  <p
+                    id="pwdnote"
+                    className={
+                      passwordFocus && !confirmPassword
+                        ? "instructions"
+                        : "offscreen"
+                    }
+                  >
+                    Un minimum de 11 caractères.
+                    <br />
+                    Doit inclure une lettre majuscule, un chiffre et un
+                    caractère special (@$!%_*?&-).
+                    <br />
+                  </p>
+                </label>{" "}
               </div>
               {/* Bouton de soumission du formulaire */}
               <button className="parentConnexionBtn" id="button" type="submit">
@@ -124,9 +202,6 @@ function ParentsInscription() {
       </div>
       <div className="linksConnexion">
         <img className="imgConnexionParent" src={home} alt="imgparent" />
-        <button className="parentConnexionBtn" id="button" type="submit">
-          <Link to="/parents/rules">Connexion</Link>
-        </button>
       </div>
     </div>
   );
