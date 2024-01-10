@@ -14,7 +14,7 @@ function Home() {
           </button>
         </Link>
 
-        <Link to="/pro/connexion">
+        <Link to="/pro/login">
           <button type="button" className="espaceBtn">
             Une structure
           </button>
