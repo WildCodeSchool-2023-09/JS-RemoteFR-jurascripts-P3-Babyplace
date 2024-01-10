@@ -1,10 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import App from "./App";
 import NotFound from "./pages/NotFound";
-import StructureConnexion from "./pages/structure/StructureConnexion";
 import Reservation from "./components/parents/Reservation";
 import ReservationTunnel from "./components/parents/ReservationTunnel";
 import Folders from "./components/parents/Folders";
@@ -14,27 +13,62 @@ import ParentsConnexion from "./pages/parents/ParentsConnexion";
 import ParentsTutorial from "./pages/parents/ParentsTutorial";
 import Creche from "./pages/parents/Creche";
 import CrecheNoRDV from "./pages/parents/CrecheNoRDV";
+import Home from "./pages/Home";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    errorElement: <NotFound />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/parents/subscribe",
+        element: <ParentsInscription />,
+      },
+      {
+        path: "/parents/connexion",
+        element: <ParentsConnexion />,
+      },
+      {
+        path: "/parents/rules",
+        element: <ParentsTutorial />,
+      },
+      {
+        path: "/parents/reservation",
+        element: <Reservation />,
+      },
+      {
+        path: "/parents/reservation/creation",
+        element: <ReservationTunnel />,
+      },
+      {
+        path: "/parents/creche",
+        element: <Creche />,
+      },
+      {
+        path: "/parents/crechenotfound",
+        element: <CrecheNoRDV />,
+      },
+      {
+        path: "/parents/folders",
+        element: <Folders />,
+      },
+      {
+        path: "/pro/dashboard",
+        element: <Dashboard />,
+      },
+    ],
+  },
+]);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
   <React.StrictMode>
-    <Router>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/parents/subscribe" element={<ParentsInscription />} />
-        <Route path="/parents/connexion" element={<ParentsConnexion />} />
-        <Route path="/parents/rules" element={<ParentsTutorial />} />
-        <Route path="/pro/connexion" element={<StructureConnexion />} />
-        <Route path="/parents/reservation" element={<Reservation />} />
-        <Route
-          path="/parents/reservation/creation"
-          element={<ReservationTunnel />}
-        />
-        <Route path="/parents/creche" element={<Creche />} />
-        <Route path="/parents/crechenotfound" element={<CrecheNoRDV />} />
-        <Route path="/parents/folders" element={<Folders />} />
-        <Route path="/pro/dashboard" element={<Dashboard />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Router>
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
