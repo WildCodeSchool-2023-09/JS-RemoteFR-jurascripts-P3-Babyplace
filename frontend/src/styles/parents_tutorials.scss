@@ -88,3 +88,20 @@
     }
   }
 }
+
+@media screen and (min-width: 767px) {
+  .parentTutorialContainer {
+    .parentContainer {
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .parentTutorial {
+      .parentTitle {
+        margin-bottom: auto;
+        margin-top: auto;
+      }
+    }
+  }
+}
