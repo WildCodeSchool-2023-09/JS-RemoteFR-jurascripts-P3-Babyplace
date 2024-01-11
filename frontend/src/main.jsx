@@ -86,7 +86,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/parents/crechedetails",
-        element: <CrecheDetails />,
+        element: isAuthenticated() ? <CrecheDetails /> : <Navigate to="/" />,
       },
       {
         path: "/parents/folders",
