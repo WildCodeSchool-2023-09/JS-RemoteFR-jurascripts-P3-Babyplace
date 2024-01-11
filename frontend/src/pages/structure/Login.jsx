@@ -30,7 +30,7 @@ function Login() {
 
         localStorage.setItem("auth", auth.token);
 
-        navigate("/pro/dashboard", { replace: true });
+        navigate("/pro/dashboard/reservationdashboard", { replace: true });
       } else {
         console.info(response);
       }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "../../styles/contentMain.scss";
+import "../../styles/ReservationDashboard.scss";
 
-function ContentMain() {
+function ReservationDashboard() {
   const [cards, setCards] = useState([
     {
       id: 1,
@@ -146,4 +146,4 @@ function ContentMain() {
   );
 }
 
-export default ContentMain;
+export default ReservationDashboard;

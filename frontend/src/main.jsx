@@ -23,6 +23,8 @@ import Creche from "./pages/parents/Creche";
 import CrecheNoRDV from "./pages/parents/CrecheNoRDV";
 import CrecheDetails from "./components/parents/CrecheDetails";
 import Home from "./pages/Home";
+import ReservationDashboard from "./components/structure/ReservationDashboard";
+import Calendar from "./components/structure/Calendar";
 
 const isAuthenticated = () => {
   const structureToken = localStorage.getItem("auth");
@@ -106,6 +108,20 @@ const router = createBrowserRouter([
       {
         path: "/pro/dashboard",
         element: isAuthenticated() ? <Dashboard /> : <Navigate to="/" />,
+      },
+      {
+        path: "/pro/dashboard",
+        element: <Dashboard />,
+        children: [
+          {
+            path: "reservationdashboard",
+            element: <ReservationDashboard />,
+          },
+          {
+            path: "agenda",
+            element: <Calendar />,
+          },
+        ],
       },
     ],
   },
