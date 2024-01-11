@@ -9,46 +9,48 @@ function DossierParents() {
     <section>
       <div className="parent_box">
         <div className="parent">
-          <FaLessThan className="less" />
-          <div className="parent_container">
-            <h1>Ed Cannan</h1>
+          <FaLessThan className="icon" />
+          <h1>
+            Ed Cannan
             <span>Papa Poule</span>
-          </div>
+          </h1>
         </div>
         <div className="linksTo">
-          <Link to="/parents/dossierenfants" className="link">
-            Enfants
-          </Link>
-          <Link to="/parents/dossierparents" className="link">
-            Parents
-          </Link>
-          <Link to="/parents/dossierinscription" className="link">
-            Inscription
-          </Link>
+          <Link to="/parents/dossierenfants">Enfants</Link>
+          <Link to="/parents/dossierparents">Parents</Link>
+          <Link to="/parents/dossierinscription">Inscription</Link>
         </div>
       </div>
 
+      <h2>Dossier Parents</h2>
       <div className="parentDoc_form">
-        <h2>Dossier Parents</h2>
-        <form action="">
+        <form action="submit">
           <div className="parents">
             <h3>Parent 1</h3>
-            <input type="text" placeholder="Nom" />{" "}
-            <input type="text" placeholder="Prénom" />
-            <input type="text" placeholder="Profession" />
-            <input type="tel" placeholder="Téléphone portable" />
-            <input type="email" placeholder="Mail" />
+            <input type="text" name="lastename" placeholder="Nom" />{" "}
+            <input type="text" name="firstname" placeholder="Prénom" />
+            <input type="text" name="jobname" placeholder="Profession" />
+            <input
+              type="tel"
+              name="phonenumber"
+              placeholder="Téléphone portable"
+            />
+            <input type="email" name="email" placeholder="Mail" />
           </div>
           <div className="parents">
             <h3>Parent 2</h3>
-            <input type="text" placeholder="Nom" />{" "}
-            <input type="text" placeholder="Prénom" />
-            <input type="text" placeholder="Profession" />
-            <input type="tel" placeholder="Téléphone portable" />
-            <input type="email" placeholder="Mail" />
+            <input type="text" name="lastename" placeholder="Nom" />{" "}
+            <input type="text" name="firstname" placeholder="Prénom" />
+            <input type="text" name="jobname" placeholder="Profession" />
+            <input
+              type="tel"
+              name="phonenumber"
+              placeholder="Téléphone portable"
+            />
+            <input type="email" name="email" placeholder="Mail" />
           </div>
         </form>
-        <p>+ADRESSE</p>
+        <input type="submit" value="Envoyer" className="send" />
       </div>
       <NavBar />
     </section>
