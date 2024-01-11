@@ -100,16 +100,14 @@ function ParentsConnexion() {
                   />
                 </label>
               </div>
-              <div className="linksConnexion">
-                <button
-                  className="parentConnexionBtn"
-                  id="button"
-                  type="submit"
-                  disabled={!validPwd}
-                >
-                  Connexion
-                </button>
-              </div>
+              <button
+                className="parentConnexionBtn"
+                id="button"
+                type="submit"
+                disabled={!validPwd}
+              >
+                Connexion
+              </button>
             </form>
           </section>
           <label id="form_connexion" className="checkboxCGU">
