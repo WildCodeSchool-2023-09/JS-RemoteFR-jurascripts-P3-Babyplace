@@ -56,15 +56,15 @@ section {
         margin: 40px 0;
 
         &:first-child {
-          background: #8ddad5;
+          background: $childColor;
         }
 
         &:nth-child(2) {
-          background: #00f2fe;
+          background: $parentColor;
         }
 
         &:last-child {
-          background: #ffafbd;
+          background: $incriptionColor;
         }
       }
     }

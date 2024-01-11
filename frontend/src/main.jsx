@@ -14,9 +14,6 @@ import ParentsConnexion from "./pages/parents/ParentsConnexion";
 import ParentsTutorial from "./pages/parents/ParentsTutorial";
 import Creche from "./pages/parents/Creche";
 import CrecheNoRDV from "./pages/parents/CrecheNoRDV";
-import DossierParents from "./pages/parents/DossierParents";
-import DossierEnfants from "./pages/parents/DossierEnfants";
-import DossierInscription from "./pages/parents/DossierInscription";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -32,12 +29,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           path="/parents/reservation/creation"
           element={<ReservationTunnel />}
         />
-        <Route path="/parents/dossierparents" element={<DossierParents />} />
-        <Route path="/parents/dossierenfants" element={<DossierEnfants />} />
-        <Route
-          path="/parents/dossierinscription"
-          element={<DossierInscription />}
-        />
+
         <Route path="/parents/creche" element={<Creche />} />
         <Route path="/parents/crechenotfound" element={<CrecheNoRDV />} />
         <Route path="/parents/folders" element={<Folders />} />

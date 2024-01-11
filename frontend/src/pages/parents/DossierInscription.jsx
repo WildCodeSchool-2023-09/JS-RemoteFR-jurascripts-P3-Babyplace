@@ -101,6 +101,7 @@ function DossierInscription() {
             <MdChevronRight />
           </div>
         </form>
+        <input type="submit" value="Envoyer" className="send" />
       </div>
       <NavBar />
     </section>

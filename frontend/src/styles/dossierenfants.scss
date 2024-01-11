@@ -1,0 +1,71 @@
+@import "./variables.scss";
+
+section {
+  .childs {
+    width: 90%;
+    margin: 0 auto;
+    min-height: 88svh;
+
+    .child_doc {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin: 0 0 1.8rem;
+
+      button {
+        padding: 0.4rem;
+        border-radius: 0.8rem;
+        border: 0.2px solid $height;
+        font-weight: 600;
+        background: transparent;
+        cursor: pointer;
+
+        &:first-child {
+          background: $height;
+          color: $primary;
+          font-weight: 800;
+        }
+      }
+    }
+
+    form {
+      width: 80%;
+      margin: 0 auto;
+
+      div {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        align-items: center;
+        input {
+          padding: 8px;
+          margin: 0.35rem 0;
+          border: 0.1rem solid $six;
+
+          &:focus {
+            outline: none;
+            border: 1px solid $childColor;
+          }
+        }
+      }
+    }
+
+    .send {
+      padding: 0.123rem 0.77rem;
+      border: 1px solid $six;
+      background: $bg-gen;
+      border-radius: 0.78rem;
+      color: $primary;
+      margin: 0 38% 12px;
+      font-weight: 600;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(0.9);
+        transition: all 0.3s ease;
+      }
+      &:active {
+        background: $clr-accepted;
+      }
+    }
+  }
+}
