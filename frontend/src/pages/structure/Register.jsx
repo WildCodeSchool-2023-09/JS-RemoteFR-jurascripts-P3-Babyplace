@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { connexion } from "../../assets";
-import "../../styles/login.scss";
+import "../../styles/register.scss";
 
 function Register() {
   const emailRef = useRef();
@@ -77,17 +77,17 @@ function Register() {
             value={password}
             onChange={handlePasswordChange}
           />
+          <input
+            className="inputInscription"
+            type="password"
+            placeholder="Confirmer mot de passe"
+            value={confirmPassword}
+            onChange={handleConfirmPasswordChange}
+          />{" "}
           <label className="checkboxCGU">
             <input type="checkbox" /> J'accepte les{" "}
             <a href="/NotFound">conditions générales d'utilisation.</a>
           </label>
-          <label htmlFor="confirm-password">confirm password</label>{" "}
-          <input
-            type="password"
-            id="confirm-password"
-            value={confirmPassword}
-            onChange={handleConfirmPasswordChange}
-          />{" "}
           <button className="structureInscriptionBtn" type="submit">
             S'inscrire
           </button>
