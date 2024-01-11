@@ -1,0 +1,51 @@
+@import "./variables.scss";
+
+section {
+  h2 {
+    margin: 40px 20px;
+  }
+  .Inscription_doc {
+    min-height: 76svh;
+    width: 80%;
+    margin: 0 auto;
+    form {
+      display: flex;
+      flex-direction: column;
+
+      div {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin: 0.33rem;
+
+        input {
+          padding: 0.35rem;
+          outline: none;
+          border: none;
+
+          &:focus {
+            outline: 1px solid $clr-rejected;
+          }
+        }
+      }
+    }
+    .send {
+      padding: 0.123rem 0.77rem;
+      border: 1px solid $six;
+      background: $bg-gen;
+      border-radius: 0.78rem;
+      color: $primary;
+      margin: 0 38% 12px;
+      font-weight: 600;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(0.9);
+        transition: all 0.3s ease;
+      }
+      &:active {
+        background: $clr-accepted;
+      }
+    }
+  }
+}

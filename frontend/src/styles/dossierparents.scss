@@ -1,0 +1,140 @@
+@import "./variables.scss";
+
+section {
+  background: $primary;
+  min-height: 100svh;
+
+  .parent_box {
+    background: $bg-gen;
+    width: 100svw;
+    display: flex;
+    flex-direction: column;
+
+    .parent {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $primary;
+      font-size: 20px;
+      line-height: 18px;
+      width: 90%;
+      margin: 0 auto;
+
+      .icon {
+        font-size: 18px;
+        margin: 1.2rem 2.5rem 0 0;
+      }
+      h1 {
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+
+        span {
+          margin-top: 10px;
+        }
+      }
+    }
+
+    .linksTo {
+      width: 90%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-around;
+
+      a {
+        text-decoration: none;
+        color: $primary;
+        border: 1px solid $clr-accepted;
+        width: 77px;
+        height: 77px;
+        flex-shrink: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-around;
+        border-radius: 26px;
+        font-size: 13px;
+        margin: 40px 0;
+
+        &:first-child {
+          background: $childColor;
+        }
+
+        &:nth-child(2) {
+          background: $parentColor;
+        }
+
+        &:last-child {
+          background: $incriptionColor;
+        }
+      }
+    }
+  }
+
+  h2 {
+    margin: 35px;
+    color: $height;
+    font-size: 20px;
+  }
+  .parentDoc_form {
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+    background: $height;
+
+    form {
+      color: $primary;
+      margin: 20px auto;
+      display: grid;
+      grid-template-columns: 50% 50%;
+
+      .parents {
+        display: flex;
+        flex-direction: column;
+
+        h3 {
+          font-size: 11px;
+          font-weight: 200;
+          margin: 0.4rem 1.3rem;
+        }
+        input {
+          font-size: 10px;
+          border-radius: 6px;
+          padding: 5px 10px;
+          border: 1px solid $five;
+          color: $primary;
+          background: $nine;
+          width: 80%;
+          margin: 0.1465rem auto;
+
+          &::placeholder {
+            color: $primary;
+          }
+
+          &:focus {
+            outline: none;
+            border: 1px solid $clr-bg-active;
+          }
+        }
+      }
+    }
+
+    .send {
+      padding: 0.123rem 0.77rem;
+      border: 1px solid $six;
+      background: $bg-gen;
+      border-radius: 0.78rem;
+      color: $primary;
+      margin: 0 38% 12px;
+      font-weight: 600;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(0.9);
+        transition: all 0.3s ease;
+      }
+      &:active {
+        background: $clr-accepted;
+      }
+    }
+  }
+}
