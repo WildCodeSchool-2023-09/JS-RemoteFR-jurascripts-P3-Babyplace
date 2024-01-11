@@ -10,11 +10,11 @@ function Home() {
       <div className="buttons">
         <Link to="/parents/subscribe">
           <button type="button" className="espaceBtn">
-            Un Parent
+            Un parent
           </button>
         </Link>
 
-        <Link to="/pro/connexion">
+        <Link to="/pro/login">
           <button type="button" className="espaceBtn">
             Une structure
           </button>

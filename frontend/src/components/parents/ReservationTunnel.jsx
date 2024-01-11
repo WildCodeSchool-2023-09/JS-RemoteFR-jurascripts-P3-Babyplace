@@ -14,8 +14,8 @@ function ReservationTunnel() {
       <h1>Merci !</h1>
       <h2>Votre demande de réservation a été créé avec succès !</h2>
       <p>
-        L'accueil en structure collective nécessite que vous remplissiez des
-        informations administratives obligatoires.
+        Cependant, il faut que vous complétiez votre dossier afin de finaliser
+        votre demande !
       </p>
       <Link to="/parents/folders" className="link-res">
         <button type="button">Compléter mon dossier</button>

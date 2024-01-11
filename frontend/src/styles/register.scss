@@ -1,0 +1,102 @@
+@use "_variables.scss";
+@use "_mixins.scss";
+
+.structureInscriptionContainer {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+
+  .leftContainer {
+    flex: 40%;
+    padding: 5vh 5vw;
+  }
+
+  .titleStructureInscription {
+    display: flex;
+    color: whitesmoke;
+    margin-bottom: 3vh;
+  }
+
+  .pro {
+    border: 2px solid whitesmoke;
+    border-radius: 100px;
+    padding: 0.5vh 1vw;
+    margin: 0 1vw;
+  }
+
+  .subtitleStructureInscription {
+    color: grey;
+    background-color: whitesmoke;
+    width: 15vw;
+    font-size: calc(15px + 0.5vw);
+    padding-inline: 5px;
+    margin-bottom: 1vh;
+  }
+
+  .dhInscription {
+    color: whitesmoke;
+    font-size: calc(15px + 0.5vw);
+    font-weight: bold;
+  }
+
+  .imgInscriptionStructure {
+    margin-top: 30vh;
+    width: 90%;
+  }
+
+  .rightContainer {
+    flex: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 20px;
+
+    .spaceInscription {
+      width: 50%;
+      margin-bottom: 3vh;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .inputInscription {
+      width: 50%;
+      margin-bottom: 1vh;
+      padding: 1vh 1vw;
+    }
+
+    .checkboxCGU {
+      width: 50%;
+      margin-bottom: 2vh;
+      a {
+        color: black;
+      }
+    }
+    .linksInscription {
+      margin-top: 0.5vh;
+      display: flex;
+      width: 50%;
+      justify-content: space-between;
+    }
+    .forgetPwdLink {
+      color: black;
+      margin-right: 2vw;
+    }
+
+    .inscriptionLink {
+      color: black;
+    }
+
+    .structureInscriptionBtn {
+      width: 50%;
+      text-transform: uppercase;
+      color: whitesmoke;
+      background-color: #9c69e2;
+      padding: 1vh 1vw;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+  }
+}
