@@ -1,22 +1,34 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 import "./App.css";
 import App from "./App";
 import NotFound from "./pages/NotFound";
-import StructureConnexion from "./pages/structure/StructureConnexion";
+import Login from "./pages/structure/Login";
+import Register from "./pages/structure/Register";
 import Reservation from "./components/parents/Reservation";
 import ReservationTunnel from "./components/parents/ReservationTunnel";
 import Folders from "./components/parents/Folders";
 import Dashboard from "./pages/structure/Dashboard";
+import Profile from "./components/parents/Profile";
 import ParentsInscription from "./pages/parents/ParentsInscription";
 import ParentsConnexion from "./pages/parents/ParentsConnexion";
 import ParentsTutorial from "./pages/parents/ParentsTutorial";
 import Creche from "./pages/parents/Creche";
 import CrecheNoRDV from "./pages/parents/CrecheNoRDV";
+import CrecheDetails from "./components/parents/CrecheDetails";
 import Home from "./pages/Home";
 import ReservationDashboard from "./components/structure/ReservationDashboard";
 import Calendar from "./components/structure/Calendar";
+
+const isAuthenticated = () => {
+  const token = localStorage.getItem("auth");
+  return !!token;
+};
 
 const router = createBrowserRouter([
   {
@@ -38,31 +50,51 @@ const router = createBrowserRouter([
       },
       {
         path: "/parents/rules",
-        element: <ParentsTutorial />,
+        element: isAuthenticated() ? <ParentsTutorial /> : <Navigate to="/" />,
       },
       {
-        path: "/pro/connexion",
-        element: <StructureConnexion />,
+        path: "/pro/login",
+        element: <Login />,
+      },
+      {
+        path: "/pro/register",
+        element: <Register />,
+      },
+      {
+        path: "/parents/profile",
+        element: isAuthenticated() ? <Profile /> : <Navigate to="/" />,
       },
       {
         path: "/parents/reservation",
-        element: <Reservation />,
+        element: isAuthenticated() ? <Reservation /> : <Navigate to="/" />,
       },
       {
         path: "/parents/reservation/creation",
-        element: <ReservationTunnel />,
+        element: isAuthenticated() ? (
+          <ReservationTunnel />
+        ) : (
+          <Navigate to="/" />
+        ),
       },
       {
         path: "/parents/creche",
-        element: <Creche />,
+        element: isAuthenticated() ? <Creche /> : <Navigate to="/" />,
       },
       {
         path: "/parents/crechenotfound",
-        element: <CrecheNoRDV />,
+        element: isAuthenticated() ? <CrecheNoRDV /> : <Navigate to="/" />,
+      },
+      {
+        path: "/parents/crechedetails",
+        element: <CrecheDetails />,
       },
       {
         path: "/parents/folders",
-        element: <Folders />,
+        element: isAuthenticated() ? <Folders /> : <Navigate to="/" />,
+      },
+      {
+        path: "/pro/dashboard",
+        element: isAuthenticated() ? <Dashboard /> : <Navigate to="/" />,
       },
       {
         path: "/pro/dashboard",

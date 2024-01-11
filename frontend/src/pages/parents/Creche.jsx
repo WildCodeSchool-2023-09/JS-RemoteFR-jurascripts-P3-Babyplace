@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import {
-  background,
-  balade,
-  infe,
-  info,
-  tea,
-  wifi,
-} from "../../assets/parents/creche";
-import "../../styles/creche.scss";
+  MdSmokeFree,
+  MdOutlineHealthAndSafety,
+  MdOutlineMedicalServices,
+  MdAttractions,
+  MdDirectionsWalk,
+  MdOutlineBedroomBaby,
+  MdMusicNote,
+  MdOutlineFoodBank,
+  MdBabyChangingStation,
+} from "react-icons/md";
+import { background, info } from "../../assets/parents/creche";
+import "../../styles/creches.scss";
 import Modal from "./Modal";
+import NavBar from "../../components/parents/NavBar";
 
 function Creche() {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,11 +21,8 @@ function Creche() {
   return (
     <div className="creche">
       <div className="title" id="title">
-        <h1>
-          {" "}
-          <img src={infe} alt="inferieur icon" /> Crèche Picoti Picota
-        </h1>
-        <span className="parentale">crèche parentale</span>
+        <h1>&lt; Crèche Picoti Picota</h1>
+        <p className="parentale">crèche parentale</p>
       </div>
       <div className="creche_container">
         <img src={background} alt="creche" className="creche_img" />
@@ -57,40 +59,45 @@ function Creche() {
           <div className="experiences">
             <h2>Expérience</h2>
             <div className="experiences_box">
-              <img src={balade} alt="balade" />{" "}
+              <MdOutlineHealthAndSafety />
               <span>Formation 1er secours </span>
             </div>
             <div className="experiences_box">
-              <img src={tea} alt="tea" /> <span>Formation Nesting</span>
+              <MdOutlineMedicalServices />
+              <span>Formation Nesting</span>
             </div>
             <div className="experiences_box">
-              <img src={wifi} alt="wifi" />
+              <MdBabyChangingStation />
               <span>Pédagogie Montessori</span>
             </div>
           </div>
           <div className="accueil">
             <h2>Accueil</h2>
             <div className="accueil_box">
-              <img src={balade} alt="balade" /> <span>Sorties extérieure </span>
+              <MdAttractions />
+              <span>Sorties extérieure </span>
             </div>
             <div className="accueil_box">
-              <img src={tea} alt="tea" /> <span>Repas maison</span>
+              <MdOutlineFoodBank />
+              <span>Repas maison</span>
             </div>
             <div className="accueil_box">
-              <img src={wifi} alt="wifi" />
+              <MdSmokeFree />
               <span>Foyer Non-Fumeur</span>
             </div>
           </div>
           <div className="activities">
             <h2>Activité</h2>
             <div className="activities_box">
-              <img src={balade} alt="balade" /> <span>Promenade </span>
+              <MdDirectionsWalk />
+              <span>Promenade </span>
             </div>
             <div className="activities_box">
-              <img src={tea} alt="tea" /> <span>Activité d'éveil</span>
+              <MdOutlineBedroomBaby />
+              <span>Activité d'éveil</span>
             </div>
             <div className="activities_box">
-              <img src={wifi} alt="wifi" />
+              <MdMusicNote />
               <span>Atelier musique</span>
             </div>
           </div>
@@ -113,6 +120,7 @@ function Creche() {
           tarification personnalisée en fonction de mes revenus
         </p>{" "}
       </div>
+      <NavBar />
     </div>
   );
 }

@@ -1,3 +1,34 @@
-.calendar-ctn {
-  margin-top: 60px;
+@import "./variables";
+
+.calendar-container {
+  margin-top: 100px;
+  width: 100%;
+  height: 100%;
+  .calendar-main {
+    margin: auto;
+    width: 95%;
+    .fc-event {
+      background: $bg-gen;
+    }
+    .fc-timegrid-slot {
+      height: 3.5rem;
+    }
+    .fc {
+      height: 75vh;
+    }
+
+    td {
+      height: 100%;
+      border: 1px solid $clr-grey;
+    }
+    .fc-button {
+      background-color: $five;
+    }
+    .fc-button:hover {
+      background: $height;
+    }
+    .fc-button:active {
+      background: $height;
+    }
+  }
 }

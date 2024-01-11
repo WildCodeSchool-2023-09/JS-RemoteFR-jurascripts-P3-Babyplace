@@ -1,11 +1,9 @@
 @use "./variables.scss" as *;
 
 .modal_box {
-  min-height: 100svh;
-
   .modal {
     position: fixed;
-    top: 50%;
+    top: 45%;
     left: 50%;
     width: 92%;
     margin: auto;
