@@ -1,15 +1,32 @@
 @import "./variables.scss";
 
 section {
+  h2 {
+    margin: 40px 20px;
+  }
   .Inscription_doc {
-    h2 {
-      text-align: center;
-      margin: 40px;
-    }
+    width: 80%;
+    margin: 0 auto;
+    form {
+      display: flex;
+      flex-direction: column;
 
-    .formfil {
-      width: 80%;
-      margin: 0 auto;
+      div {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin: 0.33rem;
+
+        input {
+          padding: 0.35rem;
+          outline: none;
+          border: none;
+
+          &:focus {
+            outline: 1px solid $clr-rejected;
+          }
+        }
+      }
     }
   }
 }

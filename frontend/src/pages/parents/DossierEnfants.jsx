@@ -9,11 +9,11 @@ function DossierEnfants() {
     <section>
       <div className="parent_box">
         <div className="parent">
-          <FaLessThan className="less" />
-          <div className="parent_container">
-            <h1>Ed Cannan</h1>
+          <FaLessThan className="icon" />
+          <h1>
+            Ed Cannan
             <span>Papa Poule</span>
-          </div>
+          </h1>
         </div>
         <div className="linksTo">
           <Link to="/parents/dossierenfants" className="link">
