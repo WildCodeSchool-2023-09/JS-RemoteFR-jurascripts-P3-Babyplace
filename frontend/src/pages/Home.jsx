@@ -10,7 +10,7 @@ function Home() {
       <div className="buttons">
         <Link to="/parents/subscribe">
           <button type="button" className="espaceBtn">
-            Un Parent
+            Un parent
           </button>
         </Link>
 
