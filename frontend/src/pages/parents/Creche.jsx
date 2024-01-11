@@ -13,7 +13,6 @@ import {
 import { background, info } from "../../assets/parents/creche";
 import "../../styles/creches.scss";
 import Modal from "./Modal";
-import NavBar from "../../components/parents/NavBar";
 
 function Creche() {
   const [isOpen, setIsOpen] = useState(false);
@@ -120,7 +119,6 @@ function Creche() {
           tarification personnalisée en fonction de mes revenus
         </p>{" "}
       </div>
-      <NavBar />
     </div>
   );
 }

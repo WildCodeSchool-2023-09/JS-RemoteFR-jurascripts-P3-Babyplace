@@ -20,12 +20,12 @@ const seed = async () => {
     await database.query("delete from users");
     queries.push(
       database.query(
-        "insert into users (email, password, profile, confirmation_inscription, confirmation_date_sent, created_date, last_connection) values ('picotipicota@structure.fr', 'baby', 'Structure', '1', '2024-01-01 00:00:00', '2024-01-01 00:00:00', '2024-01-01 00:00:00')"
+        "insert into users (email, hashed_password, profile, confirmation_inscription, confirmation_date_sent, created_date, last_connection) values ('picotipicota@structure.fr', 'baby', 'Structure', '1', '2024-01-01 00:00:00', '2024-01-01 00:00:00', '2024-01-01 00:00:00')"
       )
     );
     queries.push(
       database.query(
-        "insert into users (email, password, profile, confirmation_inscription, confirmation_date_sent, created_date, last_connection) values ('papapoule@papaoule.fr', 'papapoule', 'Parent', '1', '2024-01-01 00:00:00', '2024-01-01 00:00:00', '2024-01-01 00:00:00')"
+        "insert into users (email, hashed_password, profile, confirmation_inscription, confirmation_date_sent, created_date, last_connection) values ('papapoule@papaoule.fr', 'papapoule', 'Parent', '1', '2024-01-01 00:00:00', '2024-01-01 00:00:00', '2024-01-01 00:00:00')"
       )
     );
 
