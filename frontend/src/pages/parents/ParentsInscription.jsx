@@ -159,7 +159,7 @@ function ParentsInscription() {
                     id="password_sub"
                     value={password}
                     name="password"
-                    placeholder="Mot de passe"
+                    placeholder="Mot de Passe"
                     onChange={(e) => setPassword(e.target.value)}
                     required
                     aria-invalid={confirmPassword ? "false" : "true"}
