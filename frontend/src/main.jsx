@@ -52,17 +52,13 @@ const router = createBrowserRouter([
         element: <ParentsConnexion />,
       },
       {
+        path: "/parents/rules",
+        element: isAuthenticated() ? <ParentsTutorial /> : <Navigate to="/" />,
+      },
+      {
         path: "/parents",
         element: <Layout />,
         children: [
-          {
-            path: "rules",
-            element: isAuthenticated() ? (
-              <ParentsTutorial />
-            ) : (
-              <Navigate to="/" />
-            ),
-          },
           {
             path: "profile",
             element: isAuthenticated() ? <Profile /> : <Navigate to="/" />,
@@ -133,4 +129,4 @@ root.render(
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>
-);           
+);
