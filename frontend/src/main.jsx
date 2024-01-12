@@ -25,6 +25,9 @@ import CrecheDetails from "./components/parents/CrecheDetails";
 import Home from "./pages/Home";
 import ReservationDashboard from "./components/structure/ReservationDashboard";
 import Calendar from "./components/structure/Calendar";
+import DossierParents from "./pages/parents/DossierParents";
+import DossierEnfants from "./pages/parents/DossierEnfants";
+import DossierInscription from "./pages/parents/DossierInscription";
 
 const isAuthenticated = () => {
   const structureToken = localStorage.getItem("auth");
@@ -94,6 +97,20 @@ const router = createBrowserRouter([
           {
             path: "folders",
             element: isAuthenticated() ? <Folders /> : <Navigate to="/" />,
+            children: [
+              {
+                path: "dossierparent",
+                element: <DossierParents />,
+              },
+              {
+                path: "dossierenfant",
+                element: <DossierEnfants />,
+              },
+              {
+                path: "dossierinscription",
+                element: <DossierInscription />,
+              },
+            ],
           },
         ],
       },
@@ -133,4 +150,4 @@ root.render(
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>
-);           
+);
