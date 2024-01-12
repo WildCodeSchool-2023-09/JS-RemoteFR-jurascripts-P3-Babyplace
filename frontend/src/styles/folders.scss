@@ -32,9 +32,10 @@
   }
   button {
     width: 40%;
-    background-color: orange;
-    font-size: 14px;
-    font-weight: 600;
+    background-color: rgba($color: orange, $alpha: 0.8);
+    font-size: 18px;
+    font-weight: bolder;
+    text-decoration: underline;
     border-style: none;
     color: white;
     padding: 15px;

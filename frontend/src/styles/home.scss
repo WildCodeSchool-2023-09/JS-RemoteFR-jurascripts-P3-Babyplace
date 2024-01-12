@@ -6,19 +6,18 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
 }
+
 .logo {
-  width: 30vw;
+  width: 300px;
   height: auto;
-  margin-bottom: 5vh;
+  margin: 5vh 0;
 }
 
 .choiceConnection {
   color: whitesmoke;
   margin-bottom: 5vh;
-  font-size: calc(30px + 0.5vw);
 }
 
 .buttons {
@@ -26,21 +25,45 @@
 }
 
 .espaceBtn {
-  min-width: 15vw;
+  width: 200px;
   height: auto;
-  padding: 2svh;
-  background-color: orange;
-  border-radius: 20px;
   border: none;
   color: whitesmoke;
-  font-size: calc(10px + 0.5vw);
   margin: 0 5vw;
   cursor: pointer;
+  background-color: rgba($color: orange, $alpha: 0.8);
+  font-size: 18px;
+  font-weight: bolder;
+  text-decoration: underline;
+  padding: 15px;
+  border-radius: 15px;
+  text-align: center;
 }
 
 .imgConnexion {
-  width: 30vw;
-  height: auto;
+  width: 450px;
 }
 
 //Media queries 1024px, 768px
+@media screen and (max-width: 500px) {
+  .logo {
+    width: 100px;
+  }
+  .imgConnexion {
+    width: 250px;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .choiceConnection {
+    font-size: x-large;
+  }
+}
