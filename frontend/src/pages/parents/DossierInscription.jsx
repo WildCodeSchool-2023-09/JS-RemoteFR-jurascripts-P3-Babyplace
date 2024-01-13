@@ -7,7 +7,7 @@ import "../../styles/dossierInscription.scss";
 
 function DossierInscription() {
   return (
-    <section>
+    <section className="InscriptionDoc">
       <div className="parent_box">
         <div className="parent">
           <FaLessThan className="icon" />
