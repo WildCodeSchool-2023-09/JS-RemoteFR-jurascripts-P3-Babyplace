@@ -26,11 +26,14 @@ import Home from "./pages/Home";
 import ReservationDashboard from "./components/structure/ReservationDashboard";
 import Calendar from "./components/structure/Calendar";
 
-const isAuthenticated = () => {
-  const structureToken = localStorage.getItem("auth");
-  const parentToken = localStorage.getItem("userToken");
+const isParentAuthenticated = () => {
+  const parentToken = localStorage.getItem("parentToken");
+  return !!parentToken;
+};
 
-  return !!structureToken || !!parentToken;
+const isStructureAuthenticated = () => {
+  const structureToken = localStorage.getItem("structureToken");
+  return !!structureToken;
 };
 
 const router = createBrowserRouter([
@@ -53,7 +56,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/parents/rules",
-        element: isAuthenticated() ? <ParentsTutorial /> : <Navigate to="/" />,
+        element: isParentAuthenticated() ? (
+          <ParentsTutorial />
+        ) : (
+          <Navigate to="/" />
+        ),
       },
       {
         path: "/parents",
@@ -61,15 +68,23 @@ const router = createBrowserRouter([
         children: [
           {
             path: "profile",
-            element: isAuthenticated() ? <Profile /> : <Navigate to="/" />,
+            element: isParentAuthenticated() ? (
+              <Profile />
+            ) : (
+              <Navigate to="/" />
+            ),
           },
           {
             path: "reservation",
-            element: isAuthenticated() ? <Reservation /> : <Navigate to="/" />,
+            element: isParentAuthenticated() ? (
+              <Reservation />
+            ) : (
+              <Navigate to="/" />
+            ),
           },
           {
             path: "reservation/creation",
-            element: isAuthenticated() ? (
+            element: isParentAuthenticated() ? (
               <ReservationTunnel />
             ) : (
               <Navigate to="/" />
@@ -77,19 +92,31 @@ const router = createBrowserRouter([
           },
           {
             path: "creche",
-            element: isAuthenticated() ? <Creche /> : <Navigate to="/" />,
+            element: isParentAuthenticated() ? <Creche /> : <Navigate to="/" />,
           },
           {
             path: "crechenotfound",
-            element: isAuthenticated() ? <CrecheNoRDV /> : <Navigate to="/" />,
+            element: isParentAuthenticated() ? (
+              <CrecheNoRDV />
+            ) : (
+              <Navigate to="/" />
+            ),
           },
           {
             path: "crechedetails",
-            element: <CrecheDetails />,
+            element: isParentAuthenticated() ? (
+              <CrecheDetails />
+            ) : (
+              <Navigate to="/" />
+            ),
           },
           {
             path: "folders",
-            element: isAuthenticated() ? <Folders /> : <Navigate to="/" />,
+            element: isParentAuthenticated() ? (
+              <Folders />
+            ) : (
+              <Navigate to="/" />
+            ),
           },
         ],
       },
@@ -103,7 +130,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/pro/dashboard",
-        element: isAuthenticated() ? <Dashboard /> : <Navigate to="/" />,
+        element: isStructureAuthenticated() ? (
+          <Dashboard />
+        ) : (
+          <Navigate to="/" />
+        ),
       },
       {
         path: "/pro/dashboard",

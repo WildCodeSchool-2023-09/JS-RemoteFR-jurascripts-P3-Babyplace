@@ -47,7 +47,7 @@ function ParentsConnexion() {
       if (response.status === 200) {
         const auth = await response.json();
         // stocker le token dans le local storage
-        localStorage.setItem("userToken", auth.token);
+        localStorage.setItem("parentToken", auth.token);
 
         navigate("/parents/creche", { replace: true });
       } else {
