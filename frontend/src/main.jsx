@@ -115,11 +115,21 @@ const router = createBrowserRouter([
           },
           {
             path: "folders",
-            element: isParentAuthenticated() ? (
-              <Folders />
-            ) : (
-              <Navigate to="/" />
-            ),
+            element: isParentAuthenticated() ? <Folders /> : <Navigate to="/" />,
+            children: [
+              {
+                path: "dossierparent",
+                element: <DossierParents />,
+              },
+              {
+                path: "dossierenfant",
+                element: <DossierEnfants />,
+              },
+              {
+                path: "dossierinscription",
+                element: <DossierInscription />,
+              },
+            ],
           },
         ],
       },
