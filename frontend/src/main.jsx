@@ -25,6 +25,9 @@ import CrecheDetails from "./components/parents/CrecheDetails";
 import Home from "./pages/Home";
 import ReservationDashboard from "./components/structure/ReservationDashboard";
 import Calendar from "./components/structure/Calendar";
+import DossierParents from "./pages/parents/DossierParents";
+import DossierEnfants from "./pages/parents/DossierEnfants";
+import DossierInscription from "./pages/parents/DossierInscription";
 
 const isParentAuthenticated = () => {
   const parentToken = localStorage.getItem("parentToken");
@@ -118,8 +121,8 @@ const router = createBrowserRouter([
               <Navigate to="/" />
             ),
           },
-        ],
-      },
+            ],
+          },
       {
         path: "/pro/login",
         element: <Login />,
