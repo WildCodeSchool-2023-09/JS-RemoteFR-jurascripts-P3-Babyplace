@@ -121,8 +121,8 @@ const router = createBrowserRouter([
               <Navigate to="/" />
             ),
           },
-            ],
-          },
+        ],
+      },
       {
         path: "/pro/login",
         element: <Login />,
