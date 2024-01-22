@@ -1,0 +1,84 @@
+@import "./variables";
+
+.date-time-picker {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+
+  .calendar-parents {
+    margin-top: 1rem;
+    display: flex;
+    background-color: whitesmoke;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px 40px;
+    color: #5664d2;
+    border-radius: 1rem;
+    text-align: center;
+    border: 1px solid black;
+
+    ::placeholder {
+      color: black;
+      text-align: center;
+    }
+
+    input {
+      text-align: center;
+    }
+  }
+
+  .time-picker-container {
+    display: flex;
+    flex-direction: column;
+    background: whitesmoke;
+    padding: 15px 40px;
+    margin: 0 auto;
+    align-items: center;
+    margin-top: 1rem;
+    border-radius: 1rem;
+    text-align: center;
+    border: 1px solid black;
+    color: #5664d2;
+
+    ::placeholder {
+      color: black;
+      text-align: center;
+    }
+
+    .calendar-date {
+      text-align: center;
+      color: #5664d2;
+    }
+    input {
+      text-align: center;
+    }
+  }
+
+  .para {
+    display: flex;
+    text-align: center;
+    margin-top: 0.5rem;
+    background: $height;
+    color: $primary;
+    border-radius: 1rem;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid $seven;
+    padding: 10px 15px;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  .date-time-picker {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 3rem;
+
+    .para {
+      margin-bottom: 1rem;
+    }
+  }
+}
