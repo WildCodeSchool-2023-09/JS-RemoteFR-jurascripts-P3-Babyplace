@@ -26,7 +26,6 @@ function LayoutProfile() {
   return (
     <>
       <header className="headbar">
-        {" "}
         <picture className="picture">
           <img src={avatar} alt="avatar" />
         </picture>
