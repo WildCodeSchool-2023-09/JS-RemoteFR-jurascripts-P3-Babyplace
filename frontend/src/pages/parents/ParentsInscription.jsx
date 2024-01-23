@@ -5,7 +5,7 @@ import { logo, home } from "../../assets";
 
 const MAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PWD_REGEX =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%_*?&-])[A-Za-z\d@$!%_*?&-]{8,24}$/;
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@!%_*?&-])[A-Za-z\d@!%_*?&-]{8,24}$/;
 
 function ParentsInscription() {
   const emailRef = useRef();
@@ -22,10 +22,6 @@ function ParentsInscription() {
   const [passwordFocus, setPasswordFocus] = useState(false);
 
   const [errMsg, setErrMsg] = useState("");
-
-  useEffect(() => {
-    emailRef.current.focus();
-  }, []);
 
   useEffect(() => {
     const result = MAIL_REGEX.test(mail);
@@ -49,11 +45,7 @@ function ParentsInscription() {
 
   useEffect(() => {
     updateButton();
-  }, []);
-
-  useEffect(() => {
-    updateButton();
-  }, [password, mail]);
+  }, [confirmPassword]);
 
   // Hook pour la navigation
   const navigate = useNavigate();
@@ -150,7 +142,9 @@ function ParentsInscription() {
                     Correcte
                   </span>
                   <span
-                    className={confirmPassword || !mail ? "hide" : "invalid"}
+                    className={
+                      confirmPassword || !password ? "hide" : "invalid"
+                    }
                   >
                     Incorrecte
                   </span>
@@ -174,10 +168,10 @@ function ParentsInscription() {
                         : "offscreen"
                     }
                   >
-                    Un minimum de 11 caractères.
+                    Un minimum de 8 caractères.
                     <br />
                     Doit inclure une lettre majuscule, un chiffre et un
-                    caractère special (@$!%_*?&-).
+                    caractère special (@!%_*?&-).
                     <br />
                   </p>
                 </label>{" "}
