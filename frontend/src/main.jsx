@@ -23,6 +23,7 @@ import DossierEnfants from "./pages/parents/DossierEnfants";
 import DossierInscription from "./pages/parents/DossierInscription";
 import DossierParents from "./pages/parents/DossierParents";
 import Layout from "./pages/parents/Layout";
+import LayoutProfile from "./pages/parents/LayoutProfile";
 import ParentsConnexion from "./pages/parents/ParentsConnexion";
 import ParentsInscription from "./pages/parents/ParentsInscription";
 import ParentsTutorial from "./pages/parents/ParentsTutorial";
@@ -65,7 +66,17 @@ const router = createBrowserRouter([
         children: [
           {
             path: "profile",
-            element: isAuthenticated() ? <Profile /> : <Navigate to="/" />,
+            element: isAuthenticated() ? (
+              <LayoutProfile />
+            ) : (
+              <Navigate to="/" />
+            ),
+            children: [
+              {
+                path: "",
+                element: <Profile />,
+              },
+            ],
           },
           {
             path: "reservation",
