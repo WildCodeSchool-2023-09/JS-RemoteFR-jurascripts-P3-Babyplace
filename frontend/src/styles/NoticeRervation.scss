@@ -1,0 +1,127 @@
+@import "./variables.scss";
+
+.NoticeReservation {
+  background: $primary;
+  // min-height: 100svh;
+
+  .reserhead {
+    display: flex;
+    align-items: center;
+    color: $secondary;
+    justify-content: center;
+
+    .icon {
+      margin: 0 30px;
+    }
+
+    h1 {
+      font-size: 1.887rem;
+    }
+  }
+
+  .profile {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 2.4rem 0;
+
+    img {
+      width: 6rem;
+      border-radius: 100px;
+      height: 6rem;
+      border: 0.5rem solid $secondary;
+    }
+    h2 {
+      display: flex;
+      flex-direction: column;
+      color: $secondary;
+
+      span {
+        color: $five;
+      }
+    }
+  }
+  .filter_box {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.8rem;
+    margin: 0 1rem 2.9rem;
+
+    button {
+      font-size: 0.72rem;
+      border-radius: 0.8rem;
+      background: transparent;
+      border: 0.163rem solid $clr-rejected;
+      cursor: pointer;
+      &:first-child {
+        font-weight: 700;
+        background: $six;
+      }
+    }
+  }
+  .profile_container {
+    margin: 0 1.2rem;
+    .profile_box {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      margin: 1.9rem 0;
+
+      &:hover {
+        background: $six;
+        border-radius: 0.7rem;
+      }
+
+      img {
+        width: 4rem;
+        border-radius: 1.44rem;
+        height: 4rem;
+      }
+      .descrip {
+        font-size: 0.67rem;
+        margin: 0 0.6rem;
+      }
+
+      .attente {
+        background: $attenteButton;
+        color: $primary;
+        padding: 0.2rem;
+        border-radius: 5rem;
+        border: none;
+        width: 260px;
+      }
+      .accpt {
+        background: $clr-accepted;
+        color: $primary;
+        padding: 0.2rem;
+        border-radius: 5rem;
+        border: none;
+        width: 260px;
+      }
+      .refus {
+        background: $clr-rejected;
+        color: $primary;
+        padding: 0.2rem;
+        border-radius: 5rem;
+        border: none;
+        width: 260px;
+      }
+
+      span {
+        font-size: 0.67rem;
+        margin: 0.3em;
+      }
+      .icons {
+        font-size: 0.78rem;
+
+        &:hover {
+          cursor: pointer;
+
+          &:first-child {
+            transform: scale(1.6);
+          }
+        }
+      }
+    }
+  }
+}

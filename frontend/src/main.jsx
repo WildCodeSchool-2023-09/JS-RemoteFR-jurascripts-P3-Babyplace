@@ -30,6 +30,7 @@ import ParentsTutorial from "./pages/parents/ParentsTutorial";
 import Dashboard from "./pages/structure/Dashboard";
 import Login from "./pages/structure/Login";
 import Register from "./pages/structure/Register";
+import NoticeReservation from "./pages/parents/NoticeReservation";
 
 const isAuthenticated = () => {
   const structureToken = localStorage.getItem("auth");
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
       {
         path: "/parents/subscribe",
         element: <ParentsInscription />,
+      },
+      {
+        path: "/parents/notification",
+        element: <NoticeReservation />,
       },
       {
         path: "/parents/connexion",
