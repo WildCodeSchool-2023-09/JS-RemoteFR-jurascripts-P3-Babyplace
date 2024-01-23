@@ -25,6 +25,7 @@ const employeesControllers = require("./controllers/employeesControllers");
 const authControllers = require("./controllers/authControllers");
 
 router.post("/users/login", authControllers.login);
+// router.post("/users/logout", authControllers.logout);
 
 // users
 router.get("/users", usersControllers.browse);
