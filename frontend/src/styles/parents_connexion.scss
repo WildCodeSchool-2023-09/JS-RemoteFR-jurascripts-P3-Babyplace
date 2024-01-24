@@ -2,10 +2,6 @@
 @use "_mixins.scss";
 
 .parentConnexionContainer {
-  display: block;
-  width: 100vw;
-  justify-content: center;
-  align-items: center;
   min-height: 100svh;
 
   .parentContainer {
