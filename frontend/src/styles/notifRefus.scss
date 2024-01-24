@@ -2,12 +2,12 @@
 
 .Notifs {
   text-align: center;
-  min-height: 100svh;
+  min-height: calc(95svh - 60px);
   color: $primary;
   .notifPic {
     width: 50px;
     height: auto;
-    margin: 5vh 0;
+    margin: 5svh;
   }
 
   .profilPicture {
@@ -23,13 +23,13 @@
   .centerLogoRefus {
     width: 25%;
     margin: 1rem auto 2.2rem;
-    background: $clr-rejected;
+    background: $clr-bg-active;
     border-radius: 5rem;
 
     img {
       width: 50px;
       height: auto;
-      margin: 5vh 0;
+      padding: 10px;
     }
   }
 
@@ -55,10 +55,10 @@
     }
 
     button {
-      width: 50%;
+      width: 20%;
       margin: 0 auto;
       padding: 0.8rem;
-      background: $clr-rejected;
+      background: $orangeFred;
       border-radius: 1rem;
       border: none;
       font-size: 20px;

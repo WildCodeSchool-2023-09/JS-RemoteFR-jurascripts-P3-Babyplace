@@ -1,26 +1,12 @@
-import React from "react";
-import { FaLessThan } from "react-icons/fa6";
 import { FcCalendar } from "react-icons/fc";
 import { RiSendPlaneLine } from "react-icons/ri";
 import "../../styles/NoticeRervation.scss";
+import { Link } from "react-router-dom";
 import { avatar } from "../../assets/index";
 
 function NoticeReservation() {
   return (
     <section className="NoticeReservation">
-      <div className="reserhead">
-        <FaLessThan className="icon" />
-        <h1> Réservations </h1>
-      </div>
-      <div className="profile">
-        {" "}
-        <img src={avatar} alt="avatar profile" />{" "}
-        <h2>
-          Samanta Doe
-          <span>Maman poule</span>
-          <span>100% complété</span>
-        </h2>
-      </div>
       <div className="filter_box">
         <button type="button">Toutes les reservations</button>
         <button type="button">Passées</button>
@@ -35,7 +21,7 @@ function NoticeReservation() {
             <p>Invitation</p>
           </div>
           <button type="button" className="attente">
-            Demande en attente
+            en attente
           </button>
           <span>Lun 17 sept </span>
           <div className="icons">
@@ -49,9 +35,11 @@ function NoticeReservation() {
             <h3>Shakuro</h3>
             <p>Invitation</p>
           </div>
-          <button type="button" className="accpt">
-            Demande en attente
-          </button>
+          <Link to="/parents/accepte">
+            <button type="button" className="accpt">
+              accepté
+            </button>
+          </Link>
           <span>Lun 17 sept </span>
           <div className="icons">
             <FcCalendar />
@@ -64,9 +52,11 @@ function NoticeReservation() {
             <h3>Shakuro</h3>
             <p>Invitation</p>
           </div>
-          <button type="button" className="refus">
-            Demande en attente
-          </button>
+          <Link to="/parents/refuse">
+            <button type="button" className="refus">
+              refusé
+            </button>
+          </Link>
           <span>Lun 17 sept </span>
           <div className="icons">
             <FcCalendar />
@@ -74,6 +64,11 @@ function NoticeReservation() {
           </div>
         </div>
       </div>
+      <Link to="/parents/profile">
+        <button className="retour" type="button">
+          Retour{" "}
+        </button>
+      </Link>
     </section>
   );
 }
