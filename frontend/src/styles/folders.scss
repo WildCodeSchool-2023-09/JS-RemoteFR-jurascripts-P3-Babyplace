@@ -44,20 +44,24 @@
     text-align: center;
     cursor: pointer;
   }
-  .children,
-  .parents,
-  .inscription {
+  a {
+    text-decoration: none;
+    color: white;
     width: 90%;
-    height: 75px;
-    border-radius: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 30px;
-    line-height: 1.5;
-    cursor: pointer;
-    span {
-      text-align: end;
+    .children,
+    .parents,
+    .inscription {
+      height: 75px;
+      border-radius: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 30px;
+      line-height: 1.5;
+      cursor: pointer;
+      span {
+        text-align: end;
+      }
     }
   }
   .children {

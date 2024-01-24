@@ -1,8 +1,8 @@
 import { FcCalendar } from "react-icons/fc";
 import { RiSendPlaneLine } from "react-icons/ri";
-import "../../styles/NoticeRervation.scss";
 import { Link } from "react-router-dom";
 import { avatar } from "../../assets/index";
+import "../../styles/NoticeRervation.scss";
 
 function NoticeReservation() {
   return (
