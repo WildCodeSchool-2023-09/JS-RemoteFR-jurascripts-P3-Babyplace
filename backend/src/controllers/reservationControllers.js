@@ -34,6 +34,43 @@ const read = async (req, res, next) => {
   }
 };
 
+const readForCalendar = async (req, res, next) => {
+  try {
+    // Fetch a specific item from the database based on the provided ID
+    const reservation = await tables.reservation.readForCalendar(req.params.id);
+
+    // If the item is not found, respond with HTTP 404 (Not Found)
+    // Otherwise, respond with the item in JSON format
+    if (reservation == null) {
+      res.sendStatus(404);
+    } else {
+      res.json(reservation);
+    }
+  } catch (err) {
+    // Pass any errors to the error-handling middleware
+    next(err);
+  }
+};
+const readForListRequests = async (req, res, next) => {
+  try {
+    // Fetch a specific item from the database based on the provided ID
+    const reservation = await tables.reservation.readForListRequests(
+      req.params.id
+    );
+
+    // If the item is not found, respond with HTTP 404 (Not Found)
+    // Otherwise, respond with the item in JSON format
+    if (reservation == null) {
+      res.sendStatus(404);
+    } else {
+      res.json(reservation);
+    }
+  } catch (err) {
+    // Pass any errors to the error-handling middleware
+    next(err);
+  }
+};
+
 // The E of BREAD - Edit (Update) operation
 const edit = async (req, res, next) => {
   try {
@@ -89,6 +126,8 @@ const destroy = async (req, res, next) => {
 module.exports = {
   browse,
   read,
+  readForCalendar,
+  readForListRequests,
   edit,
   add,
   destroy,

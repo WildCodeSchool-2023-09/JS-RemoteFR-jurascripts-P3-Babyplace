@@ -34,11 +34,14 @@ import NoticeReservation from "./pages/parents/NoticeReservation";
 import NotifRefused from "./pages/parents/NotifRefused";
 import NotifAccept from "./pages/parents/NotifAccept";
 
-const isAuthenticated = () => {
-  const structureToken = localStorage.getItem("auth");
-  const parentToken = localStorage.getItem("userToken");
+const isParentAuthentificated = () => {
+  const parentToken = localStorage.getItem("parentToken");
+  return !!parentToken;
+};
 
-  return !!structureToken || !!parentToken;
+const isStructureAuthentificated = () => {
+  const structureToken = localStorage.getItem("structureToken");
+  return !!structureToken;
 };
 
 const router = createBrowserRouter([
@@ -65,7 +68,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/parents/rules",
-        element: isAuthenticated() ? <ParentsTutorial /> : <Navigate to="/" />,
+        element: isParentAuthentificated() ? (
+          <ParentsTutorial />
+        ) : (
+          <Navigate to="/" />
+        ),
       },
       {
         path: "/parents",
@@ -73,7 +80,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: "profile",
-            element: isAuthenticated() ? (
+            element: isParentAuthentificated() ? (
               <LayoutProfile />
             ) : (
               <Navigate to="/" />
@@ -99,11 +106,15 @@ const router = createBrowserRouter([
           },
           {
             path: "reservation",
-            element: isAuthenticated() ? <Reservation /> : <Navigate to="/" />,
+            element: isParentAuthentificated() ? (
+              <Reservation />
+            ) : (
+              <Navigate to="/" />
+            ),
           },
           {
             path: "reservation/creation",
-            element: isAuthenticated() ? (
+            element: isParentAuthentificated() ? (
               <ReservationTunnel />
             ) : (
               <Navigate to="/" />
@@ -111,15 +122,27 @@ const router = createBrowserRouter([
           },
           {
             path: "creche",
-            element: isAuthenticated() ? <Creche /> : <Navigate to="/" />,
+            element: isParentAuthentificated() ? (
+              <Creche />
+            ) : (
+              <Navigate to="/" />
+            ),
           },
           {
             path: "crechenotfound",
-            element: isAuthenticated() ? <CrecheNoRDV /> : <Navigate to="/" />,
+            element: isParentAuthentificated() ? (
+              <CrecheNoRDV />
+            ) : (
+              <Navigate to="/" />
+            ),
           },
           {
             path: "agendaparents",
-            element: <AgendaParents />,
+            element: isParentAuthentificated() ? (
+              <AgendaParents />
+            ) : (
+              <Navigate to="/" />
+            ),
           },
           {
             path: "crechedetails",
@@ -127,7 +150,11 @@ const router = createBrowserRouter([
           },
           {
             path: "folders",
-            element: isAuthenticated() ? <Folders /> : <Navigate to="/" />,
+            element: isParentAuthentificated() ? (
+              <Folders />
+            ) : (
+              <Navigate to="/" />
+            ),
             children: [
               {
                 path: "dossierparent",
@@ -155,7 +182,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/pro/dashboard",
-        element: isAuthenticated() ? <Dashboard /> : <Navigate to="/" />,
+        element: isStructureAuthentificated() ? (
+          <Dashboard />
+        ) : (
+          <Navigate to="/" />
+        ),
       },
       {
         path: "/pro/dashboard",

@@ -1,41 +1,22 @@
-import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
+import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
+import { useEffect, useState } from "react";
 import "../../styles/calendar.scss";
-import useCalendar from "../../utils/Calendar";
-import { createEventId } from "../../constants/dataGen";
+import getFormattedEvents from "../../utils/getFormattedEvent";
 
 function Calendar() {
-  const { currentEvents, setCurrentEvents } = useCalendar();
+  const [currentEvents, setCurrentEvents] = useState([]);
 
-  const handleEvents = async (events) => {
-    await Promise.resolve(setCurrentEvents(events));
-  };
-  const handleDateSelect = (selectInfo) => {
-    // eslint-disable-next-line no-alert
-    const title = prompt("Merci d'ecrire votre evenement");
-    const calendarApi = selectInfo.view.calendar;
+  useEffect(() => {
+    const loadEvents = async () => {
+      const data = await getFormattedEvents();
+      setCurrentEvents(data);
+    };
 
-    calendarApi.unselect();
-
-    if (title) {
-      calendarApi.addEvent({
-        id: createEventId(),
-        title,
-        start: selectInfo.start,
-        end: selectInfo.end,
-        allDay: selectInfo.allDay,
-      });
-    }
-  };
-
-  const handleEventClick = (clickInfo) => {
-    // eslint-disable-next-line no-restricted-globals
-    if (confirm("Etes-vous sur de vouloir supprimer l'evenement ?")) {
-      clickInfo.event.remove();
-    }
-  };
+    loadEvents();
+  }, []);
 
   return (
     <div className="calendar-container">
@@ -53,17 +34,18 @@ function Calendar() {
           locale="fr"
           initialView="timeGridWeek"
           slotDuration="01:00:00"
-          editable
-          selectable
+          editable={false}
+          selectable={false}
           selectMirror
           dayMaxEvents
           weekends={false}
           nowIndicator
           scrollTimeReset={false}
-          initialEvents={currentEvents}
-          eventsSet={handleEvents}
-          select={handleDateSelect}
-          eventClick={handleEventClick}
+          events={currentEvents}
+          eventc
+          // eventsSet={handleEvents}
+          // select={handleDateSelect}
+          // eventClick={handleEventClick}
         />
       </div>
     </div>

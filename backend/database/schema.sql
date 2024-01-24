@@ -44,7 +44,7 @@ create table parents (
 
 create table child (
   id int auto_increment primary key,
-  parents_id int,
+  parent_id int,
   first_name varchar(100) not null,
   last_name varchar(100) not null,
   date_of_birth date not null,
@@ -52,7 +52,7 @@ create table child (
   name_of_doctor varchar(100),
   allergies text,
   alimentation enum('All', 'Vegan', 'Vegetarian', 'Halal', 'Kosher'),
-  constraint fk_child_parents foreign key (parents_id) references parents(id) ON DELETE CASCADE ON UPDATE CASCADE
+  constraint fk_child_parents foreign key (parent_id) references parents(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 create table structures (
@@ -105,7 +105,8 @@ create table reservation (
   available_place_id int,
   status enum('in_progress', 'waiting', 'accepted', 'refused'),
   rejection_reason text,
-  reservation_date date,
+  reservation_date_start date,
+  reservation_date_end date,
   start_time time,
   end_time time,
   created_date datetime default current_timestamp,

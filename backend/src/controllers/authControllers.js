@@ -40,6 +40,19 @@ const login = async (req, res, next) => {
   }
 };
 
+const logout = async (req, res, next) => {
+  try {
+    localStorage.removeItem("structureToken");
+    localStorage.removeItem("parentToken");
+    res.status(200).json({ message: "Déconnexion réussie" });
+  } catch (error) {
+    console.error("Erreur lors de la déconnexion :", error);
+    res.status(500).json({ message: "Erreur lors de la déconnexion" });
+  }
+  next();
+};
+
 module.exports = {
   login,
+  logout,
 };
