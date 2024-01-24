@@ -2,7 +2,7 @@ import { FaLessThan } from "react-icons/fa6";
 import { MdChevronRight } from "react-icons/md";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import NavBar from "../../components/parents/NavBar";
+
 import "../../styles/dossierInscription.scss";
 
 function DossierInscription() {
@@ -28,7 +28,9 @@ function DossierInscription() {
     <section className="InscriptionDoc">
       <div className="parent_box">
         <div className="parent">
-          <FaLessThan className="icon" />
+          <Link to="/parents/folders">
+            <FaLessThan className="icon" />
+          </Link>
           <h1>
             Ed Cannan
             <span>Papa Poule</span>
@@ -291,7 +293,6 @@ function DossierInscription() {
         </form>
         <input type="submit" value="Envoyer" className="send" />
       </div>
-      <NavBar />
     </section>
   );
 }

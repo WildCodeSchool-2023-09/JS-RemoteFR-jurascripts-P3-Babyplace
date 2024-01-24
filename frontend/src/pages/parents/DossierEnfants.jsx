@@ -3,7 +3,7 @@ import { FaLessThan } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { RiLinksFill } from "react-icons/ri";
 // import { GrValidate } from "react-icons/gr";
-import NavBar from "../../components/parents/NavBar";
+
 import "../../styles/dossierenfants.scss";
 
 function DossierEnfants() {
@@ -30,7 +30,9 @@ function DossierEnfants() {
     <section className="InscriptionDoc">
       <div className="parent_box">
         <div className="parent">
-          <FaLessThan className="icon" />
+          <Link to="/parents/folders">
+            <FaLessThan className="icon" />
+          </Link>
           <h1>
             Ed Cannan
             <span>Papa Poule</span>
@@ -298,7 +300,6 @@ function DossierEnfants() {
         </form>
         <input type="submit" value="Envoyer" className="send" />
       </div>
-      <NavBar />
     </section>
   );
 }
