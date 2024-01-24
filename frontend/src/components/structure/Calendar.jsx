@@ -42,7 +42,6 @@ function Calendar() {
           nowIndicator
           scrollTimeReset={false}
           events={currentEvents}
-          eventc
           // eventsSet={handleEvents}
           // select={handleDateSelect}
           // eventClick={handleEventClick}
