@@ -1,7 +1,7 @@
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useRef, useState, useEffect } from "react";
+import { home, logo } from "../../assets";
 import "../../styles/parents_connexion.scss";
-import { logo, home } from "../../assets";
 
 function ParentsConnexion() {
   const emailRef = useRef();
@@ -47,7 +47,7 @@ function ParentsConnexion() {
       if (response.status === 200) {
         const auth = await response.json();
         // stocker le token dans le local storage
-        localStorage.setItem("userToken", auth.token);
+        localStorage.setItem("parentToken", auth.token);
 
         navigate("/parents/creche", { replace: true });
       } else {

@@ -1,7 +1,7 @@
-import { useRef, useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { home, logo } from "../../assets";
 import "../../styles/parents_connexion.scss";
-import { logo, home } from "../../assets";
 
 const MAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PWD_REGEX =
@@ -178,7 +178,7 @@ function ParentsInscription() {
               </div>
               {/* Bouton de soumission du formulaire */}
               <button className="parentConnexionBtn" id="button" type="submit">
-                Connexion
+                S'inscrire
               </button>
             </form>
           </section>
