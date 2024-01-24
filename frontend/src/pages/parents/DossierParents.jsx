@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { FaLessThan } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 import "../../styles/dossierparents.scss";
 
 function DossierParents() {

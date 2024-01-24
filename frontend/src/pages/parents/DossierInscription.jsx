@@ -2,7 +2,6 @@ import { FaLessThan } from "react-icons/fa6";
 import { MdChevronRight } from "react-icons/md";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
 import "../../styles/dossierInscription.scss";
 
 function DossierInscription() {
@@ -37,10 +36,10 @@ function DossierInscription() {
           </h1>
         </div>
         <div className="linksTo">
-          <Link to="/parents/dossierenfants" className="link">
+          <Link to="/parents/dossierenfant" className="link">
             Enfants
           </Link>
-          <Link to="/parents/dossierparents" className="link">
+          <Link to="/parents/dossierparent" className="link">
             Parents
           </Link>
           <Link to="/parents/dossierinscription" className="link">

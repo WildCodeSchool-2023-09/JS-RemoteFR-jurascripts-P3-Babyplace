@@ -1,10 +1,16 @@
 import { MdContentPaste, MdHelp, MdLogout } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../styles/profile.scss";
 
 function Profile() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("parentToken");
+    navigate("/");
+  };
   return (
-    <div className="profile">
+    <section className="profile">
       <Link to="/parents/rules" className="navigation">
         <MdHelp className="icons_profile" />
         <span>Aide</span>
@@ -13,11 +19,11 @@ function Profile() {
         <MdContentPaste className="icons_profile" />
         <span>Réservations</span>
       </Link>
-      <Link to="/" className="navigation">
+      <div className="navigation" onClick={handleLogout} aria-hidden>
         <MdLogout className="icons_profile" />
         <span>Déconnexion</span>
-      </Link>
-    </div>
+      </div>
+    </section>
   );
 }
 

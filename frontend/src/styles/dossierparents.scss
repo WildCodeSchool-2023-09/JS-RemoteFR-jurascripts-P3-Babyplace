@@ -2,27 +2,20 @@
 
 .InscriptionDoc {
   background: $primary;
-  min-height: 100svh;
+  min-height: calc(100svh - 60px);
 
   .parent_box {
     background: $bg-gen;
-    width: 100svw;
-    display: flex;
-    flex-direction: column;
-
     .parent {
       display: flex;
       align-items: center;
       justify-content: center;
       color: $primary;
       font-size: 20px;
-      line-height: 18px;
-      width: 90%;
-      margin: 0 auto;
-
       .icon {
         font-size: 18px;
         margin: 1.2rem 2.5rem 0 0;
+        color: $primary;
       }
       h1 {
         display: flex;
@@ -36,8 +29,6 @@
     }
 
     .linksTo {
-      width: 90%;
-      margin: 0 auto;
       display: flex;
       justify-content: space-around;
 

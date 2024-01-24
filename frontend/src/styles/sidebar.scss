@@ -6,6 +6,9 @@
   height: 100vh;
   padding: 36px 20px;
   transition: $transition-default;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   .logo-ctn {
     display: flex;
