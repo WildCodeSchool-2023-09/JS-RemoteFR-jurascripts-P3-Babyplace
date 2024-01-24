@@ -39,10 +39,10 @@ function DossierEnfants() {
           </h1>
         </div>
         <div className="linksTo">
-          <Link to="/parents/dossierenfants" className="link">
+          <Link to="/parents/dossierenfant" className="link">
             Enfants
           </Link>
-          <Link to="/parents/dossierparents" className="link">
+          <Link to="/parents/dossierparent" className="link">
             Parents
           </Link>
           <Link to="/parents/dossierinscription" className="link">
