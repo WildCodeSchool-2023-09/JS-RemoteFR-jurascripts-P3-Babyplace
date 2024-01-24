@@ -36,10 +36,20 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         align-items: center;
+
+        //custom à voir avec les collgues
+        // input[type="checkbox"] {
+        //   appearance: none;
+        //   background: $six;
+        // }
         input {
           padding: 8px;
           margin: 0.35rem 0;
           border: 0.1rem solid $six;
+
+          &:first-child {
+            width: 20px;
+          }
 
           &:focus {
             outline: none;

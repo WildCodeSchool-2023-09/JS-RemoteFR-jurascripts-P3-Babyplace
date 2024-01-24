@@ -30,6 +30,9 @@ import ParentsTutorial from "./pages/parents/ParentsTutorial";
 import Dashboard from "./pages/structure/Dashboard";
 import Login from "./pages/structure/Login";
 import Register from "./pages/structure/Register";
+import NoticeReservation from "./pages/parents/NoticeReservation";
+import NotifRefused from "./pages/parents/NotifRefused";
+import NotifAccept from "./pages/parents/NotifAccept";
 
 const isParentAuthentificated = () => {
   const parentToken = localStorage.getItem("parentToken");
@@ -54,6 +57,10 @@ const router = createBrowserRouter([
       {
         path: "/parents/subscribe",
         element: <ParentsInscription />,
+      },
+      {
+        path: "/parents/notification",
+        element: <NoticeReservation />,
       },
       {
         path: "/parents/connexion",
@@ -83,7 +90,19 @@ const router = createBrowserRouter([
                 path: "",
                 element: <Profile />,
               },
+              {
+                path: "reservations",
+                element: <NoticeReservation />,
+              },
             ],
+          },
+          {
+            path: "accepte",
+            element: <NotifAccept />,
+          },
+          {
+            path: "refuse",
+            element: <NotifRefused />,
           },
           {
             path: "reservation",

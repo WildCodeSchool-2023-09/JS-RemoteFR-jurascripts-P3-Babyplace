@@ -9,7 +9,7 @@ function Profile() {
         <MdHelp className="icons_profile" />
         <span>Aide</span>
       </Link>
-      <Link to="/parents/reservations" className="navigation">
+      <Link to="/parents/profile/reservations" className="navigation">
         <MdContentPaste className="icons_profile" />
         <span>Réservations</span>
       </Link>
