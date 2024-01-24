@@ -2,7 +2,6 @@ import { FaLessThan } from "react-icons/fa6";
 import { GrValidate } from "react-icons/gr";
 import { MdChevronRight } from "react-icons/md";
 import { Link } from "react-router-dom";
-import NavBar from "../../components/parents/NavBar";
 import "../../styles/dossierInscription.scss";
 
 function DossierInscription() {
@@ -10,17 +9,19 @@ function DossierInscription() {
     <section className="InscriptionDoc">
       <div className="parent_box">
         <div className="parent">
-          <FaLessThan className="icon" />
+          <Link to="/parents/folders">
+            <FaLessThan className="icon" />
+          </Link>
           <h1>
             Ed Cannan
             <span>Papa Poule</span>
           </h1>
         </div>
         <div className="linksTo">
-          <Link to="/parents/dossierenfants" className="link">
+          <Link to="/parents/dossierenfant" className="link">
             Enfants
           </Link>
-          <Link to="/parents/dossierparents" className="link">
+          <Link to="/parents/dossierparent" className="link">
             Parents
           </Link>
           <Link to="/parents/dossierinscription" className="link">
@@ -103,7 +104,6 @@ function DossierInscription() {
         </form>
         <input type="submit" value="Envoyer" className="send" />
       </div>
-      <NavBar />
     </section>
   );
 }

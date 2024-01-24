@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { iconsNavbar } from "../../assets";
 import { navLinks } from "../../constants/dataGen";
+import Logout from "../../pages/structure/Logout";
 import "../../styles/sidebar.scss";
 
 function Sidebar() {
@@ -39,6 +40,7 @@ function Sidebar() {
           ))}
         </ul>
       </nav>
+      <Logout />
     </div>
   );
 }

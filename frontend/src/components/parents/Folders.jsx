@@ -1,6 +1,7 @@
-import NavBar from "./NavBar";
+import { Link } from "react-router-dom";
 import { avatar } from "../../assets";
 import "../../styles/folders.scss";
+import NavBar from "./NavBar";
 
 function Folders() {
   return (
@@ -14,30 +15,36 @@ function Folders() {
         <p className="profile_sentence">
           Un profil complet est nécéssaire pour un accueil en crèche
         </p>
-        <div className="children">
-          <p>
-            Dossier <br /> Enfants
-          </p>{" "}
-          <span>
-            70% <br /> complété{" "}
-          </span>
-        </div>
-        <div className="parents">
-          <p>
-            Dossier <br /> Parents
-          </p>{" "}
-          <span>
-            50% <br /> complété{" "}
-          </span>
-        </div>
-        <div className="inscription">
-          <p>
-            Dossier <br /> d'inscription
-          </p>{" "}
-          <span>
-            40% <br /> complété{" "}
-          </span>
-        </div>
+        <Link to="/parents/dossierenfant">
+          <div className="children">
+            <p>
+              Dossier <br /> Enfants
+            </p>{" "}
+            <span>
+              70% <br /> complété{" "}
+            </span>
+          </div>
+        </Link>
+        <Link to="/parents/dossierparent">
+          <div className="parents">
+            <p>
+              Dossier <br /> Parents
+            </p>{" "}
+            <span>
+              50% <br /> complété{" "}
+            </span>
+          </div>
+        </Link>
+        <Link to="/parents/dossierinscription">
+          <div className="inscription">
+            <p>
+              Dossier <br /> d'inscription
+            </p>{" "}
+            <span>
+              40% <br /> complété{" "}
+            </span>
+          </div>
+        </Link>
 
         <button type="button">Envoyer</button>
       </section>

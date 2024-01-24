@@ -1,12 +1,17 @@
 @import "./variables.scss";
 
 .InscriptionDoc {
+  // width: 90vw;
   .childs {
-    width: 90%;
-    margin: 0 auto;
-    min-height: 88svh;
+    margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
 
     .child_doc {
+      width: 100%;
       display: flex;
       justify-content: space-around;
       align-items: center;
@@ -33,8 +38,8 @@
       margin: 0 auto;
 
       div {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        display: flex;
+        gap: 30px;
         align-items: center;
 
         //custom à voir avec les collgues
@@ -65,9 +70,10 @@
       background: $bg-gen;
       border-radius: 0.78rem;
       color: $primary;
-      margin: 0 38% 12px;
+
       font-weight: 600;
       cursor: pointer;
+      margin-bottom: 20px;
 
       &:hover {
         transform: scale(0.9);

@@ -1,7 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { FaLessThan } from "react-icons/fa6";
-import NavBar from "../../components/parents/NavBar";
+import { Link } from "react-router-dom";
 import "../../styles/dossierparents.scss";
 
 function DossierParents() {
@@ -9,15 +8,17 @@ function DossierParents() {
     <section className="InscriptionDoc">
       <div className="parent_box">
         <div className="parent">
-          <FaLessThan className="icon" />
+          <Link to="/parents/folders">
+            <FaLessThan className="icon" />
+          </Link>
           <h1>
             Ed Cannan
             <span>Papa Poule</span>
           </h1>
         </div>
         <div className="linksTo">
-          <Link to="/parents/dossierenfants">Enfants</Link>
-          <Link to="/parents/dossierparents">Parents</Link>
+          <Link to="/parents/dossierenfant">Enfants</Link>
+          <Link to="/parents/dossierparent">Parents</Link>
           <Link to="/parents/dossierinscription">Inscription</Link>
         </div>
       </div>
@@ -84,7 +85,6 @@ function DossierParents() {
         </form>
         <input type="submit" value="Envoyer" className="send" id="send" />
       </div>
-      <NavBar />
     </section>
   );
 }
