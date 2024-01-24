@@ -58,26 +58,92 @@ class ReservationManager extends AbstractManager {
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing reservation
 
-  async update({
+  async readForCalendar() {
+    const [rows] = await this.database.query(`SELECT * FROM ${this.table}`);
+
+    return Promise.all(
+      rows.map(async (event) => {
+        const [child] = await this.database.query(
+          `SELECT * FROM child WHERE id = ?`,
+          [event.child_id]
+        );
+        const [parent] = await this.database.query(
+          `SELECT * FROM parents WHERE id = ?`,
+          [event.parent_id]
+        );
+        return {
+          id: event.id,
+          parent_name: `${parent[0].first_name} ${parent[0].last_name}`,
+          child_name: `${child[0].first_name} ${child[0].last_name}`,
+          reservationDateStart: event.reservation_date_start,
+          reservationDateEnd: event.reservation_date_end,
+          startTime: event.start_time,
+          endTime: event.end_time,
+        };
+      })
+    );
+  }
+
+  async readForListRequests() {
+    const [rows] = await this.database.query(`SELECT * FROM ${this.table}`);
+
+    return Promise.all(
+      rows.map(async (event) => {
+        const [child] = await this.database.query(
+          `SELECT * FROM child WHERE id = ?`,
+          [event.child_id]
+        );
+        const [parent] = await this.database.query(
+          `SELECT * FROM parents WHERE id = ?`,
+          [event.parent_id]
+        );
+        return {
+          id: event.id,
+          parentName: `${parent[0].first_name} ${parent[0].last_name}`,
+          childName: `${child[0].first_name} ${child[0].last_name}`,
+          reservationDateStart: event.reservation_date_start,
+          reservationDateEnd: event.reservation_date_end,
+          startTime: event.start_time,
+          endTime: event.end_time,
+          status: event.status,
+        };
+      })
+    );
+  }
+
+  // The U of CRUD - Update operation
+  // TODO: Implement the update operation to modify an existing reservation
+
+  async updateAll({
     status,
     rejectionReason,
-    reservationDate,
+    reservationDateStart,
+    reservationDateEnd,
     startTime,
     endTime,
     createdDate,
     id,
   }) {
     const [rows] = await this.database.query(
-      ` UPDATE ${this.table} SET status = ?, rejection_reason = ?, reservation_date = ?, start_time = ?, end_time = ?, created_date = ? WHERE id = ?`,
+      ` UPDATE ${this.table} SET status = ?, rejection_reason = ?, reservation_date_start = ?, reservation_date_end = ?, start_time = ?, end_time = ?, created_date = ? WHERE id = ?`,
       [
         status,
         rejectionReason,
-        reservationDate,
+        reservationDateStart,
+        reservationDateEnd,
         startTime,
         endTime,
         createdDate,
         id,
       ]
+    );
+    return [rows];
+  }
+
+  async update({ status, id }) {
+    const [rows] = await this.database.query(
+      ` UPDATE ${this.table} SET status = ? WHERE id = ?`,
+      [status, id]
     );
     return [rows];
   }
