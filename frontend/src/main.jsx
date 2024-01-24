@@ -31,6 +31,7 @@ import Dashboard from "./pages/structure/Dashboard";
 import Login from "./pages/structure/Login";
 import Register from "./pages/structure/Register";
 import NoticeReservation from "./pages/parents/NoticeReservation";
+import NotifRefused from "./pages/parents/NotifRefused";
 
 const isAuthenticated = () => {
   const structureToken = localStorage.getItem("auth");
@@ -52,6 +53,11 @@ const router = createBrowserRouter([
       {
         path: "/parents/subscribe",
         element: <ParentsInscription />,
+      },
+      // chemin provisoire
+      {
+        path: "parents/refuser",
+        element: <NotifRefused />,
       },
       {
         path: "/parents/notification",
