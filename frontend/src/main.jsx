@@ -1,30 +1,35 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import {
-  createBrowserRouter,
-  RouterProvider,
   Navigate,
+  RouterProvider,
+  createBrowserRouter,
 } from "react-router-dom";
-import "./App.css";
 import App from "./App";
-import NotFound from "./pages/NotFound";
-import Login from "./pages/structure/Login";
-import Register from "./pages/structure/Register";
+import "./App.css";
+import CrecheDetails from "./components/parents/CrecheDetails";
+import Folders from "./components/parents/Folders";
+import Profile from "./components/parents/Profile";
 import Reservation from "./components/parents/Reservation";
 import ReservationTunnel from "./components/parents/ReservationTunnel";
-import Folders from "./components/parents/Folders";
-import Dashboard from "./pages/structure/Dashboard";
-import Layout from "./pages/parents/Layout";
-import Profile from "./components/parents/Profile";
-import ParentsInscription from "./pages/parents/ParentsInscription";
-import ParentsConnexion from "./pages/parents/ParentsConnexion";
-import ParentsTutorial from "./pages/parents/ParentsTutorial";
+import Calendar from "./components/structure/Calendar";
+import ReservationDashboard from "./components/structure/ReservationDashboard";
+import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
+import AgendaParents from "./pages/parents/AgendaParents";
 import Creche from "./pages/parents/Creche";
 import CrecheNoRDV from "./pages/parents/CrecheNoRDV";
-import CrecheDetails from "./components/parents/CrecheDetails";
-import Home from "./pages/Home";
-import ReservationDashboard from "./components/structure/ReservationDashboard";
-import Calendar from "./components/structure/Calendar";
+import DossierEnfants from "./pages/parents/DossierEnfants";
+import DossierInscription from "./pages/parents/DossierInscription";
+import DossierParents from "./pages/parents/DossierParents";
+import Layout from "./pages/parents/Layout";
+import LayoutProfile from "./pages/parents/LayoutProfile";
+import ParentsConnexion from "./pages/parents/ParentsConnexion";
+import ParentsInscription from "./pages/parents/ParentsInscription";
+import ParentsTutorial from "./pages/parents/ParentsTutorial";
+import Dashboard from "./pages/structure/Dashboard";
+import Login from "./pages/structure/Login";
+import Register from "./pages/structure/Register";
 
 const isAuthenticated = () => {
   const structureToken = localStorage.getItem("auth");
@@ -61,7 +66,17 @@ const router = createBrowserRouter([
         children: [
           {
             path: "profile",
-            element: isAuthenticated() ? <Profile /> : <Navigate to="/" />,
+            element: isAuthenticated() ? (
+              <LayoutProfile />
+            ) : (
+              <Navigate to="/" />
+            ),
+            children: [
+              {
+                path: "",
+                element: <Profile />,
+              },
+            ],
           },
           {
             path: "reservation",
@@ -84,12 +99,30 @@ const router = createBrowserRouter([
             element: isAuthenticated() ? <CrecheNoRDV /> : <Navigate to="/" />,
           },
           {
+            path: "agendaparents",
+            element: <AgendaParents />,
+          },
+          {
             path: "crechedetails",
             element: <CrecheDetails />,
           },
           {
             path: "folders",
             element: isAuthenticated() ? <Folders /> : <Navigate to="/" />,
+            children: [
+              {
+                path: "dossierparent",
+                element: <DossierParents />,
+              },
+              {
+                path: "dossierenfant",
+                element: <DossierEnfants />,
+              },
+              {
+                path: "dossierinscription",
+                element: <DossierInscription />,
+              },
+            ],
           },
         ],
       },

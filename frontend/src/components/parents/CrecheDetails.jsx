@@ -42,12 +42,12 @@ function CrecheDetails() {
 
   // prix x nb of hours :
   const basicPrice = 3.5 * 8 + 0.5;
-  const totalPrice = calculationTotalPrice(basicPrice, button, mode);
+  const total = calculationTotalPrice(basicPrice, button, mode);
 
   return (
     <section className="crechedetails">
       <h1 className="creche-title">
-        <Link to="/parents/creche">
+        <Link to="/parents/agendaparents">
           <img src={infe} alt="inferieur icon" />
         </Link>
         Crèche Picoti Picota
@@ -126,7 +126,7 @@ function CrecheDetails() {
           </div>
           <div className="tarif-button">
             <ul className="price">
-              <li className="prix"> {totalPrice}€* </li>
+              <li className="prix"> {total}€* </li>
               <li className="note">8 h de garde*</li>
             </ul>
 
