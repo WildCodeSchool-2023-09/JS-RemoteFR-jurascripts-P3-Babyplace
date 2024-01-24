@@ -1,13 +1,12 @@
 @import "./variables.scss";
 
 .InscriptionDoc {
-  h2 {
-    margin: 40px 20px;
-  }
   .Inscription_doc {
-    min-height: 76svh;
-    width: 80%;
     margin: 0 auto;
+    margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
     form {
       display: flex;
       flex-direction: column;
