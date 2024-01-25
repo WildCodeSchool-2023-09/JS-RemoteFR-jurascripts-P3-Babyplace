@@ -23,15 +23,19 @@ function ReservationDashboard() {
   // console.info("tableau cards", cards);
 
   const handleUpdateCardStatus = (cardId, newStatus) => {
+    let newStatusValue = newStatus;
+
+    if (newStatus === "modified") {
+      newStatusValue = "waiting";
+    }
     axios
       .put(`${import.meta.env.VITE_BACKEND_URL}/api/reservation/${cardId}`, {
-        status: newStatus,
+        status: newStatusValue,
       })
       .then(() => {
         const updatedCards = cards.map((card) =>
-          card.id === cardId ? { ...card, status: newStatus } : card
+          card.id === cardId ? { ...card, status: newStatusValue } : card
         );
-        // console.info("updatedCards", updatedCards);
         setCards(updatedCards);
       })
       .catch((error) => {

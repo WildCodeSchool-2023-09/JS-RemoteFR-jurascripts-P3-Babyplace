@@ -24,15 +24,15 @@ import DossierInscription from "./pages/parents/DossierInscription";
 import DossierParents from "./pages/parents/DossierParents";
 import Layout from "./pages/parents/Layout";
 import LayoutProfile from "./pages/parents/LayoutProfile";
+import NoticeReservation from "./pages/parents/NoticeReservation";
+import NotifAccept from "./pages/parents/NotifAccept";
+import NotifRefused from "./pages/parents/NotifRefused";
 import ParentsConnexion from "./pages/parents/ParentsConnexion";
 import ParentsInscription from "./pages/parents/ParentsInscription";
 import ParentsTutorial from "./pages/parents/ParentsTutorial";
 import Dashboard from "./pages/structure/Dashboard";
 import Login from "./pages/structure/Login";
 import Register from "./pages/structure/Register";
-import NoticeReservation from "./pages/parents/NoticeReservation";
-import NotifRefused from "./pages/parents/NotifRefused";
-import NotifAccept from "./pages/parents/NotifAccept";
 
 const isParentAuthentificated = () => {
   const parentToken = localStorage.getItem("parentToken");
@@ -155,20 +155,18 @@ const router = createBrowserRouter([
             ) : (
               <Navigate to="/" />
             ),
-            children: [
-              {
-                path: "dossierparent",
-                element: <DossierParents />,
-              },
-              {
-                path: "dossierenfant",
-                element: <DossierEnfants />,
-              },
-              {
-                path: "dossierinscription",
-                element: <DossierInscription />,
-              },
-            ],
+          },
+          {
+            path: "dossierparent",
+            element: <DossierParents />,
+          },
+          {
+            path: "dossierenfant",
+            element: <DossierEnfants />,
+          },
+          {
+            path: "dossierinscription",
+            element: <DossierInscription />,
           },
         ],
       },

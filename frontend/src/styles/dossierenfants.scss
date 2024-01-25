@@ -1,12 +1,17 @@
 @import "./variables.scss";
 
 .InscriptionDoc {
+  // width: 90vw;
   .childs {
-    width: 90%;
-    margin: 0 auto;
-    min-height: 88svh;
+    margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
 
     .child_doc {
+      width: 100%;
       display: flex;
       justify-content: space-around;
       align-items: center;
@@ -33,15 +38,42 @@
       margin: 0 auto;
 
       div {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        display: flex;
+        gap: 30px;
         align-items: center;
 
-        //custom à voir avec les collgues
-        // input[type="checkbox"] {
-        //   appearance: none;
-        //   background: $six;
-        // }
+        label {
+          cursor: pointer;
+          stroke-dasharray: 70.5096664428711 9999999;
+          stroke-dashoffset: -262.2723388671875;
+          input {
+            display: none;
+          }
+
+          svg {
+            overflow: visible;
+
+            width: 1.5rem;
+
+            .path {
+              fill: none;
+              stroke: $orangeFred;
+              stroke-width: 5;
+              stroke-linecap: round;
+              stroke-linejoin: round;
+              transition:
+                stroke-dasharray 0.5s ease,
+                stroke-dashoffset 0.5s ease;
+              stroke-dasharray: 241 9999999;
+              stroke-dashoffset: 0;
+            }
+          }
+          & input:checked ~ svg .path {
+            stroke-dasharray: 70.5096664428711 9999999;
+            stroke-dashoffset: -262.2723388671875;
+          }
+        }
+
         input {
           padding: 8px;
           margin: 0.35rem 0;
@@ -62,12 +94,13 @@
     .send {
       padding: 0.123rem 0.77rem;
       border: 1px solid $six;
-      background: $bg-gen;
+      background: $orangeFred;
       border-radius: 0.78rem;
       color: $primary;
-      margin: 0 38% 12px;
+      margin-bottom: 20px;
       font-weight: 600;
       cursor: pointer;
+      margin-bottom: 20px;
 
       &:hover {
         transform: scale(0.9);

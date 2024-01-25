@@ -59,7 +59,9 @@ class ReservationManager extends AbstractManager {
   // TODO: Implement the update operation to modify an existing reservation
 
   async readForCalendar() {
-    const [rows] = await this.database.query(`SELECT * FROM ${this.table}`);
+    const [rows] = await this.database.query(
+      `SELECT * FROM ${this.table} WHERE status = 'accepted'`
+    );
 
     return Promise.all(
       rows.map(async (event) => {
