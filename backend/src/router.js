@@ -38,7 +38,7 @@ router.delete("/users/:id", usersControllers.destroy);
 router.get("/assignments", assignmentsControllers.browse);
 router.get("/assignments/:id", assignmentsControllers.read);
 router.put("/assignments/:id", assignmentsControllers.edit);
-router.post("/assignments", assignmentsControllers.add);
+router.post("/assignments", assignmentsControllers.addOne);
 router.delete("/assignments/:id", assignmentsControllers.destroy);
 
 // disponibilites
@@ -47,6 +47,14 @@ router.get("/disponibilities/:id", disponibilitiesControllers.read);
 router.put("/disponibilities/:id", disponibilitiesControllers.edit);
 router.post("/disponibilities", disponibilitiesControllers.add);
 router.delete("/disponibilities/:id", disponibilitiesControllers.destroy);
+router.get(
+  "/available-employees",
+  disponibilitiesControllers.getAvailableEmployees
+);
+router.put(
+  "/disponibilities/:id/decrement",
+  disponibilitiesControllers.decrementPlaces
+);
 
 // child
 router.get("/child", childControllers.browse);

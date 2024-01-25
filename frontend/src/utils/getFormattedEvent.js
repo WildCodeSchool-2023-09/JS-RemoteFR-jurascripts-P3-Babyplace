@@ -16,10 +16,6 @@ const getFormattedEvents = async () => {
       `${dateEnd}T${event.endTime}`,
       "YYYY-MM-DDThh:mm:ss"
     ).toDate();
-    //-----------------------------------------------
-    console.info("start", start);
-    console.info("end", end);
-    //-----------------------------------------------
 
     return {
       id: event.id,
@@ -28,9 +24,6 @@ const getFormattedEvents = async () => {
       end,
     };
   });
-  //-----------------------------------------------
-  console.info("formattedEvents", formattedEvents);
-  //-----------------------------------------------
 
   return formattedEvents;
 };
