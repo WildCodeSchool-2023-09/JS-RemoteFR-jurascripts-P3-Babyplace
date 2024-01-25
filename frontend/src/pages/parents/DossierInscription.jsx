@@ -1,8 +1,7 @@
-import { FaLessThan } from "react-icons/fa6";
 import { MdChevronRight } from "react-icons/md";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import "../../styles/dossierInscription.scss";
+import HeaderDoc from "../../components/parents/HeaderDoc";
 
 function DossierInscription() {
   const [validator, setValidator] = useState({
@@ -25,28 +24,7 @@ function DossierInscription() {
 
   return (
     <section className="InscriptionDoc">
-      <div className="parent_box">
-        <div className="parent">
-          <Link to="/parents/folders">
-            <FaLessThan className="icon" />
-          </Link>
-          <h1>
-            Ed Cannan
-            <span>Papa Poule</span>
-          </h1>
-        </div>
-        <div className="linksTo">
-          <Link to="/parents/dossierenfant" className="link">
-            Enfants
-          </Link>
-          <Link to="/parents/dossierparent" className="link">
-            Parents
-          </Link>
-          <Link to="/parents/dossierinscription" className="link">
-            Inscription
-          </Link>
-        </div>
-      </div>
+      <HeaderDoc />
       <h2>Dossier d'inscription</h2>
       <div className="Inscription_doc">
         <form action="submit">
