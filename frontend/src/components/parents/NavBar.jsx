@@ -1,34 +1,56 @@
-import "../../styles/navbar.scss";
-import { Link } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import { useEffect, useState } from "react";
 import {
+  IoHomeSharp,
+  IoNotifications,
   IoPerson,
   IoSearch,
-  IoNotifications,
-  IoHomeSharp,
 } from "react-icons/io5";
-import { useState } from "react";
+import { Link } from "react-router-dom";
+import "../../styles/navbar.scss";
 
 function NavBar() {
+  const [profile, setProfile] = useState({ sub: 0 });
+  useEffect(() => {
+    const token = localStorage.getItem("parentToken");
+    if (token) {
+      console.info(jwtDecode(token));
+      setProfile(jwtDecode(token));
+    }
+  }, []);
+  // const { id } = useParams();
+  // useEffect(() => {
+  //   axios
+  //     .get(`${import.meta.env.VITE_BACKEND_URL}/api/parents/${id}`)
+  //     .then((response) => {
+  //       const result = response.data;
+  //       setProfile(result);
+  //       console.info(result);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Erreur lors de la récupération des données:", error);
+  //     });
+  // }, []);
   const navbar = [
     {
       id: 1,
       icons: <IoHomeSharp className="icons" />,
-      link: "/parents/connexion",
+      link: `/parents/connexion`,
     },
     {
       id: 2,
       icons: <IoSearch className="icons" />,
-      link: "/parents/creche",
+      link: `/parents/creche`,
     },
     {
       id: 3,
       icons: <IoNotifications className="icons" />,
-      link: "/parents/folders",
+      link: `/parents/folders`,
     },
     {
       id: 4,
       icons: <IoPerson className="icons" />,
-      link: "/parents/profile",
+      link: `/parents/profile/${profile.sub}`,
     },
   ];
 

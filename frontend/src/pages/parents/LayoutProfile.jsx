@@ -1,17 +1,18 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import avatar from "../../assets/avatar.png";
 import "../../styles/layoutprofile.scss";
 
 function LayoutProfile() {
   const [profile, setProfile] = useState([]);
 
-  // const { id } = useParams();
+  const { id } = useParams();
+  console.info(id);
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/api/parents/1`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/parents/${id}`)
       .then((response) => {
         const result = response.data;
         setProfile(result);

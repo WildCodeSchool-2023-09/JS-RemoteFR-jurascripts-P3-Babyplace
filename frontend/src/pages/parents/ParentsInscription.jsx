@@ -68,7 +68,8 @@ function ParentsInscription() {
           }),
         }
       );
-
+      // const data = await response.json();
+      // post parents via data.insertId
       // Redirection vers la page de connexion si la création réussit
       if (response.status === 201) {
         navigate("/parents/connexion");
