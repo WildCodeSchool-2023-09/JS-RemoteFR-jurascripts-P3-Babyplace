@@ -1,28 +1,11 @@
 import React from "react";
-import { FaLessThan } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import HeaderDoc from "../../components/parents/HeaderDoc";
 import "../../styles/dossierparents.scss";
 
 function DossierParents() {
   return (
     <section className="InscriptionDoc">
-      <div className="parent_box">
-        <div className="parent">
-          <Link to="/parents/folders">
-            <FaLessThan className="icon" />
-          </Link>
-          <h1>
-            Ed Cannan
-            <span>Papa Poule</span>
-          </h1>
-        </div>
-        <div className="linksTo">
-          <Link to="/parents/dossierenfant">Enfants</Link>
-          <Link to="/parents/dossierparent">Parents</Link>
-          <Link to="/parents/dossierinscription">Inscription</Link>
-        </div>
-      </div>
-
+      <HeaderDoc />
       <h2>Dossier Parents</h2>
       <div className="parentDoc_form">
         <form action="submit">

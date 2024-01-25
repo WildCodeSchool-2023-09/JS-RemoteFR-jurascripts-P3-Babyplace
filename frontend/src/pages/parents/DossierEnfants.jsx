@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-import { FaLessThan } from "react-icons/fa6";
-import { Link } from "react-router-dom";
 import { RiLinksFill } from "react-icons/ri";
-// import { GrValidate } from "react-icons/gr";
-
+import HeaderDoc from "../../components/parents/HeaderDoc";
 import "../../styles/dossierenfants.scss";
 
 function DossierEnfants() {
@@ -28,28 +25,7 @@ function DossierEnfants() {
 
   return (
     <section className="InscriptionDoc">
-      <div className="parent_box">
-        <div className="parent">
-          <Link to="/parents/folders">
-            <FaLessThan className="icon" />
-          </Link>
-          <h1>
-            Ed Cannan
-            <span>Papa Poule</span>
-          </h1>
-        </div>
-        <div className="linksTo">
-          <Link to="/parents/dossierenfant" className="link">
-            Enfants
-          </Link>
-          <Link to="/parents/dossierparent" className="link">
-            Parents
-          </Link>
-          <Link to="/parents/dossierinscription" className="link">
-            Inscription
-          </Link>
-        </div>
-      </div>
+      <HeaderDoc />
       <h2>Dossier enfants</h2>
       <div className="childs">
         <div className="child_doc">
