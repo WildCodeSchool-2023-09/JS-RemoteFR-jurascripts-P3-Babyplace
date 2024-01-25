@@ -45,6 +45,17 @@ class assignmentsManager extends AbstractManager {
     );
     return [rows];
   }
-}
 
+  async createAssignment({ reservationId, employeeId }) {
+    const [rows] = await this.database.query(
+      `INSERT INTO ${this.table} (reservation_id, employee_id) VALUES (?, ?)`,
+      [reservationId, employeeId]
+    );
+    return {
+      insertId: rows.insertId,
+      reservationId,
+      employeeId,
+    };
+  }
+}
 module.exports = assignmentsManager;

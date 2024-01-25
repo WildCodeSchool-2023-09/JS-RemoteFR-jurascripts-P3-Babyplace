@@ -58,6 +58,36 @@ class disponibilitiesManager extends AbstractManager {
     );
     return [rows];
   }
+
+  // Employee disponibilities avaible for a specific date and time
+  async getAvailableEmployees() {
+    const [rows] = await this.database.query(
+      `SELECT * FROM employees 
+      JOIN ${this.table} ON employees.id = ${this.table}.employee_id 
+      WHERE ${this.table}.start_date >= current_date() 
+      AND ${this.table}.number_of_places > 0`
+    );
+    return rows;
+  }
+
+  async getEmployeeAvailability() {
+    const [rows] = await this.database.query(
+      `SELECT e.id, e.first_name, e.last_name, ed.number_of_places as available_places
+    FROM employees e
+    LEFT JOIN ${this.table} ed ON e.id = ed.employee_id
+    WHERE ed.slot_id = ?;`
+    );
+    return rows;
+  }
+
+  // Decrement places
+  async decrementPlaces(id) {
+    const [rows] = await this.database.query(
+      `UPDATE ${this.table} SET number_of_places = number_of_places - 1 WHERE id = ?`,
+      [id]
+    );
+    return [rows];
+  }
 }
 
 module.exports = disponibilitiesManager;

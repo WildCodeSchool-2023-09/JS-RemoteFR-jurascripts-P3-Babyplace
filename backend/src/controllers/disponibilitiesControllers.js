@@ -78,10 +78,45 @@ const destroy = async (req, res, next) => {
   }
 };
 
+// Available employees
+const getAvailableEmployees = async (req, res, next) => {
+  try {
+    const { date, startTime, endTime } = req.query;
+    const availableEmployees =
+      await tables.employees_disponibilities.getAvailableEmployees(
+        date,
+        startTime,
+        endTime
+      );
+    res.json(availableEmployees);
+  } catch (err) {
+    next(err);
+  }
+};
+
+// Decrement number_of_places
+const decrementPlaces = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const [result] = await tables.employees_disponibilities.decrementPlaces(id);
+
+    if (result.affectedRows === 0) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(204);
+    }
+  } catch (err) {
+    res.sendStatus(500);
+    next(err);
+  }
+};
+
 module.exports = {
   browse,
   read,
   edit,
   add,
   destroy,
+  getAvailableEmployees,
+  decrementPlaces,
 };

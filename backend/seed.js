@@ -60,6 +60,23 @@ const seed = async () => {
       )
     );
 
+    await database.query("delete from employees");
+    queries.push(
+      database.query(
+        "insert into employees (structure_id, first_name, last_name, qualification, max_children_capacity) values ('1','Carole', 'Toto', 'Employee', '3')"
+      )
+    );
+    queries.push(
+      database.query(
+        "insert into employees (structure_id, first_name, last_name, qualification, max_children_capacity) values ('1','Nadine', 'Toto', 'Employee', '3')"
+      )
+    );
+    queries.push(
+      database.query(
+        "insert into employees (structure_id, first_name, last_name, qualification, max_children_capacity) values ('1','Nicole', 'Toto', 'Employee', '3')"
+      )
+    );
+
     /* ************************************************************************* */
 
     // Wait for all the insertion queries to complete
