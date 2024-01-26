@@ -20,7 +20,7 @@ function Creche() {
   return (
     <div className="creche">
       <div className="title" id="title">
-        <h1>&lt; Crèche Picoti Picota</h1>
+        <h1> Crèche Picoti Picota</h1>
         <p className="parentale">crèche parentale</p>
       </div>
       <div className="creche_container">

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { RiLinksFill } from "react-icons/ri";
+import axios from "axios";
 import HeaderDoc from "../../components/parents/HeaderDoc";
 import "../../styles/dossierenfants.scss";
 
@@ -17,10 +18,42 @@ function DossierEnfants() {
     aptitude: false,
     autorisation: false,
   });
-  const [input, setInput] = useState("");
+  const [inputs, setInputs] = useState({
+    nom: "",
+    prenom: "",
+    dateNaissance: "",
+    marcheur: "",
+    allergies: "",
+    assurance: "",
+    vaccination: "",
+    acteNaissance: "",
+    medecinTraitant: "",
+    aptitude: "",
+    autorisation: "",
+  });
 
   const handlValid = (checkName) => {
     setValidator((chekcs) => ({ ...chekcs, [checkName]: !chekcs[checkName] }));
+  };
+  const handlInputChange = (e) => {
+    const { name, value } = e.target;
+    setInputs((preInputs) => ({ ...preInputs, [name]: value }));
+    if (value === "") {
+      setValidator((chekcs) => ({ ...chekcs, [name]: false }));
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/parents/1`,
+        inputs
+      );
+      console.info(res.data);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -33,15 +66,16 @@ function DossierEnfants() {
           <button type="button">Bébé Cannan 2</button>
           <button type="button">Bébé Cannan 3</button>
         </div>
-        <form action="submit">
+        <form action="submit" onSubmit={handleSubmit}>
           <div>
             <label htmlFor="checkboxNom">
               {" "}
               <input
                 type="checkbox"
                 id="checkboxNom"
-                name="validate"
-                checked={validator.nom}
+                name="nom"
+                checked={validator.nom && inputs.nom}
+                disabled={!inputs}
                 onChange={() => handlValid("nom")}
               />
               <svg viewBox="0 0 64 64" height="2em" width="2em">
@@ -54,9 +88,11 @@ function DossierEnfants() {
             </label>
             <input
               type="text"
-              placeholder="Nom"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
+              placeholder="nom"
+              id="nom"
+              name="nom"
+              value={inputs.nom}
+              onChange={handlInputChange}
             />
           </div>
           <div>
@@ -66,7 +102,8 @@ function DossierEnfants() {
                 type="checkbox"
                 id="checkboxPrenom"
                 name="validate"
-                checked={validator.prenom}
+                disabled={!inputs.prenom}
+                checked={validator.prenom && inputs.prenom}
                 onChange={() => handlValid("prenom")}
               />
               <svg viewBox="0 0 64 64" height="2em" width="2em">
@@ -77,7 +114,14 @@ function DossierEnfants() {
                 />
               </svg>
             </label>
-            <input type="text" placeholder="Prénom" />
+            <input
+              type="text"
+              placeholder="prenom"
+              id="prenom"
+              name="prenom"
+              value={inputs.prenom}
+              onChange={handlInputChange}
+            />
           </div>
           <div>
             <label htmlFor="checkboxdateNaissance">
@@ -86,7 +130,8 @@ function DossierEnfants() {
                 type="checkbox"
                 id="checkboxdateNaissance"
                 name="validate"
-                checked={validator.dateNaissance}
+                checked={validator.dateNaissance && inputs.dateNaissance}
+                disabled={!inputs.dateNaissance}
                 onChange={() => handlValid("dateNaissance")}
               />
               <svg viewBox="0 0 64 64" height="2em" width="2em">
@@ -97,7 +142,14 @@ function DossierEnfants() {
                 />
               </svg>
             </label>
-            <input type="text" placeholder="Date de Naissance" />
+            <input
+              type="text"
+              id="dateNaissance"
+              name="dateNaissance"
+              placeholder="Date de Naissance"
+              value={inputs.dateNaissance}
+              onChange={handlInputChange}
+            />
           </div>
           <div>
             <label htmlFor="checkboxmarcheur">
@@ -105,8 +157,9 @@ function DossierEnfants() {
               <input
                 type="checkbox"
                 id="checkboxmarcheur"
-                name="validate"
-                checked={validator.marcheur}
+                name="marcheur"
+                disabled={!inputs.marcheur}
+                checked={validator.marcheur && inputs.marcheur}
                 onChange={() => handlValid("marcheur")}
               />
               <svg viewBox="0 0 64 64" height="2em" width="2em">
@@ -117,7 +170,14 @@ function DossierEnfants() {
                 />
               </svg>
             </label>
-            <input type="text" placeholder="Marcheur / Non Marcheur" />
+            <input
+              type="text"
+              name="marcheur"
+              id="marcheur"
+              value={inputs.marcheur}
+              placeholder="Marcheur / Non Marcheur"
+              onChange={handlInputChange}
+            />
           </div>
           <div>
             <label htmlFor="checkboxallergies">
@@ -125,8 +185,9 @@ function DossierEnfants() {
               <input
                 type="checkbox"
                 id="checkboxallergies"
-                name="validate"
-                checked={validator.allergies}
+                name="allergies"
+                checked={validator.allergies && inputs.allergies}
+                disabled={!inputs.allergies}
                 onChange={() => handlValid("allergies")}
               />
               <svg viewBox="0 0 64 64" height="2em" width="2em">
@@ -137,7 +198,14 @@ function DossierEnfants() {
                 />
               </svg>
             </label>
-            <input type="text" placeholder="Allergies" />
+            <input
+              type="text"
+              id="allergies"
+              name="allergies"
+              value={inputs.allergies}
+              placeholder="Allergies"
+              onChange={handlInputChange}
+            />
           </div>
           <div>
             <label htmlFor="checkboxassurance">
@@ -145,8 +213,9 @@ function DossierEnfants() {
               <input
                 type="checkbox"
                 id="checkboxassurance"
-                name="validate"
-                checked={validator.assurance}
+                name="assurance"
+                checked={validator.assurance && inputs.assurance}
+                disabled={!inputs.assurance}
                 onChange={() => handlValid("assurance")}
               />
               <svg viewBox="0 0 64 64" height="2em" width="2em">
@@ -157,7 +226,14 @@ function DossierEnfants() {
                 />
               </svg>
             </label>
-            <input type="text" placeholder="Attestation d'assurance" />
+            <input
+              type="text"
+              id="assurance"
+              name="assurance"
+              value={inputs.assurance}
+              placeholder="Attestation d'assurance"
+              onChange={handlInputChange}
+            />
             <RiLinksFill />
           </div>
           <div>
@@ -166,8 +242,9 @@ function DossierEnfants() {
               <input
                 type="checkbox"
                 id="checkboxvaccination"
-                name="validate"
-                checked={validator.vaccination}
+                name="vaccination"
+                checked={validator.vaccination && inputs.vaccination}
+                disabled={!inputs.vaccination}
                 onChange={() => handlValid("vaccination")}
               />
               <svg viewBox="0 0 64 64" height="2em" width="2em">
@@ -178,7 +255,14 @@ function DossierEnfants() {
                 />
               </svg>
             </label>
-            <input type="text" placeholder="Carnet de santé / Vaccination" />
+            <input
+              type="text"
+              id="vaccination"
+              name="vaccination"
+              value={inputs.vaccination}
+              placeholder="Carnet de santé / Vaccination"
+              onChange={handlInputChange}
+            />
             <RiLinksFill />
           </div>
           <div>
@@ -188,7 +272,8 @@ function DossierEnfants() {
                 type="checkbox"
                 id="checkboxacteNaissance"
                 name="validate"
-                checked={validator.acteNaissance}
+                checked={validator.acteNaissance && inputs.acteNaissance}
+                disabled={!inputs.acteNaissance}
                 onChange={() => handlValid("acteNaissance")}
               />
               <svg viewBox="0 0 64 64" height="2em" width="2em">
@@ -201,6 +286,10 @@ function DossierEnfants() {
             </label>
             <input
               type="text"
+              name="acteNaissance"
+              id="acteNaissance"
+              value={inputs.acteNaissance}
+              onChange={handlInputChange}
               placeholder="Acte de naissance / ou certificat de grossesse"
             />
             <RiLinksFill className="validatorIcon" />
@@ -211,8 +300,9 @@ function DossierEnfants() {
               <input
                 type="checkbox"
                 id="checkboxmedecinTraitant"
-                name="validate"
-                checked={validator.medecinTraitant}
+                name="medecinTraitant"
+                checked={validator.medecinTraitant && inputs.medecinTraitant}
+                disabled={!inputs.medecinTraitant}
                 onChange={() => handlValid("medecinTraitant")}
               />
               <svg viewBox="0 0 64 64" height="2em" width="2em">
@@ -223,7 +313,13 @@ function DossierEnfants() {
                 />
               </svg>
             </label>
-            <input type="text" placeholder="Médecin traitant" />
+            <input
+              type="text"
+              name="medecinTraitant"
+              id="medecinTraitant"
+              placeholder="Médecin traitant"
+              onChange={handlInputChange}
+            />
           </div>
           <div>
             <label htmlFor="checkboxaptitude">
@@ -231,8 +327,9 @@ function DossierEnfants() {
               <input
                 type="checkbox"
                 id="checkboxaptitude"
-                name="validate"
-                checked={validator.aptitude}
+                name="aptitude"
+                checked={validator.aptitude && inputs.aptitude}
+                disabled={!inputs.aptitude}
                 onChange={() => handlValid("aptitude")}
               />
               <svg viewBox="0 0 64 64" height="2em" width="2em">
@@ -245,6 +342,10 @@ function DossierEnfants() {
             </label>
             <input
               type="text"
+              name="aptitude"
+              id="aptitude"
+              value={inputs.aptitude}
+              onChange={handlInputChange}
               placeholder="Certificat d'aptitude à l'acceuil collectif"
             />
             <RiLinksFill />
@@ -255,8 +356,9 @@ function DossierEnfants() {
               <input
                 type="checkbox"
                 id="checkboxautorisation"
-                name="validate"
-                checked={validator.autorisation}
+                name="autorisation"
+                checked={validator.autorisation && inputs.autorisation}
+                disabled={!inputs.autorisation}
                 onChange={() => handlValid("autorisation")}
               />
               <svg viewBox="0 0 64 64" height="2em" width="2em">
@@ -269,12 +371,16 @@ function DossierEnfants() {
             </label>
             <input
               type="text"
+              name="autorisation"
+              id="autorisation"
+              value={inputs.autorisation}
+              onChange={handlInputChange}
               placeholder="Autorisation de soin et d'hospitalisation"
             />
             <RiLinksFill />
           </div>
+          <input type="submit" value="Envoyer" className="send" />
         </form>
-        <input type="submit" value="Envoyer" className="send" />
       </div>
     </section>
   );

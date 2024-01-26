@@ -18,7 +18,7 @@ function ParentsTutorial() {
         <img className="imgConnexionParent2" src={logo} alt="imgparent" />
       </div>
       <div className="parentTutorial">
-        <h1 className="parentTitle">Garde d’enfant à la demande</h1>
+        <h1 className="parentTitle">Garde d'enfant à la demande</h1>
       </div>
       <div className="parentsObject">
         <p className="parentsText">{tutorial[tutorialText].text}</p>

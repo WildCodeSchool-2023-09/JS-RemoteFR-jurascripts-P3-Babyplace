@@ -8,11 +8,6 @@ function AgendaParents() {
   return (
     <section className="agenda-parents">
       <div className="title-container">
-        <Link to="/parents/creche">
-          <button className="icon" type="submit">
-            &lt;
-          </button>
-        </Link>
         <img src={background} alt="avatar" className="user-avatar" />
         <span className="title">
           <span className="intro">Demandez une place</span>

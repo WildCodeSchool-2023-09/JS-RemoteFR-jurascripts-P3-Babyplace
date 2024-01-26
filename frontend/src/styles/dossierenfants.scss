@@ -88,25 +88,24 @@
           }
         }
       }
-    }
 
-    .send {
-      padding: 0.123rem 0.77rem;
-      border: 1px solid $six;
-      background: $orangeFred;
-      border-radius: 0.78rem;
-      color: $primary;
-      margin-bottom: 20px;
-      font-weight: 600;
-      cursor: pointer;
-      margin-bottom: 20px;
+      .send {
+        padding: 0.123rem 0.77rem;
+        border: 1px solid $six;
+        background: $orangeFred;
+        border-radius: 0.78rem;
+        color: $primary;
+        margin: 10px 30%;
+        font-weight: 600;
+        cursor: pointer;
 
-      &:hover {
-        transform: scale(0.9);
-        transition: all 0.3s ease;
-      }
-      &:active {
-        background: $clr-accepted;
+        &:hover {
+          transform: scale(0.9);
+          transition: all 0.3s ease;
+        }
+        &:active {
+          background: $clr-accepted;
+        }
       }
     }
   }
