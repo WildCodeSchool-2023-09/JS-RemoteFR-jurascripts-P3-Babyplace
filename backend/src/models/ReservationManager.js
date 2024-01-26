@@ -87,7 +87,13 @@ class ReservationManager extends AbstractManager {
   }
 
   async readForListRequests() {
-    const [rows] = await this.database.query(`SELECT * FROM ${this.table}`);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const [rows] = await this.database.query(
+      `SELECT * FROM ${this.table} WHERE reservation_date_start >= ?`,
+      [today]
+    );
 
     return Promise.all(
       rows.map(async (event) => {
