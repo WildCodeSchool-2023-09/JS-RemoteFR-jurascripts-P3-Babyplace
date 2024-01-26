@@ -10,23 +10,23 @@ class ReservationManager extends AbstractManager {
   // The C of CRUD - Create operation
 
   async create({
-    status,
     rejectionReason,
-    reservationDate,
+    reservationDateStart,
     startTime,
     endTime,
-    createdDate,
+    prices,
   }) {
     // Execute the SQL INSERT query to add a new item to the "reservation" table
     const [rows] = await this.database.query(
-      `INSERT INTO ${this.table} (status, rejection_reason, reservation_date, start_time, end_time, created_date) VALUES (?,?,?,?,?,?)`,
+      `INSERT INTO ${this.table} (status, rejection_reason, reservation_date_start, start_time, end_time, created_date, prices) VALUES (?,?,?,?,?,?,?)`,
       [
-        status,
+        "waiting",
         rejectionReason,
-        reservationDate,
-        startTime,
-        endTime,
-        createdDate,
+        new Date(reservationDateStart),
+        new Date(startTime),
+        new Date(endTime),
+        new Date(Date.now()),
+        prices,
       ]
     );
 
@@ -108,6 +108,7 @@ class ReservationManager extends AbstractManager {
           startTime: event.start_time,
           endTime: event.end_time,
           status: event.status,
+          prices: event.prices,
         };
       })
     );
@@ -124,10 +125,11 @@ class ReservationManager extends AbstractManager {
     startTime,
     endTime,
     createdDate,
+    prices,
     id,
   }) {
     const [rows] = await this.database.query(
-      ` UPDATE ${this.table} SET status = ?, rejection_reason = ?, reservation_date_start = ?, reservation_date_end = ?, start_time = ?, end_time = ?, created_date = ? WHERE id = ?`,
+      ` UPDATE ${this.table} SET status = ?, rejection_reason = ?, reservation_date_start = ?, reservation_date_end = ?, start_time = ?, end_time = ?, created_date = ?, prices = ? WHERE id = ?`,
       [
         status,
         rejectionReason,
@@ -136,6 +138,7 @@ class ReservationManager extends AbstractManager {
         startTime,
         endTime,
         createdDate,
+        prices,
         id,
       ]
     );

@@ -72,6 +72,22 @@ const add = async (req, res, next) => {
   }
 };
 
+const addForReservation = async (req, res, next) => {
+  // Extract the parents data from the request body
+  const parents = req.body;
+
+  try {
+    // Insert the parents into the database
+    const insertId = await tables.parents.createForReservation(parents);
+
+    // Respond with HTTP 201 (Created) and the ID of the newly inserted parents
+    res.status(201).json({ insertId });
+  } catch (err) {
+    // Pass any errors to the error-handling middleware
+    next(err);
+  }
+};
+
 // The D of BREAD - Destroy (Delete) operation
 // This operation is not yet implemented
 const destroy = async (req, res, next) => {
@@ -94,5 +110,6 @@ module.exports = {
   read,
   edit,
   add,
+  addForReservation,
   destroy,
 };

@@ -109,6 +109,7 @@ create table reservation (
   reservation_date_end date,
   start_time time,
   end_time time,
+  prices decimal(10,2),
   created_date datetime default current_timestamp,
   constraint fk_reservation_parents foreign key (parent_id) references parents(id),
   constraint fk_reservation_documents foreign key (document_id) references documents(id),

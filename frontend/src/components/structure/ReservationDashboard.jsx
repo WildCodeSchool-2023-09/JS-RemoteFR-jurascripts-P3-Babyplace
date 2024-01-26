@@ -87,7 +87,7 @@ function ReservationDashboard() {
             <p>Heure d'arrivée: {card.startTime}</p>
             <p>Heure de départ: {card.endTime}</p>
             <p>Total Heures: {card.totalHours}</p>
-            <p>Total Prix: {card.totalPrice}</p>
+            <p>Total Prix: {card.prices}</p>
             {card.status === "waiting" && (
               <>
                 <button

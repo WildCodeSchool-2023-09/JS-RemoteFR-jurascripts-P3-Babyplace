@@ -51,12 +51,12 @@ const seed = async () => {
     await database.query("delete from reservation");
     queries.push(
       database.query(
-        "insert into reservation (parent_id,child_id, status, reservation_date_start, reservation_date_end, start_time, end_time ) values ('1','1', 'waiting', '2024-01-24', '2024-01-24', '08:00:00', '18:00:00')"
+        "insert into reservation (parent_id,child_id, status, reservation_date_start, reservation_date_end, start_time, end_time, prices ) values ('1','1', 'waiting', '2024-01-24', '2024-01-24', '08:00:00', '18:00:00', '35.00')"
       )
     );
     queries.push(
       database.query(
-        "insert into reservation (parent_id,child_id, status, reservation_date_start, reservation_date_end, start_time, end_time ) values ('1','1', 'waiting', '2024-01-30', '2024-01-31', '09:00:00', '17:00:00')"
+        "insert into reservation (parent_id,child_id, status, reservation_date_start, reservation_date_end, start_time, end_time, prices ) values ('1','1', 'waiting', '2024-01-30', '2024-01-31', '09:00:00', '17:00:00', '28.00')"
       )
     );
 
