@@ -33,7 +33,7 @@
       width: 100%;
       background-color: rgba($color: orange, $alpha: 0.8);
       font-size: 14px;
-      text-decoration: underline;
+      text-decoration: none;
       border-style: none;
       color: white;
       font-size: 18px;
@@ -41,6 +41,10 @@
       padding: 15px;
       border-radius: 15px;
       text-align: center;
+
+      .fleche {
+        margin-left: 0.5rem;
+      }
     }
   }
   .later_text {

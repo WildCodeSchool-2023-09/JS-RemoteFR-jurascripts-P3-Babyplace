@@ -9,6 +9,9 @@ import email from "./structure/email.svg";
 import gears from "./structure/gears.svg";
 import reservation from "./structure/reservation.svg";
 import menu from "./structure/menu.svg";
+import success from "./success.png";
+import refusal from "./refusal.svg";
+import edit from "./edit.png";
 
 export const iconsNavbar = {
   agenda,
@@ -19,4 +22,4 @@ export const iconsNavbar = {
   menu,
 };
 
-export { logo, home, connexion, parents, avatar };
+export { logo, home, connexion, parents, avatar, success, refusal, edit };

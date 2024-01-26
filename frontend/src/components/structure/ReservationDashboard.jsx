@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "../../styles/ReservationDashboard.scss";
+import { success, refusal, edit } from "../../assets";
 
 function ReservationDashboard() {
   const [cards, setCards] = useState([]);
@@ -63,6 +64,7 @@ function ReservationDashboard() {
   return (
     <div className="content-main">
       <div className="filters-btn">
+        <span>Toutes les réservations</span>
         <button type="button" onClick={() => changeFilter("all")}>
           Tous
         </button>
@@ -80,21 +82,44 @@ function ReservationDashboard() {
         {filteredCards().map((card) => (
           <div className={`card ${card.status}`} key={card.id}>
             <h3>{card.babyName}</h3>
-            <p>Enfant: {card.childName}</p>
-            <p>Parent: {card.parentName}</p>
-            <p>Status: {card.status}</p>
-            <p>Date: {card.reservationDateStart.split("T")[0]}</p>
-            <p>Heure d'arrivée: {card.startTime}</p>
-            <p>Heure de départ: {card.endTime}</p>
-            <p>Total Heures: {card.totalHours}</p>
-            <p>Total Prix: {card.prices}</p>
+            <p>
+              Enfant: <span className="color-status">{card.childName}</span>
+            </p>
+            <p>
+              Parent: <span className="color-status">{card.parentName}</span>
+            </p>
+            <p>
+              Status:{" "}
+              <span className={`color-status ${card.status}`}>
+                {" "}
+                {card.status}{" "}
+              </span>{" "}
+            </p>
+            <p>
+              Date:{" "}
+              <span className="color-status">
+                {card.reservationDateStart.split("T")[0]}
+              </span>
+            </p>
+            <p>
+              Heure d'arrivée:{" "}
+              <span className="color-status">{card.startTime}</span>
+            </p>
+            <p>
+              Heure de départ:{" "}
+              <span className="color-status">{card.endTime}</span>
+            </p>
+            <p>
+              Total Prix: <span className="color-status">{card.prices} €</span>
+            </p>
             {card.status === "waiting" && (
-              <>
+              <div className="btn_accept_refuse">
                 <button
                   type="button"
                   className="btn-accept"
                   onClick={() => handleUpdateCardStatus(card.id, "accepted")}
                 >
+                  <img className="icon-button" src={success} alt="accepted" />{" "}
                   Accepter
                 </button>
                 <button
@@ -102,9 +127,10 @@ function ReservationDashboard() {
                   className="btn-reject"
                   onClick={() => handleUpdateCardStatus(card.id, "refused")}
                 >
+                  <img className="icon-button" src={refusal} alt="refused" />
                   Refuser
                 </button>
-              </>
+              </div>
             )}
             {card.status === "accepted" && (
               <button
@@ -112,6 +138,7 @@ function ReservationDashboard() {
                 className="btn-modify"
                 onClick={() => handleUpdateCardStatus(card.id, "modified")}
               >
+                <img className="icon-button" src={edit} alt="refused" />
                 Modifier
               </button>
             )}
@@ -121,6 +148,7 @@ function ReservationDashboard() {
                 className="btn-modify"
                 onClick={() => handleUpdateCardStatus(card.id, "modified")}
               >
+                <img className="icon-button" src={edit} alt="refused" />
                 Modifier
               </button>
             )}

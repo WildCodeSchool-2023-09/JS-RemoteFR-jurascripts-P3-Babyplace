@@ -18,7 +18,9 @@ function ReservationTunnel() {
         votre demande !
       </p>
       <Link to="/parents/folders" className="link-res">
-        <button type="button">Compléter mon dossier</button>
+        <button type="button">
+          Compléter mon dossier <span className="fleche">⮕</span>
+        </button>
       </Link>
 
       <div className="later_text">
