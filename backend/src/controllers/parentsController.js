@@ -19,7 +19,7 @@ const browse = async (req, res, next) => {
 const read = async (req, res, next) => {
   try {
     // Fetch a specific parents from the database based on the provided ID
-    const parents = await tables.parents.read(req.params.id);
+    const parents = await tables.parents.read(req.params.user_id);
 
     // If the parents is not found, respond with HTTP 404 (Not Found)
     // Otherwise, respond with the parents in JSON format

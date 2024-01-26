@@ -26,8 +26,8 @@ create table users (
 create table parents (
   id int auto_increment primary key,
   user_id int unique,
-  first_name varchar(100) not null,
-  last_name varchar(100) not null,
+  first_name varchar(100),
+  last_name varchar(100),
   birth_name varchar(100),
   terms_accepted boolean,
   date_acceptance_terms datetime,
@@ -69,8 +69,7 @@ create table structures (
   activities text,
   welcomes text,
   experiences text,
-  prices decimal(10,2),
-  constraint fk_structures_users foreign key (user_id) references users(id) ON DELETE CASCADE ON UPDATE CASCADE
+  prices decimal(10,2)
 );
 
 create table employees (
