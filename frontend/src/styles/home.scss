@@ -1,5 +1,4 @@
-@use "_variables.scss";
-@use "_mixins.scss";
+@import "./variables.scss";
 
 .homeContainer {
   display: flex;
@@ -16,7 +15,7 @@
 }
 
 .choiceConnection {
-  color: whitesmoke;
+  color: $primary;
   margin-bottom: 5vh;
 }
 
@@ -28,10 +27,10 @@
   width: 200px;
   height: auto;
   border: none;
-  color: whitesmoke;
+  color: $primary;
   margin: 0 5vw;
   cursor: pointer;
-  background-color: rgba($color: orange, $alpha: 0.8);
+  background-color: rgba($color: $orangeFred, $alpha: 0.8);
   font-size: 18px;
   font-weight: bolder;
   text-decoration: underline;

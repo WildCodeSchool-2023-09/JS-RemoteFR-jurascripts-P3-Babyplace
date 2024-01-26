@@ -4,7 +4,6 @@ import { IoSettingsOutline } from "react-icons/io5";
 import {
   background,
   balade,
-  infe,
   info,
   wifi,
   tea,
@@ -52,12 +51,7 @@ function CrecheDetails() {
 
   return (
     <section className="crechedetails">
-      <h1 className="creche-title">
-        <Link to="/parents/agendaparents">
-          <img src={infe} alt="inferieur icon" />
-        </Link>
-        Crèche Picoti Picota
-      </h1>
+      <h1 className="creche-title">Crèche Picoti Picota</h1>
       <div className="creche-container">
         <img src={background} alt="creche" className="creche-img" />
 

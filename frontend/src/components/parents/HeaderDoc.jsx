@@ -1,17 +1,29 @@
-import React from "react";
-import { FaLessThan } from "react-icons/fa6";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/headerDoc.scss";
+import axios from "axios";
 
 function HeaderDoc() {
+  const [name, setName] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/parents/1`)
+      .then((res) => {
+        const result = res.data;
+        setName(result);
+        console.info(result);
+      })
+      .catch((error) => {
+        console.error("Chargement de données compromis:", error);
+      });
+  }, []);
+
   return (
-    <div className="parent_box">
+    <section className="parent_box">
       <div className="parent">
-        <Link to="/parents/folders">
-          <FaLessThan className="icon" />
-        </Link>
         <h1>
-          Ed Cannan
+          {name.first_name} {name.last_name}
           <span>Papa Poule</span>
         </h1>
       </div>
@@ -20,7 +32,7 @@ function HeaderDoc() {
         <Link to="/parents/dossierparent">Parents</Link>
         <Link to="/parents/dossierinscription">Inscription</Link>
       </div>
-    </div>
+    </section>
   );
 }
 
