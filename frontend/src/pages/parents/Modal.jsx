@@ -8,7 +8,7 @@ function Modal({ open }) {
   return (
     <div className="modal_box">
       <div className="overlay" />
-      <div className="modal">
+      <div className="modala">
         <div className="aggrements">
           <h2>
             <img src={info} alt="info" /> Aggréments{" "}

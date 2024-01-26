@@ -1,7 +1,7 @@
 @use "./variables.scss" as *;
 
 .modal_box {
-  .modal {
+  .modala {
     position: fixed;
     top: 45%;
     left: 50%;
@@ -27,7 +27,7 @@
         li {
           display: flex;
           span {
-            display: flex;
+            margin: 0 15px;
           }
         }
       }
