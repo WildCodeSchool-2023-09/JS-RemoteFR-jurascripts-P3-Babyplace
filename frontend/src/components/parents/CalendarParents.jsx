@@ -5,8 +5,9 @@ import { MobileTimePicker } from "@mui/x-date-pickers/MobileTimePicker";
 import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { fr } from "date-fns/locale";
 import dayjs from "dayjs";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/calendarparents.scss";
+import axios from "axios";
 
 function CalendarParents() {
   const [chooseDate, setChooseDate] = useState(null);
@@ -29,13 +30,38 @@ function CalendarParents() {
 
   const handleDepartureTimeChange = (time) => {
     setDepartureTime(time);
-    const price = calculateTotalPrice(arrivalTime, time);
-    setTotalPrice(price);
   };
 
-  const nineAM = dayjs().set("hour", 9).startOf("hour");
-  const eightPM = dayjs().set("hour", 20).set("minute", 30).startOf("minute");
-  const ninePM = dayjs().set("hour", 21).set("minute", 0).startOf("minute");
+  useEffect(() => {
+    if ((arrivalTime, departureTime)) {
+      const price = calculateTotalPrice(arrivalTime, departureTime);
+      setTotalPrice(price);
+    }
+  }, [arrivalTime, departureTime]);
+
+  const handleSubmit = () => {
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/api/reservation`, {
+        startTime: arrivalTime,
+        endTime: departureTime,
+        reservationDateStart: chooseDate,
+        prices: totalPrice,
+      })
+      .then(() => {
+        console.info("Succès !");
+        if (totalPrice > 0) {
+          const totalPriceFormated = totalPrice.replace(".", "-");
+          window.location.href = `/parents/crechedetails/${totalPriceFormated}`;
+        }
+      })
+      .catch((error) => {
+        console.error("Erreur", error);
+      });
+  };
+
+  const eightAM = dayjs().set("hour", 8).startOf("hour");
+  const sixPM = dayjs().set("hour", 18).set("minute", 30).startOf("minute");
+  const sevenPM = dayjs().set("hour", 19).set("minute", 0).startOf("minute");
 
   const isWeekend = (date) => {
     const day = date.day();
@@ -73,8 +99,8 @@ function CalendarParents() {
                   value={arrivalTime}
                   onChange={handleArrivalTimeChange}
                   ampm={false}
-                  minTime={nineAM}
-                  maxTime={eightPM}
+                  minTime={eightAM}
+                  maxTime={sixPM}
                 />
               </DemoItem>
               <DemoItem label="Heure de départ">
@@ -82,8 +108,8 @@ function CalendarParents() {
                   value={departureTime}
                   onChange={handleDepartureTimeChange}
                   ampm={false}
-                  minTime={nineAM}
-                  maxTime={ninePM}
+                  minTime={eightAM}
+                  maxTime={sevenPM}
                 />
               </DemoItem>
             </DemoContainer>
@@ -91,6 +117,14 @@ function CalendarParents() {
         </span>
       </div>
       <p className="para">Prix total : {totalPrice} €</p>
+      <button
+        disabled={totalPrice === 0}
+        className="btn-parent"
+        type="submit"
+        onClick={handleSubmit}
+      >
+        Terminé
+      </button>
     </section>
   );
 }

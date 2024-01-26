@@ -25,11 +25,6 @@ function AgendaParents() {
           <CalendarParents />
         </div>
       </div>
-      <Link to="/parents/crechedetails">
-        <button className="btn-parent" type="submit">
-          Terminé
-        </button>
-      </Link>
     </section>
   );
 }

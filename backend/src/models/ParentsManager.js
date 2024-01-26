@@ -48,6 +48,13 @@ class ParentsManager extends AbstractManager {
     return result.insertId;
   }
 
+  async createForReservation({ firstName, lastName }) {
+    await this.database.query(
+      `INSERT INTO ${this.table} ( first_name, last_name ) VALUES (?,?)`,
+      [firstName, lastName]
+    );
+  }
+
   // The Rs of CRUD - Read operations
 
   async read(id) {

@@ -145,8 +145,12 @@ const router = createBrowserRouter([
             ),
           },
           {
-            path: "crechedetails",
-            element: <CrecheDetails />,
+            path: "crechedetails/:price",
+            element: isParentAuthentificated() ? (
+              <CrecheDetails />
+            ) : (
+              <Navigate to="/" />
+            ),
           },
           {
             path: "folders",
