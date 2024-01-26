@@ -1,3 +1,4 @@
+@import "variables.scss";
 .folders {
   min-height: 100svh;
   margin: auto;
@@ -5,7 +6,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  color: white;
+  color: $primary;
   align-items: center;
   img {
     width: 175px;
@@ -31,22 +32,27 @@
     text-align: center;
   }
   button {
-    width: 40%;
-    background-color: rgba($color: orange, $alpha: 0.8);
-    font-size: 18px;
+    width: 35%;
+    background: rgba($color: $orangeFred, $alpha: 0.8);
+    font-size: 1rem;
     font-weight: bolder;
-    text-decoration: underline;
     border-style: none;
-    color: white;
+    color: $primary;
     padding: 15px;
     margin-bottom: 10px;
     border-radius: 15px;
     text-align: center;
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      text-decoration: underline;
+      background: rgba($color: $orangeFred, $alpha: 1);
+    }
   }
   a {
     text-decoration: none;
-    color: white;
+    color: $primary;
     width: 90%;
     .children,
     .parents,

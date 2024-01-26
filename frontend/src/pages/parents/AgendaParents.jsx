@@ -1,5 +1,3 @@
-import React from "react";
-import { Link } from "react-router-dom";
 import CalendarParents from "../../components/parents/CalendarParents";
 import "../../styles/agendaparents.scss";
 import { background } from "../../assets/parents/creche";
