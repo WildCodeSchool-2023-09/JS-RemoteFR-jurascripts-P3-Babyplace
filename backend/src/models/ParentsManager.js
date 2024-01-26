@@ -10,6 +10,7 @@ class ParentsManager extends AbstractManager {
   // The C of CRUD - Create operation
 
   async create({
+    userId,
     firstName,
     lastName,
     birthName,
@@ -26,8 +27,9 @@ class ParentsManager extends AbstractManager {
   }) {
     // Execute the SQL INSERT query to add a new parents to the "parents" table
     const [result] = await this.database.query(
-      `INSERT INTO ${this.table} ( first_name, last_name, birth_name, terms_accepted, date_acceptance_terms, marital_status, address, address_complements, zip_code, city, phone_number, email, profession) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+      `INSERT INTO ${this.table} (user_id, first_name, last_name, birth_name, terms_accepted, date_acceptance_terms, marital_status, address, address_complements, zip_code, city, phone_number, email, profession) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
       [
+        userId,
         firstName,
         lastName,
         birthName,
@@ -57,11 +59,11 @@ class ParentsManager extends AbstractManager {
 
   // The Rs of CRUD - Read operations
 
-  async read(id) {
+  async read(userId) {
     // Execute the SQL SELECT query to retrieve a specific parents by its ID
     const [rows] = await this.database.query(
-      `SELECT * FROM ${this.table} WHERE id = ?`,
-      [id]
+      `SELECT * FROM ${this.table} WHERE user_id = ?`,
+      [userId]
     );
 
     // Return the first row of the result, which represents the parents

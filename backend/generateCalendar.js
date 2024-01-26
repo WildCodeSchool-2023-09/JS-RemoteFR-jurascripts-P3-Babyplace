@@ -81,7 +81,7 @@ const runProcedure = async () => {
     // Call the stored procedure
     await connection.query("CALL GenerateSlots()");
 
-    console.info("Employee slots generated successfully");
+    console.info("Employee slots generated successfully 💩");
 
     // Close the database connection
     connection.end();

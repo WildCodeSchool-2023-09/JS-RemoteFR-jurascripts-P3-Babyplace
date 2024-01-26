@@ -10,17 +10,12 @@ const PWD_REGEX =
 function ParentsInscription() {
   const emailRef = useRef();
   const errRef = useRef();
-
-  // Etat pour le email et sa validation
   const [mail, setMail] = useState("");
   const [validMail, setValidMail] = useState(false);
   const [mailFocus, setMailFocus] = useState(false);
-
-  // États pour le mot de passe et la confirmation du mot de passe
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordFocus, setPasswordFocus] = useState(false);
-
   const [errMsg, setErrMsg] = useState("");
 
   useEffect(() => {
@@ -47,15 +42,12 @@ function ParentsInscription() {
     updateButton();
   }, [confirmPassword]);
 
-  // Hook pour la navigation
   const navigate = useNavigate();
 
-  // Gestionnaire de soumission du formulaire
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      // Appel à l'API pour créer un nouvel utilisateur
       const response = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/api/users`,
         {
@@ -68,15 +60,34 @@ function ParentsInscription() {
           }),
         }
       );
-      // Redirection vers la page de connexion si la création réussit
+      console.info(response);
+
       if (response.status === 201) {
-        navigate("/parents/connexion");
+        const userData = await response.json();
+        console.info(userData);
+
+        const parentResponse = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/api/parents`,
+          {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              userId: userData.insertId,
+            }),
+          }
+        );
+
+        if (parentResponse.status === 201) {
+          navigate("/parents/connexion");
+        } else {
+          console.info(parentResponse);
+        }
       } else {
-        // Log des détails de la réponse en cas d'échec
         console.info(response);
       }
     } catch (err) {
-      // Log des erreurs possibles
       console.error(err);
     }
   };
