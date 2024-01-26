@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { IoSettingsOutline } from "react-icons/io5";
 import {
   background,
@@ -11,8 +11,19 @@ import {
 import "../../styles/crecheDetails.scss";
 
 function CrecheDetails() {
+  const [popup, setPopup] = useState(false);
   const [button, setButton] = useState(false);
   const [mode, setMode] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  const calculationTotalPrice = (basicPrice, maintenance, food) => {
+    const maintenanceFee = maintenance ? 3.5 : 0;
+    const foodFee = food ? 7 : 0;
+
+    return basicPrice + maintenanceFee + foodFee;
+  };
+
+  const { price } = useParams();
 
   const switchButton = () => {
     setButton(!button);
@@ -22,8 +33,6 @@ function CrecheDetails() {
     setMode(!mode);
   };
 
-  const [popup, setPopup] = useState(false);
-
   const openPopup = () => {
     setPopup(true);
   };
@@ -32,16 +41,13 @@ function CrecheDetails() {
     setPopup(false);
   };
 
-  const calculationTotalPrice = (basicPrice, maintenance, food) => {
-    const maintenanceFee = maintenance ? 3.5 : 0;
-    const foodFee = food ? 7 : 0;
-
-    return basicPrice + maintenanceFee + foodFee;
-  };
-
-  // prix x nb of hours :
-  const basicPrice = 3.5 * 8 + 0.5;
-  const total = calculationTotalPrice(basicPrice, button, mode);
+  // prix formaté + 0.5€ + 3.5€ + 7€ et le link url "-" qui devient le "." et le prix total.
+  useEffect(() => {
+    const priceFormated = price.replace("-", ".");
+    setTotalPrice(
+      calculationTotalPrice(parseFloat(priceFormated) + 0.5, button, mode)
+    );
+  }, [price, button, mode]);
 
   return (
     <section className="crechedetails">
@@ -67,13 +73,13 @@ function CrecheDetails() {
           </h2>
           <ul className="creche-date">
             <li>
-              Date : lundi 14 janvier
+              Date : Lundi 12 février 2024
               <span>
                 <IoSettingsOutline />
               </span>
             </li>
             <li>
-              Horaire : 9-17h
+              Horaire : 9h-17h
               <span>
                 <IoSettingsOutline />
               </span>
@@ -120,7 +126,7 @@ function CrecheDetails() {
           </div>
           <div className="tarif-button">
             <ul className="price">
-              <li className="prix"> {total}€* </li>
+              <li className="prix"> {totalPrice}€* </li>
               <li className="note">8 h de garde*</li>
             </ul>
 

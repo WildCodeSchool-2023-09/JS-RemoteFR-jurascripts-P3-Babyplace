@@ -79,7 +79,7 @@ const router = createBrowserRouter([
         element: <Layout />,
         children: [
           {
-            path: "profile",
+            path: "profile/:id",
             element: isParentAuthentificated() ? (
               <LayoutProfile />
             ) : (
@@ -145,8 +145,12 @@ const router = createBrowserRouter([
             ),
           },
           {
-            path: "crechedetails",
-            element: <CrecheDetails />,
+            path: "crechedetails/:price",
+            element: isParentAuthentificated() ? (
+              <CrecheDetails />
+            ) : (
+              <Navigate to="/" />
+            ),
           },
           {
             path: "folders",

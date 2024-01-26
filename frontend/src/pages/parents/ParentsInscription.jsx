@@ -68,10 +68,9 @@ function ParentsInscription() {
           }),
         }
       );
-
       // Redirection vers la page de connexion si la création réussit
       if (response.status === 201) {
-        navigate("/parents/rules");
+        navigate("/parents/connexion");
       } else {
         // Log des détails de la réponse en cas d'échec
         console.info(response);
