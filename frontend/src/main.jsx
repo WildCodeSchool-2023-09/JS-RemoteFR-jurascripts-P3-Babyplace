@@ -105,7 +105,7 @@ const router = createBrowserRouter([
             element: <NotifRefused />,
           },
           {
-            path: "reservation",
+            path: "reservation/:id",
             element: isParentAuthentificated() ? (
               <Reservation />
             ) : (

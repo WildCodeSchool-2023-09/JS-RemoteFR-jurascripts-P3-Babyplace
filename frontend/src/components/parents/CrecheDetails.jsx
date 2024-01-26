@@ -1,13 +1,14 @@
+import { jwtDecode } from "jwt-decode";
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
 import { IoSettingsOutline } from "react-icons/io5";
+import { Link, useParams } from "react-router-dom";
 import {
   background,
   balade,
   infe,
   info,
-  wifi,
   tea,
+  wifi,
 } from "../../assets/parents/creche";
 import "../../styles/crecheDetails.scss";
 
@@ -16,6 +17,14 @@ function CrecheDetails() {
   const [button, setButton] = useState(false);
   const [mode, setMode] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [profile, setProfile] = useState({ sub: 0 });
+  useEffect(() => {
+    const token = localStorage.getItem("parentToken");
+    if (token) {
+      console.info(jwtDecode(token));
+      setProfile(jwtDecode(token));
+    }
+  }, []);
 
   const calculationTotalPrice = (basicPrice, maintenance, food) => {
     const maintenanceFee = maintenance ? 3.5 : 0;
@@ -136,7 +145,7 @@ function CrecheDetails() {
               <li className="note">8 h de garde*</li>
             </ul>
 
-            <Link to="/parents/reservation">
+            <Link to={`/parents/reservation/${profile.sub}`}>
               <button type="button" className="btn-detail">
                 Suivant
               </button>

@@ -65,7 +65,7 @@ router.delete("/child/:id", childControllers.destroy);
 
 // parents
 router.get("/parents", parentsControllers.browse);
-router.get("/parents/:id", parentsControllers.read);
+router.get("/parents/:user_id", parentsControllers.read);
 router.put("/parents/:id", parentsControllers.edit);
 router.post("/parents", parentsControllers.add);
 router.post("/parent", parentsControllers.addForReservation);
