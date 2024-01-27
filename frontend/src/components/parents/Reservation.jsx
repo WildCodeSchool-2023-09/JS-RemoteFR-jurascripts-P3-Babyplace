@@ -1,6 +1,7 @@
 // import { Link } from "react-router-dom";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { logo } from "../../assets";
 import "../../styles/reservation.scss";
 
@@ -8,55 +9,69 @@ function Reservation() {
   const [firstNameParent, setFirstNameParent] = useState("");
   const [lastNameParent, setLastNameParent] = useState("");
   const [firstNameBaby, setFirstNameBaby] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const { id } = useParams();
+  const navigate = useNavigate();
+  let parentId = 0;
 
-  const handleSubmitBaby = (parentID) => {
-    const dateOfBirt = "2024-01-01";
-
+  useEffect(() => {
     axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/parents/${id}`)
+      .then((response) => {
+        const result = response.data;
+        parentId = result.id;
+        setLastNameParent(result.last_name);
+        setFirstNameParent(result.first_name);
+        setEmail(result.email);
+        console.info(result);
+      })
+      .catch((error) => {
+        console.error("Erreur lors de la récupération des données:", error);
+      });
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/api/child`, {
-        parentId: parentID, // id du parent pour lier les deux tables
+        // id du parent pour lier les deux tables
         firstName: firstNameBaby,
         lastName: lastNameParent,
-        dateOfBirth: dateOfBirt,
       })
       .then(() => {
-        console.info("Succès pour le bébé !");
+        console.info("Succès pour l'enfant !");
       })
       .catch((error) => {
         console.error("Erreur", error);
       });
-  };
-  const handleSubmitParent = () => {
-    axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/api/parent`, {
+    await axios
+      .put(`${import.meta.env.VITE_BACKEND_URL}/api/parents/${parentId}`, {
         firstName: firstNameParent,
         lastName: lastNameParent,
+        email,
+        address,
+        phoneNumber,
       })
-      .then((response) => {
-        const parentId = response.data.id; // pour récup l'id qui a pop lors de l'insertion
+      .then(() => {
         console.info("Succès pour le parent !");
-
-        // insérer le bébé avec le même ID de parent
-        handleSubmitBaby(parentId);
-        if (firstNameBaby && firstNameParent && lastNameParent !== "") {
-          window.location.href = `/parents/reservation/creation`;
-        }
       })
       .catch((error) => {
         console.error("Erreur", error);
       });
+    navigate("/parents/reservation/creation");
   };
 
   return (
     <div className="reservation_container">
       <img src={logo} alt="a logo of website" />
       <h1> Demande réservation</h1>
-      <form action="submit">
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           name="lastname"
           autoComplete="family-name"
-          placeholder="Nom"
           value={lastNameParent}
           onChange={(e) => setLastNameParent(e.target.value)}
         />
@@ -73,25 +88,32 @@ function Reservation() {
           name="nameOfChildren"
           autoComplete="given-name"
           placeholder="Prénom de l'enfant"
+          value={firstNameBaby}
           onChange={(e) => setFirstNameBaby(e.target.value)}
         />
         <input
           type="text"
           name="email"
           autoComplete="email"
-          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
-        <input type="text" name="adress" placeholder="Adresse,CP,Ville" />
+        <input
+          type="text"
+          name="address"
+          placeholder="Adresse,CP,Ville"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+        />
         <input
           type="number"
           name="phoneNumber"
           autoComplete="tel-national"
           placeholder="Téléphone mobile"
+          value={phoneNumber}
+          onChange={(e) => setPhoneNumber(e.target.value)}
         />
-
-        <button onClick={handleSubmitParent} type="button">
-          Créer dossier réservation
-        </button>
+        <button type="submit">Créer dossier réservation</button>
       </form>
     </div>
   );

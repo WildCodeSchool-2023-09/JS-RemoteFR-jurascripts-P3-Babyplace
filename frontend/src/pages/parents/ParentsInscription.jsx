@@ -10,6 +10,8 @@ const PWD_REGEX =
 function ParentsInscription() {
   const emailRef = useRef();
   const errRef = useRef();
+  const firstNameRef = useRef();
+  const lastNameRef = useRef();
   const [mail, setMail] = useState("");
   const [validMail, setValidMail] = useState(false);
   const [mailFocus, setMailFocus] = useState(false);
@@ -75,6 +77,9 @@ function ParentsInscription() {
             },
             body: JSON.stringify({
               userId: userData.insertId,
+              firstName: firstNameRef.current.value.toString(),
+              lastName: lastNameRef.current.value.toString(),
+              email: emailRef.current.value.toString(),
             }),
           }
         );
@@ -113,79 +118,88 @@ function ParentsInscription() {
               {errMsg}
             </p>
             <form id="form_subscribe" onSubmit={handleSubmit}>
-              <div>
-                <label id="form-sub-mail" htmlFor="email_sub">
-                  <span className={validMail ? "valid" : "hide"}>Correcte</span>
-                  <span className={validMail || !mail ? "hide" : "invalid"}>
-                    Incorrecte
-                  </span>
-                  <input
-                    ref={emailRef}
-                    autoComplete="off"
-                    type="mail"
-                    placeholder="Email"
-                    id="email_sub"
-                    name="email"
-                    onChange={(e) => setMail(e.target.value)}
-                    required
-                    aria-invalid={validMail ? "false" : "true"}
-                    aria-describedby="uidnote"
-                    onFocus={() => setMailFocus(true)}
-                    onBlur={() => setMailFocus(false)}
-                  />
-                  <p
-                    id="uidnote"
-                    className={
-                      mailFocus && mail && !validMail
-                        ? "instructions"
-                        : "offscreen"
-                    }
-                  >
-                    Doit contenir @ et .
-                  </p>
-                </label>{" "}
-              </div>
-              <div>
-                {/* Champ pour le mot de passe */}
-                <label id="form_pass" htmlFor="password_sub">
-                  <span className={confirmPassword ? "valid" : "hide"}>
-                    Correcte
-                  </span>
-                  <span
-                    className={
-                      confirmPassword || !password ? "hide" : "invalid"
-                    }
-                  >
-                    Incorrecte
-                  </span>
-                  <input
-                    type="password"
-                    id="password_sub"
-                    value={password}
-                    name="password"
-                    placeholder="Mot de Passe"
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    aria-invalid={confirmPassword ? "false" : "true"}
-                    onFocus={() => setPasswordFocus(true)}
-                    onBlur={() => setPasswordFocus(false)}
-                  />{" "}
-                  <p
-                    id="pwdnote"
-                    className={
-                      passwordFocus && !confirmPassword
-                        ? "instructions"
-                        : "offscreen"
-                    }
-                  >
-                    Un minimum de 8 caractères.
-                    <br />
-                    Doit inclure une lettre majuscule, un chiffre et un
-                    caractère special (@!%_*?&-).
-                    <br />
-                  </p>
-                </label>{" "}
-              </div>
+              <input
+                ref={firstNameRef}
+                type="text"
+                autoComplete="off"
+                id="firstname"
+                placeholder="Prénom"
+                required
+              />
+              <input
+                ref={lastNameRef}
+                type="text"
+                autoComplete="off"
+                id="lastname"
+                placeholder="Nom"
+                required
+              />
+              <label id="form-sub-mail" htmlFor="email">
+                <span className={validMail ? "valid" : "hide"}>Correcte</span>
+                <span className={validMail || !mail ? "hide" : "invalid"}>
+                  Incorrecte
+                </span>
+                <input
+                  ref={emailRef}
+                  autoComplete="off"
+                  type="mail"
+                  placeholder="Email"
+                  id="email_sub"
+                  name="email"
+                  onChange={(e) => setMail(e.target.value)}
+                  required
+                  aria-invalid={validMail ? "false" : "true"}
+                  aria-describedby="uidnote"
+                  onFocus={() => setMailFocus(true)}
+                  onBlur={() => setMailFocus(false)}
+                />
+                <p
+                  id="uidnote"
+                  className={
+                    mailFocus && mail && !validMail
+                      ? "instructions"
+                      : "offscreen"
+                  }
+                >
+                  Doit contenir @ et .
+                </p>
+              </label>{" "}
+              <label id="form_pass" htmlFor="password">
+                <span className={confirmPassword ? "valid" : "hide"}>
+                  Correcte
+                </span>
+                <span
+                  className={confirmPassword || !password ? "hide" : "invalid"}
+                >
+                  Incorrecte
+                </span>
+                <input
+                  type="password"
+                  id="password_sub"
+                  value={password}
+                  name="password"
+                  placeholder="Mot de Passe"
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  aria-invalid={confirmPassword ? "false" : "true"}
+                  onFocus={() => setPasswordFocus(true)}
+                  onBlur={() => setPasswordFocus(false)}
+                />{" "}
+                <p
+                  id="pwdnote"
+                  className={
+                    passwordFocus && !confirmPassword
+                      ? "instructions"
+                      : "offscreen"
+                  }
+                >
+                  Un minimum de 8 caractères.
+                  <br />
+                  Doit inclure une lettre majuscule, un chiffre et un caractère
+                  special (@!%_*?&-).
+                  <br />
+                </p>
+              </label>
               {/* Bouton de soumission du formulaire */}
               <button className="parentConnexionBtn" id="button" type="submit">
                 S'inscrire
