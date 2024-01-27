@@ -1,23 +1,17 @@
-import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 import { MdContentPaste, MdHelp, MdLogout } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import "../../styles/profile.scss";
 
 function Profile() {
-  const [profile, setProfile] = useState([]);
-
+  const [profile, setProfile] = useState({ sub: 0 });
   useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/api/parents`)
-      .then((response) => {
-        const result = response.data;
-        setProfile(result);
-        console.info(result);
-      })
-      .catch((error) => {
-        console.error("Erreur lors de la récupération des données:", error);
-      });
+    const token = localStorage.getItem("parentToken");
+    if (token) {
+      console.info(jwtDecode(token));
+      setProfile(jwtDecode(token));
+    }
   }, []);
   const navigate = useNavigate();
 
@@ -32,7 +26,7 @@ function Profile() {
         <span>Aide</span>
       </Link>
       <Link
-        to={`/parents/profile/${profile.id}/reservations`}
+        to={`/parents/profile/${profile.sub}/reservations`}
         className="navigation"
       >
         <MdContentPaste className="icons_profile" />

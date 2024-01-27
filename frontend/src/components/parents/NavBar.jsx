@@ -18,19 +18,7 @@ function NavBar() {
       setProfile(jwtDecode(token));
     }
   }, []);
-  // const { id } = useParams();
-  // useEffect(() => {
-  //   axios
-  //     .get(`${import.meta.env.VITE_BACKEND_URL}/api/parents/${id}`)
-  //     .then((response) => {
-  //       const result = response.data;
-  //       setProfile(result);
-  //       console.info(result);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Erreur lors de la récupération des données:", error);
-  //     });
-  // }, []);
+
   const navbar = [
     {
       id: 1,
