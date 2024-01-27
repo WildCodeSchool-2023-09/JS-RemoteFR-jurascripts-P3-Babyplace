@@ -1,6 +1,6 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { RiLinksFill } from "react-icons/ri";
-import axios from "axios";
 import HeaderDoc from "../../components/parents/HeaderDoc";
 import "../../styles/dossierenfants.scss";
 
@@ -63,8 +63,6 @@ function DossierEnfants() {
       <div className="childs">
         <div className="child_doc">
           <button type="button">Bébé Cannan 1</button>
-          <button type="button">Bébé Cannan 2</button>
-          <button type="button">Bébé Cannan 3</button>
         </div>
         <form action="submit" onSubmit={handleSubmit}>
           <div>

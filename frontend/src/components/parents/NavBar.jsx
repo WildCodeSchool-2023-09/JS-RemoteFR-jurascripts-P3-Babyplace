@@ -14,7 +14,6 @@ function NavBar() {
   useEffect(() => {
     const token = localStorage.getItem("parentToken");
     if (token) {
-      console.info(jwtDecode(token));
       setProfile(jwtDecode(token));
     }
   }, []);

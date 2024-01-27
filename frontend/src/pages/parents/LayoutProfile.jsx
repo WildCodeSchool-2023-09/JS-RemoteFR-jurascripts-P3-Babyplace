@@ -16,6 +16,7 @@ function LayoutProfile() {
       .then((response) => {
         const result = response.data;
         setProfile(result);
+        localStorage.setItem("parentId", result.id);
         console.info(result);
       })
       .catch((error) => {

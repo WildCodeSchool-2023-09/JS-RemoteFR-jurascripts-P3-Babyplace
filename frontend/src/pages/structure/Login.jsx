@@ -62,12 +62,14 @@ function Login() {
           <input
             className="inputConnexion"
             type="email"
+            autoComplete="on"
             placeholder="Email"
             ref={emailRef}
           />
           <input
             className="inputConnexion"
             type="password"
+            autoComplete="on"
             placeholder="Mot de passe"
             ref={passwordRef}
           />

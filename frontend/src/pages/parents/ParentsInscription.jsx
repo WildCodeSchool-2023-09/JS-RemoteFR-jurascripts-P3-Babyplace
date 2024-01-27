@@ -62,7 +62,6 @@ function ParentsInscription() {
           }),
         }
       );
-      console.info(response);
 
       if (response.status === 201) {
         const userData = await response.json();

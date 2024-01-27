@@ -1,16 +1,15 @@
 // Import access to database tables
 const tables = require("../tables");
+const ReservationManager = require("../models/ReservationManager");
+
+const reservationManager = new ReservationManager();
 
 // The B of BREAD - Browse (Read All) operation
 const browse = async (req, res, next) => {
   try {
-    // Fetch all reservation from the database
     const reservation = await tables.reservation.readAll();
-
-    // Respond with the reservation in JSON format
     res.json(reservation);
   } catch (err) {
-    // Pass any errors to the error-handling middleware
     next(err);
   }
 };
@@ -18,55 +17,87 @@ const browse = async (req, res, next) => {
 // The R of BREAD - Read operation
 const read = async (req, res, next) => {
   try {
-    // Fetch a specific item from the database based on the provided ID
     const reservation = await tables.reservation.read(req.params.id);
-
-    // If the item is not found, respond with HTTP 404 (Not Found)
-    // Otherwise, respond with the item in JSON format
     if (reservation == null) {
       res.sendStatus(404);
     } else {
       res.json(reservation);
     }
   } catch (err) {
-    // Pass any errors to the error-handling middleware
     next(err);
   }
 };
 
 const readForCalendar = async (req, res, next) => {
   try {
-    // Fetch a specific item from the database based on the provided ID
     const reservation = await tables.reservation.readForCalendar(req.params.id);
-
-    // If the item is not found, respond with HTTP 404 (Not Found)
-    // Otherwise, respond with the item in JSON format
     if (reservation == null) {
       res.sendStatus(404);
     } else {
       res.json(reservation);
     }
   } catch (err) {
-    // Pass any errors to the error-handling middleware
     next(err);
   }
 };
+
 const readForListRequests = async (req, res, next) => {
   try {
-    // Fetch a specific item from the database based on the provided ID
     const reservation = await tables.reservation.readForListRequests(
       req.params.id
     );
-
-    // If the item is not found, respond with HTTP 404 (Not Found)
-    // Otherwise, respond with the item in JSON format
     if (reservation == null) {
       res.sendStatus(404);
     } else {
       res.json(reservation);
     }
   } catch (err) {
-    // Pass any errors to the error-handling middleware
+    next(err);
+  }
+};
+
+const getReservationByParentId = async (req, res) => {
+  const { parentId } = req.query;
+  try {
+    const reservations = await reservationManager.getReservationByParentId(
+      parentId
+    );
+    if (reservations.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No reservations found for this parent" });
+    }
+    return res.json(reservations);
+  } catch (error) {
+    console.error("Error fetching reservation by parent ID", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+const getReservationPrice = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const reservation = await reservationManager.getPriceById(id);
+    if (!reservation || reservation.length === 0) {
+      return res.status(404).json({ message: "Reservation not found" });
+    }
+    const price = reservation[0].prices;
+    return res.json({ price });
+  } catch (error) {
+    console.error("Error fetching reservation price:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+const getId = async (req, res, next) => {
+  try {
+    const reservation = await tables.reservation.getId(req.params.id);
+    if (reservation == null) {
+      res.sendStatus(404);
+    } else {
+      res.json({ id: reservation.id });
+    }
+  } catch (err) {
     next(err);
   }
 };
@@ -77,7 +108,6 @@ const edit = async (req, res, next) => {
     const { id } = req.params;
     const reservation = req.body;
     const [result] = await tables.reservation.update({ id, ...reservation });
-
     if (result.affectedRows === 0) {
       res.sendStatus(404);
     } else {
@@ -89,15 +119,26 @@ const edit = async (req, res, next) => {
   }
 };
 
+const updatePrices = async (req, res) => {
+  const { id } = req.params;
+  const { prices } = req.body;
+  try {
+    const result = await reservationManager.updatePrices(id, prices);
+    if (result.affectedRows === 0) {
+      return res.status(404).send("Reservation not found");
+    }
+    return res.status(200).json({ message: "Price updated successfully" });
+  } catch (error) {
+    console.error("Error updating price", error);
+    return res.status(500).json({ message: "Error updating price" });
+  }
+};
+
 // The A of BREAD - Add (Create) operation
 const add = async (req, res, next) => {
-  // Extract the item data from the request body
   const reservation = req.body;
   try {
-    // Insert the reservation into the database
     const insertId = await tables.reservation.create(reservation);
-
-    // Respond with HTTP 201 (Created) and the ID of the newly inserted item
     res.status(201).json({ insertId });
   } catch (err) {
     res.status(500).json({ message: "Can't add any reservation" });
@@ -122,7 +163,6 @@ const destroy = async (req, res, next) => {
   }
 };
 
-// Ready to export the controller function
 module.exports = {
   browse,
   read,
@@ -131,4 +171,8 @@ module.exports = {
   edit,
   add,
   destroy,
+  updatePrices,
+  getReservationByParentId,
+  getReservationPrice,
+  getId,
 };

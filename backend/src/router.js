@@ -80,10 +80,17 @@ router.delete("/structures/:id", structuresControllers.destroy);
 
 // reservation
 router.get("/reservation", reservationControllers.browse);
+router.get("/reservation", reservationControllers.getReservationByParentId);
 router.get("/reservation/:id", reservationControllers.read);
+router.get("/reservation/:id", reservationControllers.getId);
+router.get(
+  "/reservation/:id/prices",
+  reservationControllers.getReservationPrice
+);
 router.get("/calendar", reservationControllers.readForCalendar);
 router.get("/listofrequests", reservationControllers.readForListRequests);
 router.put("/reservation/:id", reservationControllers.edit);
+router.put("/reservation/:id/prices", reservationControllers.updatePrices);
 router.post("/reservation", reservationControllers.add);
 router.delete("/reservation/:id", reservationControllers.destroy);
 

@@ -3,17 +3,18 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 import { MobileTimePicker } from "@mui/x-date-pickers/MobileTimePicker";
 import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
+import axios from "axios";
 import { fr } from "date-fns/locale";
 import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import "../../styles/calendarparents.scss";
-import axios from "axios";
 
 function CalendarParents() {
   const [chooseDate, setChooseDate] = useState(null);
   const [arrivalTime, setArrivalTime] = useState(null);
   const [departureTime, setDepartureTime] = useState(null);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [reservationId, setReservationId] = useState();
 
   const calculateTotalPrice = (start, end) => {
     const hourPrice = 3.5;
@@ -39,24 +40,36 @@ function CalendarParents() {
     }
   }, [arrivalTime, departureTime]);
 
-  const handleSubmit = () => {
-    axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/api/reservation`, {
-        startTime: arrivalTime,
-        endTime: departureTime,
-        reservationDateStart: chooseDate,
-        prices: totalPrice,
-      })
-      .then(() => {
-        console.info("Succès !");
-        if (totalPrice > 0) {
-          const totalPriceFormated = totalPrice.replace(".", "-");
-          window.location.href = `/parents/crechedetails/${totalPriceFormated}`;
+  const handleSubmit = async () => {
+    try {
+      const parentId = localStorage.getItem("parentId");
+      if (!parentId) {
+        console.error("parentId is null");
+        return;
+      }
+
+      const price = calculateTotalPrice(arrivalTime, departureTime);
+
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/reservation`,
+        {
+          parentId,
+          startTime: arrivalTime,
+          endTime: departureTime,
+          reservationDateStart: chooseDate,
+          reservationDateEnd: chooseDate,
+          prices: price,
         }
-      })
-      .catch((error) => {
-        console.error("Erreur", error);
-      });
+      );
+      setReservationId(response.data.insertId);
+      localStorage.setItem("reservationId", response.data.insertId);
+
+      if (price > 0 && reservationId) {
+        window.location.href = `/parents/crechedetails/${reservationId}`;
+      }
+    } catch (error) {
+      console.error("Erreur", error);
+    }
   };
 
   const eightAM = dayjs().set("hour", 8).startOf("hour");

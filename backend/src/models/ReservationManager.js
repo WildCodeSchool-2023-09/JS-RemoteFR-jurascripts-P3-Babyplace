@@ -2,67 +2,52 @@ const AbstractManager = require("./AbstractManager");
 
 class ReservationManager extends AbstractManager {
   constructor() {
-    // Call the constructor of the parent class (AbstractManager)
-    // and pass the table name "reservation" as configuration
     super({ table: "reservation" });
   }
 
   // The C of CRUD - Create operation
-
   async create({
-    rejectionReason,
+    parentId,
     reservationDateStart,
+    reservationDateEnd,
     startTime,
     endTime,
     prices,
   }) {
-    // Execute the SQL INSERT query to add a new item to the "reservation" table
     const [rows] = await this.database.query(
-      `INSERT INTO ${this.table} (status, rejection_reason, reservation_date_start, start_time, end_time, created_date, prices) VALUES (?,?,?,?,?,?,?)`,
+      `INSERT INTO ${this.table} (parent_id, status, reservation_date_start, reservation_date_end, start_time, end_time, created_date, prices) VALUES (?,?,?,?,?,?,?,?)`,
       [
-        "waiting",
-        rejectionReason,
+        parentId,
+        "in_progress",
         new Date(reservationDateStart),
+        new Date(reservationDateEnd),
         new Date(startTime),
         new Date(endTime),
         new Date(Date.now()),
         prices,
       ]
     );
-
-    // Return the ID of the newly inserted reservation
     return rows.insertId;
   }
 
-  // The Rs of CRUD - Read operations
-
+  // The R of CRUD - Read operations
   async read(id) {
-    // Execute the SQL SELECT query to retrieve a specific item by its ID
     const [rows] = await this.database.query(
       `SELECT * FROM ${this.table} WHERE id = ?`,
       [id]
     );
-
-    // Return the first row of the rows, which represents the item
     return rows[0];
   }
 
   async readAll() {
-    // Execute the SQL SELECT query to retrieve all items from the "item" table
     const [rows] = await this.database.query(`SELECT * FROM ${this.table}`);
-
-    // Return the array of items
     return rows;
   }
-
-  // The U of CRUD - Update operation
-  // TODO: Implement the update operation to modify an existing reservation
 
   async readForCalendar() {
     const [rows] = await this.database.query(
       `SELECT * FROM ${this.table} WHERE status = 'accepted'`
     );
-
     return Promise.all(
       rows.map(async (event) => {
         const [child] = await this.database.query(
@@ -89,12 +74,10 @@ class ReservationManager extends AbstractManager {
   async readForListRequests() {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-
     const [rows] = await this.database.query(
       `SELECT * FROM ${this.table} WHERE reservation_date_start >= ?`,
       [today]
     );
-
     return Promise.all(
       rows.map(async (event) => {
         const [child] = await this.database.query(
@@ -120,9 +103,31 @@ class ReservationManager extends AbstractManager {
     );
   }
 
-  // The U of CRUD - Update operation
-  // TODO: Implement the update operation to modify an existing reservation
+  async getReservationByParentId(parentId) {
+    const [rows] = await this.database.query(
+      `SELECT * FROM ${this.table} WHERE parent_id = ?`,
+      [parentId]
+    );
+    return rows;
+  }
 
+  async getId(id) {
+    const [rows] = await this.database.query(
+      `SELECT id FROM ${this.table} WHERE id = ?`,
+      [id]
+    );
+    return rows;
+  }
+
+  async getPriceById(id) {
+    const [rows] = await this.database.query(
+      `SELECT prices FROM ${this.table} WHERE id = ?`,
+      [id]
+    );
+    return rows;
+  }
+
+  // The U of CRUD - Update operation
   async updateAll({
     status,
     rejectionReason,
@@ -159,15 +164,20 @@ class ReservationManager extends AbstractManager {
     return [rows];
   }
 
-  // The D of CRUD - Delete operation
-  // TODO: Implement the delete operation to remove a reservation by its ID
+  async updatePrices(id, prices) {
+    const [rows] = await this.database.query(
+      `UPDATE ${this.table} SET prices = ? WHERE id = ?`,
+      [prices, id]
+    );
+    return rows;
+  }
 
+  // The D of CRUD - Delete operation
   async delete(id) {
     const [rows] = await this.database.query(
       `DELETE FROM ${this.table} where id = ?`,
       [id]
     );
-
     return [rows];
   }
 }

@@ -62,7 +62,8 @@ class disponibilitiesManager extends AbstractManager {
   // Employee disponibilities avaible for a specific date and time
   async getAvailableEmployees() {
     const [rows] = await this.database.query(
-      `SELECT * FROM employees 
+      `SELECT * 
+      FROM employees 
       JOIN ${this.table} ON employees.id = ${this.table}.employee_id 
       WHERE ${this.table}.start_date >= current_date() 
       AND ${this.table}.number_of_places > 0`
@@ -72,10 +73,10 @@ class disponibilitiesManager extends AbstractManager {
 
   async getEmployeeAvailability() {
     const [rows] = await this.database.query(
-      `SELECT e.id, e.first_name, e.last_name, ed.number_of_places as available_places
-    FROM employees e
-    LEFT JOIN ${this.table} ed ON e.id = ed.employee_id
-    WHERE ed.slot_id = ?;`
+      `SELECT employees.id, employees.first_name, employees.last_name, employees_disponibilities.number_of_places as available_places
+    FROM employees
+    LEFT JOIN ${this.table} ON employees.id = employees_disponibilities.employee_id
+    WHERE employees_disponibilities.slot_id = ?;`
     );
     return rows;
   }
