@@ -6,6 +6,7 @@ import { logo } from "../../assets";
 import "../../styles/reservation.scss";
 
 function Reservation() {
+  const [parentId, setParentId] = useState(0);
   const [firstNameParent, setFirstNameParent] = useState("");
   const [lastNameParent, setLastNameParent] = useState("");
   const [firstNameBaby, setFirstNameBaby] = useState("");
@@ -14,14 +15,13 @@ function Reservation() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const { id } = useParams();
   const navigate = useNavigate();
-  let parentId = 0;
 
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/parents/${id}`)
       .then((response) => {
         const result = response.data;
-        parentId = result.id;
+        setParentId(result.id);
         setLastNameParent(result.last_name);
         setFirstNameParent(result.first_name);
         setEmail(result.email);
