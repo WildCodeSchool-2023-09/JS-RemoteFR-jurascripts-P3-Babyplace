@@ -64,7 +64,7 @@ function ReservationDashboard() {
   return (
     <div className="content-main">
       <div className="filters-btn">
-        <span>Toutes les réservations</span>
+        <span className="filters-title">Toutes les réservations :</span>
         <button type="button" onClick={() => changeFilter("all")}>
           Tous
         </button>

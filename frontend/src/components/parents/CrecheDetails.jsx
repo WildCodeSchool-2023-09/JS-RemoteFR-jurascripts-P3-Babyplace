@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { IoSettingsOutline } from "react-icons/io5";
 import {
-  background,
-  balade,
-  info,
-  wifi,
-  tea,
-} from "../../assets/parents/creche";
+  MdOutlineHealthAndSafety,
+  MdAttractions,
+  MdOutlineFoodBank,
+} from "react-icons/md";
+import { background1, info } from "../../assets/parents/creche";
 import "../../styles/crecheDetails.scss";
 
 function CrecheDetails() {
@@ -53,7 +52,7 @@ function CrecheDetails() {
     <section className="crechedetails">
       <h1 className="creche-title">Crèche Picoti Picota</h1>
       <div className="creche-container">
-        <img src={background} alt="creche" className="creche-img" />
+        <img src={background1} alt="creche" className="creche-img" />
 
         <div className="creche-description">
           <h2 className="creche-reservation">Demande de Réservation</h2>
@@ -86,9 +85,9 @@ function CrecheDetails() {
             </li>
           </ul>
           <div className="activities">
-            <img src={balade} alt="balade" /> <span>Repas bio</span>
-            <img src={tea} alt="tea" /> <span>Accueil Handicap</span>
-            <img src={wifi} alt="tea" />
+            <MdAttractions /> <span>Repas bio</span>
+            <MdOutlineFoodBank /> <span>Accueil Handicap</span>
+            <MdOutlineHealthAndSafety />
             <span>Horaires Tarifs</span>
           </div>
           <div className="indemnities">
