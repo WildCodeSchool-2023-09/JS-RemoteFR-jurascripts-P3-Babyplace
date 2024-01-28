@@ -75,6 +75,22 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "reservation/:id/details",
+        element: isParentAuthentificated() ? (
+          <Reservation />
+        ) : (
+          <Navigate to="/" />
+        ),
+      },
+      {
+        path: "/reservation/update-child",
+        element: isParentAuthentificated() ? (
+          <Reservation />
+        ) : (
+          <Navigate to="/" />
+        ),
+      },
+      {
         path: "/parents",
         element: <Layout />,
         children: [

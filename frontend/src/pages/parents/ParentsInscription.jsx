@@ -65,7 +65,6 @@ function ParentsInscription() {
 
       if (response.status === 201) {
         const userData = await response.json();
-        console.info(userData);
 
         const parentResponse = await fetch(
           `${import.meta.env.VITE_BACKEND_URL}/api/parents`,

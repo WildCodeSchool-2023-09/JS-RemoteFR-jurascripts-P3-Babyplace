@@ -39,7 +39,7 @@ const seed = async () => {
     await database.query("delete from parents");
     queries.push(
       database.query(
-        "insert into parents (user_id, first_name, last_name, birth_name, terms_accepted, date_acceptance_terms, marital_status, address, address_complements, zip_code, city, phone_number, email, profession) values ('2','Papa', 'Poule', 'Poule', '1', '2024-01-01 00:00:00', 'Married', '12 impasse de la rue imaginaire', '', '33000', 'Bordeaux', '06.07.08.09.10', 'papapoule@papaoule.fr', 'Papa à domicile')"
+        "insert into parents (user_id, first_name, last_name, birth_name, terms_accepted, date_acceptance_terms, marital_status, address, address_complements, zip_code, city, phone_number, email, profession) values ('2','Papa', 'Poule', 'Poule', '1', '2024-01-01 00:00:00', 'Married', '12 impasse de la rue imaginaire', '', '33000', 'Bordeaux', '0607080910', 'papapoule@papaoule.fr', 'Papa à domicile')"
       )
     );
     await database.query("delete from child");

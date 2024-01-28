@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
@@ -61,11 +62,12 @@ function CalendarParents() {
           prices: price,
         }
       );
-      setReservationId(response.data.insertId);
-      localStorage.setItem("reservationId", response.data.insertId);
+      const newReservationId = response.data.insertId;
+      setReservationId(newReservationId);
+      localStorage.setItem("reservationId", newReservationId);
 
-      if (price > 0 && reservationId) {
-        window.location.href = `/parents/crechedetails/${reservationId}`;
+      if (price > 0) {
+        window.location.href = `/parents/crechedetails/${newReservationId}`;
       }
     } catch (error) {
       console.error("Erreur", error);

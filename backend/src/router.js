@@ -59,6 +59,7 @@ router.put(
 // child
 router.get("/child", childControllers.browse);
 router.get("/child/:id", childControllers.read);
+router.get("/child/parent/:id", childControllers.readByParentId);
 router.put("/child/:id", childControllers.edit);
 router.post("/child", childControllers.add);
 router.delete("/child/:id", childControllers.destroy);
@@ -80,7 +81,7 @@ router.delete("/structures/:id", structuresControllers.destroy);
 
 // reservation
 router.get("/reservation", reservationControllers.browse);
-router.get("/reservation", reservationControllers.getReservationByParentId);
+router.get("/reservation/:id/parent", reservationControllers.getParentId);
 router.get("/reservation/:id", reservationControllers.read);
 router.get("/reservation/:id", reservationControllers.getId);
 router.get(
@@ -89,8 +90,16 @@ router.get(
 );
 router.get("/calendar", reservationControllers.readForCalendar);
 router.get("/listofrequests", reservationControllers.readForListRequests);
+router.get(
+  "/reservation/:id/details",
+  reservationControllers.getReservationDetailsById
+);
 router.put("/reservation/:id", reservationControllers.edit);
 router.put("/reservation/:id/prices", reservationControllers.updatePrices);
+router.put(
+  "/reservation/:id/details",
+  reservationControllers.updateReservationAndParentDetails
+);
 router.post("/reservation", reservationControllers.add);
 router.delete("/reservation/:id", reservationControllers.destroy);
 

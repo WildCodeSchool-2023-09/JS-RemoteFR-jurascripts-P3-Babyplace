@@ -1,5 +1,4 @@
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
 import React, { useEffect, useState } from "react";
 import { IoSettingsOutline } from "react-icons/io5";
 import { useNavigate, useParams } from "react-router-dom";
@@ -17,17 +16,8 @@ function CrecheDetails() {
   const [button, setButton] = useState(false);
   const [mode, setMode] = useState(false);
   const [totalPrice, setTotalPrice] = useState(null);
-  const [profile, setProfile] = useState({ sub: 0 });
   const navigate = useNavigate();
   const { id } = useParams();
-
-  useEffect(() => {
-    const token = localStorage.getItem("parentToken");
-    if (token) {
-      const decoded = jwtDecode(token);
-      setProfile(decoded);
-    }
-  }, []);
 
   useEffect(() => {
     async function fetchData() {
@@ -76,9 +66,8 @@ function CrecheDetails() {
   };
 
   async function updatePrice(newPrice, reservationId) {
-    console.info("updatePrice a été appelé");
     try {
-      const response = await axios.put(
+      await axios.put(
         `${
           import.meta.env.VITE_BACKEND_URL
         }/api/reservation/${reservationId}/prices`,
@@ -86,7 +75,6 @@ function CrecheDetails() {
           prices: newPrice,
         }
       );
-      console.info(response.data);
       return true;
     } catch (error) {
       console.error("Erreur lors de la mise à jour du prix", error);
@@ -95,17 +83,12 @@ function CrecheDetails() {
   }
 
   async function handleNextClick() {
-    console.info("handleNextClick a été appelé");
-
     if (id) {
-      console.info("Valeur de totalPrice avant la requête PUT :", totalPrice);
-      console.info("Valeur de button avant la requête PUT :", button);
-      console.info("Valeur de mode avant la requête PUT :", mode);
-
       const updateSuccess = await updatePrice(totalPrice, id);
 
       if (updateSuccess) {
-        navigate(`/parents/reservation/${profile.sub}`);
+        const reservationId = localStorage.getItem("reservationId");
+        navigate(`/reservation/${reservationId}/details`);
       }
     }
   }

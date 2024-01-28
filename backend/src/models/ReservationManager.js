@@ -127,6 +127,61 @@ class ReservationManager extends AbstractManager {
     return rows;
   }
 
+  async getReservationDetailsById(reservationId) {
+    const [checkRows] = await this.database.query(
+      `
+    SELECT child_id
+    FROM reservation
+    WHERE id = ?;
+  `,
+      [reservationId]
+    );
+
+    if (checkRows[0] && checkRows[0].child_id) {
+      const [rows] = await this.database.query(
+        `
+      SELECT
+        parents.last_name,
+        parents.first_name AS parent_first_name,
+        parents.email,
+        parents.address,
+        parents.phone_number,
+        child.first_name AS child_first_name
+      FROM parents
+      INNER JOIN child ON parents.id = child.parent_id
+      INNER JOIN reservation ON child.id = reservation.child_id
+      WHERE reservation.id = ?;
+    `,
+        [reservationId]
+      );
+      return rows[0];
+    }
+
+    const [rows] = await this.database.query(
+      `
+      SELECT
+        parents.last_name,
+        parents.first_name AS parent_first_name,
+        parents.email,
+        parents.address,
+        parents.phone_number
+      FROM parents
+      INNER JOIN reservation ON parents.id = reservation.parent_id
+      WHERE reservation.id = ?;
+    `,
+      [reservationId]
+    );
+    return rows[0];
+  }
+
+  async getParentIdByReservationId(reservationId) {
+    const [rows] = await this.database.query(
+      `SELECT parent_id FROM ${this.table} WHERE id = ?`,
+      [reservationId]
+    );
+    return rows.length > 0 ? rows[0].parent_id : null;
+  }
+
   // The U of CRUD - Update operation
   async updateAll({
     status,
@@ -170,6 +225,42 @@ class ReservationManager extends AbstractManager {
       [prices, id]
     );
     return rows;
+  }
+
+  async updateReservationAndParentDetails(
+    reservationId,
+    childId,
+    parentUpdateInfo
+  ) {
+    const connection = await this.database.getConnection();
+
+    try {
+      await connection.beginTransaction();
+
+      await connection.query(
+        `UPDATE ${this.table} SET child_id = ? WHERE id = ?`,
+        [childId, reservationId]
+      );
+
+      await connection.query(
+        `UPDATE parents SET last_name = ?, first_name = ?, email = ?, address = ?, phone_number = ? WHERE id = (SELECT parent_id FROM ${this.table} WHERE id = ?)`,
+        [
+          parentUpdateInfo.lastName,
+          parentUpdateInfo.firstName,
+          parentUpdateInfo.email,
+          parentUpdateInfo.address,
+          parentUpdateInfo.phoneNumber,
+          reservationId,
+        ]
+      );
+
+      await connection.commit();
+    } catch (error) {
+      await connection.rollback();
+      throw error;
+    } finally {
+      connection.release();
+    }
   }
 
   // The D of CRUD - Delete operation

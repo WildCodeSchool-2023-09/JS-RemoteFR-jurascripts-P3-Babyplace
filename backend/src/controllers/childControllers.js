@@ -1,16 +1,17 @@
+/* eslint-disable consistent-return */
 // Import access to database tables
 const tables = require("../tables");
+
+const ReservationManager = require("../models/ReservationManager");
+
+const reservationManager = new ReservationManager();
 
 // The B of BREAD - Browse (Read All) operation
 const browse = async (req, res, next) => {
   try {
-    // Fetch all child from the database
     const child = await tables.child.readAll();
-
-    // Respond with the child in JSON format
     res.json(child);
   } catch (err) {
-    // Pass any errors to the error-handling middleware
     next(err);
   }
 };
@@ -18,24 +19,31 @@ const browse = async (req, res, next) => {
 // The R of BREAD - Read operation
 const read = async (req, res, next) => {
   try {
-    // Fetch a specific child from the database based on the provided ID
     const child = await tables.child.read(req.params.id);
-
-    // If the child is not found, respond with HTTP 404 (Not Found)
-    // Otherwise, respond with the child in JSON format
     if (child == null) {
       res.sendStatus(404);
     } else {
       res.json(child);
     }
   } catch (err) {
-    // Pass any errors to the error-handling middleware
+    next(err);
+  }
+};
+
+const readByParentId = async (req, res, next) => {
+  try {
+    const child = await tables.child.readByParentId(req.params.id);
+    if (child == null) {
+      res.sendStatus(404);
+    } else {
+      res.json(child);
+    }
+  } catch (err) {
     next(err);
   }
 };
 
 // The E of BREAD - Edit (Update) operation
-// This operation is not yet implemented
 const edit = async (req, res, next) => {
   try {
     const child = req.body;
@@ -56,23 +64,27 @@ const edit = async (req, res, next) => {
 
 // The A of BREAD - Add (Create) operation
 const add = async (req, res, next) => {
-  // Extract the child data from the request body
-  const child = req.body;
-
+  const { reservationId, ...childData } = req.body;
   try {
-    // Insert the child into the database
-    const insertId = await tables.child.create(child);
+    const parentId = await reservationManager.getParentIdByReservationId(
+      reservationId
+    );
+    if (!parentId) {
+      return res
+        .status(404)
+        .json({ message: "Parent ID not found for the given reservation ID." });
+    }
+    const insertId = await tables.child.create({ ...childData, parentId });
 
-    // Respond with HTTP 201 (Created) and the ID of the newly inserted child
     res.status(201).json({ insertId });
   } catch (err) {
-    res.status(500).json({ message: "Added a baby" });
+    console.error("Error adding child:", err);
+    res.status(500).json({ message: "Could not add the child" });
     next(err);
   }
 };
 
 // The D of BREAD - Destroy (Delete) operation
-// This operation is not yet implemented
 const destroy = async (req, res, next) => {
   try {
     const [result] = await tables.child.delete(req.params.id);
@@ -95,4 +107,5 @@ module.exports = {
   edit,
   add,
   destroy,
+  readByParentId,
 };

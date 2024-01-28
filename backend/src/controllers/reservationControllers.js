@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable consistent-return */
 // Import access to database tables
 const tables = require("../tables");
 const ReservationManager = require("../models/ReservationManager");
@@ -102,6 +104,35 @@ const getId = async (req, res, next) => {
   }
 };
 
+const getReservationDetailsById = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const reservationDetails =
+      await reservationManager.getReservationDetailsById(id);
+    if (!reservationDetails) {
+      return res.status(404).json({ message: "Reservation details not found" });
+    }
+    return res.json(reservationDetails);
+  } catch (error) {
+    console.error("Error fetching reservation details:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+const getParentId = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const parentId = await reservationManager.getParentIdByReservationId(id);
+    if (!parentId) {
+      return res.status(404).json({ message: "Parent ID not found." });
+    }
+    return res.json({ parentId });
+  } catch (error) {
+    console.error("Error fetching parent ID:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 // The E of BREAD - Edit (Update) operation
 const edit = async (req, res, next) => {
   try {
@@ -131,6 +162,25 @@ const updatePrices = async (req, res) => {
   } catch (error) {
     console.error("Error updating price", error);
     return res.status(500).json({ message: "Error updating price" });
+  }
+};
+
+const updateReservationAndParentDetails = async (req, res) => {
+  const { id } = req.params;
+  const { childId, parentUpdateInfo } = req.body;
+
+  try {
+    await reservationManager.updateReservationAndParentDetails(
+      id,
+      childId,
+      parentUpdateInfo
+    );
+    res
+      .status(200)
+      .json({ message: "Reservation and parent details updated successfully" });
+  } catch (error) {
+    console.error("Error updating reservation and parent details:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -175,4 +225,7 @@ module.exports = {
   getReservationByParentId,
   getReservationPrice,
   getId,
+  getReservationDetailsById,
+  updateReservationAndParentDetails,
+  getParentId,
 };
