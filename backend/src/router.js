@@ -94,12 +94,22 @@ router.get(
   "/reservation/:id/details",
   reservationControllers.getReservationDetailsById
 );
+router.get(
+  "/reservation/:id/status",
+  reservationControllers.getReservationStatus
+);
+
 router.put("/reservation/:id", reservationControllers.edit);
 router.put("/reservation/:id/prices", reservationControllers.updatePrices);
 router.put(
   "/reservation/:id/details",
   reservationControllers.updateReservationAndParentDetails
 );
+router.put(
+  "/reservation/:id/status",
+  reservationControllers.updateReservationStatus
+);
+
 router.post("/reservation", reservationControllers.add);
 router.delete("/reservation/:id", reservationControllers.destroy);
 

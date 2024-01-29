@@ -63,7 +63,7 @@ function Reservation() {
         }
       );
 
-      navigate("/parents/reservation/creation");
+      navigate(`/parents/reservation/creation/${id}`);
     } catch (error) {
       console.error(
         "Erreur lors de la mise à jour de la réservation ou la création de l'enfant :",

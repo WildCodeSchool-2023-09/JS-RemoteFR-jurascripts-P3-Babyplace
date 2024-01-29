@@ -133,6 +133,20 @@ const getParentId = async (req, res) => {
   }
 };
 
+const getReservationStatus = async (req, res) => {
+  const { id } = req.params; // Récupérer l'ID de la réservation depuis les paramètres de la requête
+  try {
+    const status = await reservationManager.getReservationIdStatus(id);
+    if (status === null) {
+      return res.status(404).json({ message: "Reservation not found" });
+    }
+    return res.json({ status });
+  } catch (error) {
+    console.error("Error fetching reservation status:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 // The E of BREAD - Edit (Update) operation
 const edit = async (req, res, next) => {
   try {
@@ -184,6 +198,24 @@ const updateReservationAndParentDetails = async (req, res) => {
   }
 };
 
+const updateReservationStatus = async (req, res) => {
+  const { id } = req.params; // Récupérer l'ID de la réservation depuis les paramètres de la requête
+  const { status } = req.body; // Récupérer le nouveau statut depuis le corps de la requête
+
+  try {
+    const [result] = await reservationManager.updateStatusId({ status, id });
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "Reservation not found" });
+    }
+    return res
+      .status(200)
+      .json({ message: "Reservation status updated successfully" });
+  } catch (error) {
+    console.error("Error updating reservation status:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 // The A of BREAD - Add (Create) operation
 const add = async (req, res, next) => {
   const reservation = req.body;
@@ -228,4 +260,6 @@ module.exports = {
   getReservationDetailsById,
   updateReservationAndParentDetails,
   getParentId,
+  getReservationStatus,
+  updateReservationStatus,
 };

@@ -129,7 +129,7 @@ const router = createBrowserRouter([
             ),
           },
           {
-            path: "reservation/creation",
+            path: "reservation/creation/:reservationId",
             element: isParentAuthentificated() ? (
               <ReservationTunnel />
             ) : (
@@ -169,7 +169,7 @@ const router = createBrowserRouter([
             ),
           },
           {
-            path: "folders",
+            path: "folders/:id",
             element: isParentAuthentificated() ? (
               <Folders />
             ) : (

@@ -182,6 +182,14 @@ class ReservationManager extends AbstractManager {
     return rows.length > 0 ? rows[0].parent_id : null;
   }
 
+  async getReservationIdStatus(reservationId) {
+    const [rows] = await this.database.query(
+      `SELECT status FROM ${this.table} WHERE id = ?`,
+      [reservationId]
+    );
+    return rows.length > 0 ? rows[0].status : null;
+  }
+
   // The U of CRUD - Update operation
   async updateAll({
     status,
@@ -261,6 +269,14 @@ class ReservationManager extends AbstractManager {
     } finally {
       connection.release();
     }
+  }
+
+  async updateStatusId({ status, id }) {
+    const [rows] = await this.database.query(
+      ` UPDATE ${this.table} SET status = ? WHERE id = ?`,
+      [status, id]
+    );
+    return [rows];
   }
 
   // The D of CRUD - Delete operation
