@@ -105,7 +105,7 @@ function Reservation() {
           type="text"
           name="email"
           autoComplete="email"
-          placeholder="Email"
+          placeholder="Adresse email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />

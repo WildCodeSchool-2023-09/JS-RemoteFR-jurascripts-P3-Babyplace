@@ -83,28 +83,28 @@
         cursor: pointer;
         background-color: $clr-accepted;
         color: $clr-white;
-        margin-right: 8px;
+        // margin-right: 8px;
 
-        img.icon-button {
+        .icon-button {
           width: 19px;
-          fill: red;
         }
       }
       .btn-reject {
         display: flex;
         gap: 0.3rem;
         margin-top: 8px;
-        padding: 8px 12px;
+        padding: 8px 15px;
         border: none;
         border-radius: 1rem;
+        justify-content: center;
+        align-items: center;
         cursor: pointer;
         background-color: $clr-rejected;
         color: $clr-white;
-        margin-right: 0.5rem;
 
         .icon-button {
-          width: 17px;
-          margin-left: 1px;
+          width: 20px;
+          margin-right: 3px;
         }
       }
     }
@@ -126,9 +126,10 @@
       }
     }
   }
+
   .filters-btn {
-    margin-top: 3rem;
-    margin-bottom: 2rem;
+    margin-top: 5rem;
+    margin-bottom: 1rem;
     button {
       margin: 0.5rem;
       padding: 0.3rem;
@@ -154,6 +155,15 @@
         background-color: #ffa84c;
         color: $clr-white;
       }
+      &:nth-child(3) {
+        color: grey;
+        border: 2px solid grey;
+        padding: 0.3rem 0.6rem;
+      }
+      &:nth-child(3):hover {
+        background-color: grey;
+        color: $clr-white;
+      }
       &:nth-child(4) {
         color: #2dcd7a;
         border: 2px solid #2dcd7a;
@@ -173,9 +183,13 @@
         color: $clr-white;
       }
     }
+
+    .filters-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
   }
 }
-
 @media screen and (min-width: 1600px) {
   .content-main {
     display: flex;
