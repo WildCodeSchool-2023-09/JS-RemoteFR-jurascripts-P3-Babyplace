@@ -177,15 +177,15 @@ const router = createBrowserRouter([
             ),
           },
           {
-            path: "dossierparent",
+            path: "dossierparent/:id",
             element: <DossierParents />,
           },
           {
-            path: "dossierenfant",
+            path: "dossierenfant/:id",
             element: <DossierEnfants />,
           },
           {
-            path: "dossierinscription",
+            path: "dossierinscription/:id",
             element: <DossierInscription />,
           },
         ],

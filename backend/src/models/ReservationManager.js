@@ -190,6 +190,14 @@ class ReservationManager extends AbstractManager {
     return rows.length > 0 ? rows[0].status : null;
   }
 
+  async readChildReservation(id) {
+    const [rows] = await this.database.query(
+      `SELECT * FROM child inner join reservation on reservation.child_id = child.id WHERE reservation.id = ?`,
+      [id]
+    );
+    return rows[0];
+  }
+
   // The U of CRUD - Update operation
   async updateAll({
     status,
@@ -277,6 +285,41 @@ class ReservationManager extends AbstractManager {
       [status, id]
     );
     return [rows];
+  }
+
+  async updateChildInfo(reservationId, childInfo) {
+    const [child] = await this.database.query(
+      `SELECT child_id FROM reservation WHERE id = ?`,
+      [reservationId]
+    );
+
+    if (!child || child.length === 0 || !child[0].child_id) {
+      throw new Error("Child not found for this reservation");
+    }
+
+    const childId = child[0].child_id;
+
+    await this.database.query(
+      `UPDATE child 
+       SET 
+         first_name = ?, 
+         last_name = ?, 
+         date_of_birth = CASE WHEN ? = '' THEN NULL ELSE ? END, 
+         walker = ?, 
+         name_of_doctor = ?, 
+         allergies = ? 
+       WHERE id = ?`,
+      [
+        childInfo.first_name || null,
+        childInfo.last_name || null,
+        childInfo.date_of_birth,
+        childInfo.date_of_birth,
+        childInfo.walker || null,
+        childInfo.name_of_doctor || null,
+        childInfo.allergies || null,
+        childId,
+      ]
+    );
   }
 
   // The D of CRUD - Delete operation

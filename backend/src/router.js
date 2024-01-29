@@ -98,7 +98,7 @@ router.get(
   "/reservation/:id/status",
   reservationControllers.getReservationStatus
 );
-
+router.get("/reservation/:id/child", childControllers.readChildReservation);
 router.put("/reservation/:id", reservationControllers.edit);
 router.put("/reservation/:id/prices", reservationControllers.updatePrices);
 router.put(
@@ -109,7 +109,7 @@ router.put(
   "/reservation/:id/status",
   reservationControllers.updateReservationStatus
 );
-
+router.put("/reservation/:id/child", childControllers.updateChildInfo);
 router.post("/reservation", reservationControllers.add);
 router.delete("/reservation/:id", reservationControllers.destroy);
 

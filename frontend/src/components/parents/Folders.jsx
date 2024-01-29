@@ -52,7 +52,7 @@ function Folders() {
         <p className="profile_sentence">
           Un profil complet est nécéssaire pour un accueil en crèche
         </p>
-        <Link to="/parents/dossierenfant">
+        <Link to={`/parents/dossierenfant/${id}`}>
           <div className="children">
             <p>
               Dossier <br /> Enfants
@@ -62,7 +62,7 @@ function Folders() {
             </span>
           </div>
         </Link>
-        <Link to="/parents/dossierparent">
+        <Link to={`/parents/dossierparent/${id}`}>
           <div className="parents">
             <p>
               Dossier <br /> Parents
@@ -72,7 +72,7 @@ function Folders() {
             </span>
           </div>
         </Link>
-        <Link to="/parents/dossierinscription">
+        <Link to={`/parents/dossierinscription/${id}`}>
           <div className="inscription">
             <p>
               Dossier <br /> d'inscription

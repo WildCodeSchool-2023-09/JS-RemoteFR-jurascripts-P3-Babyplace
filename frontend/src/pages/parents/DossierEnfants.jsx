@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RiLinksFill } from "react-icons/ri";
+import { useParams } from "react-router-dom";
 import HeaderDoc from "../../components/parents/HeaderDoc";
 import "../../styles/dossierenfants.scss";
 
@@ -18,6 +19,7 @@ function SvgCheckbox() {
 }
 
 function DossierEnfants() {
+  const { id } = useParams();
   const [inputs, setInputs] = useState({
     nom: "",
     prenom: "",
@@ -55,14 +57,22 @@ function DossierEnfants() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const childData = {
+      first_name: inputs.prenom,
+      last_name: inputs.nom,
+      date_of_birth: inputs.dateNaissance,
+      walker: inputs.marcheur,
+      allergies: inputs.allergies,
+      name_of_doctor: inputs.medecinTraitant,
+    };
+
     try {
-      const res = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/parents/1`,
-        inputs
+      await axios.put(
+        `${import.meta.env.VITE_BACKEND_URL}/api/reservation/${id}/child`,
+        childData
       );
-      console.info(res.data);
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error("Error updating child information for reservation:", error);
     }
   };
 
@@ -101,12 +111,38 @@ function DossierEnfants() {
     setValidator((prev) => ({ ...prev, [name]: !!value }));
   };
 
+  useEffect(() => {
+    const fetchChildInfo = async () => {
+      try {
+        const { data } = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/reservation/${id}/child`
+        );
+        setInputs({
+          nom: data.last_name || "",
+          prenom: data.first_name || "",
+          dateNaissance: data.date_of_birth || "",
+          marcheur: data.walker || "",
+          allergies: data.allergies || "",
+          medecinTraitant: data.name_of_doctor || "",
+        });
+      } catch (error) {
+        console.error(
+          "Erreur lors de la récupération des informations de l'enfant:",
+          error
+        );
+      }
+    };
+    if (id) {
+      fetchChildInfo();
+    }
+  }, [id]);
+
   return (
     <section className="InscriptionDoc">
       <HeaderDoc />
       <h2>Dossier enfants</h2>
       <div className="childs">
-        <form onSubmit={handleSubmit}>
+        <form action="submit" onSubmit={handleSubmit}>
           <div className="input">
             <label htmlFor="checkboxNom">
               <input

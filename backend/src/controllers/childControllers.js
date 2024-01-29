@@ -43,6 +43,22 @@ const readByParentId = async (req, res, next) => {
   }
 };
 
+const readChildReservation = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const child = await reservationManager.readChildReservation(id);
+    if (child) {
+      res.json(child);
+    } else {
+      res.status(404).json({ message: "No child found for this reservation." });
+    }
+  } catch (err) {
+    console.error("Error fetching child reservation details:", err);
+    res.status(500).json({ message: "Server error" });
+    next(err);
+  }
+};
+
 // The E of BREAD - Edit (Update) operation
 const edit = async (req, res, next) => {
   try {
@@ -59,6 +75,20 @@ const edit = async (req, res, next) => {
     console.error(err);
     res.status(500);
     next(err);
+  }
+};
+
+const updateChildInfo = async (req, res) => {
+  const { id } = req.params; // ID de la réservation
+  const childInfo = req.body;
+  try {
+    await reservationManager.updateChildInfo(id, childInfo);
+    res.status(200).json({
+      message: "Child information updated successfully for reservation.",
+    });
+  } catch (error) {
+    console.error("Error updating child information:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -108,4 +138,6 @@ module.exports = {
   add,
   destroy,
   readByParentId,
+  readChildReservation,
+  updateChildInfo,
 };
