@@ -2,18 +2,20 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 import { MobileTimePicker } from "@mui/x-date-pickers/MobileTimePicker";
+import { frFR } from "@mui/x-date-pickers/locales";
 import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
-import { fr } from "date-fns/locale";
 import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import "../../styles/calendarparents.scss";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function CalendarParents() {
   const [chooseDate, setChooseDate] = useState(null);
   const [arrivalTime, setArrivalTime] = useState(null);
   const [departureTime, setDepartureTime] = useState(null);
   const [totalPrice, setTotalPrice] = useState(0);
+  const navigate = useNavigate();
 
   const calculateTotalPrice = (start, end) => {
     const hourPrice = 3.5;
@@ -51,7 +53,7 @@ function CalendarParents() {
         console.info("Succès !");
         if (totalPrice > 0) {
           const totalPriceFormated = totalPrice.replace(".", "-");
-          window.location.href = `/parents/crechedetails/${totalPriceFormated}`;
+          navigate(`/parents/crechedetails/${totalPriceFormated}`);
         }
       })
       .catch((error) => {
@@ -75,7 +77,7 @@ function CalendarParents() {
   return (
     <section className="date-time-picker">
       <div className="calendar-parents">
-        <LocalizationProvider dateAdapter={AdapterDayjs} localeText={fr}>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DemoContainer components={["MobileDatePicker", "StaticDatePicker"]}>
             <DemoItem label="Choisissez votre date">
               <MobileDatePicker
@@ -84,6 +86,11 @@ function CalendarParents() {
                 shouldDisableDate={isWeekend}
                 defaultValue={today}
                 minDate={tomorrow}
+                format="DD-MM-YYYY"
+                localeText={
+                  frFR.components.MuiLocalizationProvider.defaultProps
+                    .localeText
+                }
               />
             </DemoItem>
           </DemoContainer>
@@ -92,7 +99,7 @@ function CalendarParents() {
       <div className="time-picker-container">
         <span className="calendar-date">
           Choisissez vos horaires
-          <LocalizationProvider dateAdapter={AdapterDayjs} locale={fr}>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DemoContainer components={["MobileTimePicker"]}>
               <DemoItem label="Heure d'arrivée">
                 <MobileTimePicker

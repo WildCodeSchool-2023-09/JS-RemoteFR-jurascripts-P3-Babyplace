@@ -72,6 +72,7 @@ function Reservation() {
           type="text"
           name="lastname"
           autoComplete="family-name"
+          placeholder="Nom"
           value={lastNameParent}
           onChange={(e) => setLastNameParent(e.target.value)}
         />
@@ -95,6 +96,7 @@ function Reservation() {
           type="text"
           name="email"
           autoComplete="email"
+          placeholder="Adresse email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
