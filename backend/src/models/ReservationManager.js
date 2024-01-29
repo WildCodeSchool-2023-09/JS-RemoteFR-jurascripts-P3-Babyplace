@@ -2,67 +2,52 @@ const AbstractManager = require("./AbstractManager");
 
 class ReservationManager extends AbstractManager {
   constructor() {
-    // Call the constructor of the parent class (AbstractManager)
-    // and pass the table name "reservation" as configuration
     super({ table: "reservation" });
   }
 
-  // The C of CRUD - Create operation
-
+  // C
   async create({
-    rejectionReason,
+    parentId,
     reservationDateStart,
+    reservationDateEnd,
     startTime,
     endTime,
     prices,
   }) {
-    // Execute the SQL INSERT query to add a new item to the "reservation" table
     const [rows] = await this.database.query(
-      `INSERT INTO ${this.table} (status, rejection_reason, reservation_date_start, start_time, end_time, created_date, prices) VALUES (?,?,?,?,?,?,?)`,
+      `INSERT INTO ${this.table} (parent_id, status, reservation_date_start, reservation_date_end, start_time, end_time, created_date, prices) VALUES (?,?,?,?,?,?,?,?)`,
       [
-        "waiting",
-        rejectionReason,
+        parentId,
+        "in_progress",
         new Date(reservationDateStart),
+        new Date(reservationDateEnd),
         new Date(startTime),
         new Date(endTime),
         new Date(Date.now()),
         prices,
       ]
     );
-
-    // Return the ID of the newly inserted reservation
     return rows.insertId;
   }
 
-  // The Rs of CRUD - Read operations
-
+  // R
   async read(id) {
-    // Execute the SQL SELECT query to retrieve a specific item by its ID
     const [rows] = await this.database.query(
       `SELECT * FROM ${this.table} WHERE id = ?`,
       [id]
     );
-
-    // Return the first row of the rows, which represents the item
     return rows[0];
   }
 
   async readAll() {
-    // Execute the SQL SELECT query to retrieve all items from the "item" table
     const [rows] = await this.database.query(`SELECT * FROM ${this.table}`);
-
-    // Return the array of items
     return rows;
   }
-
-  // The U of CRUD - Update operation
-  // TODO: Implement the update operation to modify an existing reservation
 
   async readForCalendar() {
     const [rows] = await this.database.query(
       `SELECT * FROM ${this.table} WHERE status = 'accepted'`
     );
-
     return Promise.all(
       rows.map(async (event) => {
         const [child] = await this.database.query(
@@ -89,12 +74,10 @@ class ReservationManager extends AbstractManager {
   async readForListRequests() {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-
     const [rows] = await this.database.query(
       `SELECT * FROM ${this.table} WHERE reservation_date_start >= ?`,
       [today]
     );
-
     return Promise.all(
       rows.map(async (event) => {
         const [child] = await this.database.query(
@@ -120,9 +103,100 @@ class ReservationManager extends AbstractManager {
     );
   }
 
-  // The U of CRUD - Update operation
-  // TODO: Implement the update operation to modify an existing reservation
+  async getReservationByParentId(parentId) {
+    const [rows] = await this.database.query(
+      `SELECT * FROM ${this.table} WHERE parent_id = ?`,
+      [parentId]
+    );
+    return rows;
+  }
 
+  async getId(id) {
+    const [rows] = await this.database.query(
+      `SELECT id FROM ${this.table} WHERE id = ?`,
+      [id]
+    );
+    return rows;
+  }
+
+  async getPriceById(id) {
+    const [rows] = await this.database.query(
+      `SELECT prices FROM ${this.table} WHERE id = ?`,
+      [id]
+    );
+    return rows;
+  }
+
+  async getReservationDetailsById(reservationId) {
+    const [checkRows] = await this.database.query(
+      `
+    SELECT child_id
+    FROM reservation
+    WHERE id = ?;
+  `,
+      [reservationId]
+    );
+    if (checkRows[0] && checkRows[0].child_id) {
+      const [rows] = await this.database.query(
+        `
+      SELECT
+        parents.last_name,
+        parents.first_name AS parent_first_name,
+        parents.email,
+        parents.address,
+        parents.phone_number,
+        child.first_name AS child_first_name
+      FROM parents
+      INNER JOIN child ON parents.id = child.parent_id
+      INNER JOIN reservation ON child.id = reservation.child_id
+      WHERE reservation.id = ?;
+    `,
+        [reservationId]
+      );
+      return rows[0];
+    }
+    const [rows] = await this.database.query(
+      `
+      SELECT
+        parents.last_name,
+        parents.first_name AS parent_first_name,
+        parents.email,
+        parents.address,
+        parents.phone_number
+      FROM parents
+      INNER JOIN reservation ON parents.id = reservation.parent_id
+      WHERE reservation.id = ?;
+    `,
+      [reservationId]
+    );
+    return rows[0];
+  }
+
+  async getParentIdByReservationId(reservationId) {
+    const [rows] = await this.database.query(
+      `SELECT parent_id FROM ${this.table} WHERE id = ?`,
+      [reservationId]
+    );
+    return rows.length > 0 ? rows[0].parent_id : null;
+  }
+
+  async getReservationIdStatus(reservationId) {
+    const [rows] = await this.database.query(
+      `SELECT status FROM ${this.table} WHERE id = ?`,
+      [reservationId]
+    );
+    return rows.length > 0 ? rows[0].status : null;
+  }
+
+  async readChildReservation(id) {
+    const [rows] = await this.database.query(
+      `SELECT * FROM child inner join reservation on reservation.child_id = child.id WHERE reservation.id = ?`,
+      [id]
+    );
+    return rows[0];
+  }
+
+  // U
   async updateAll({
     status,
     rejectionReason,
@@ -159,15 +233,92 @@ class ReservationManager extends AbstractManager {
     return [rows];
   }
 
-  // The D of CRUD - Delete operation
-  // TODO: Implement the delete operation to remove a reservation by its ID
+  async updatePrices(id, prices) {
+    const [rows] = await this.database.query(
+      `UPDATE ${this.table} SET prices = ? WHERE id = ?`,
+      [prices, id]
+    );
+    return rows;
+  }
 
+  async updateReservationAndParentDetails(
+    reservationId,
+    childId,
+    parentUpdateInfo
+  ) {
+    const connection = await this.database.getConnection();
+    try {
+      await connection.beginTransaction();
+      await connection.query(
+        `UPDATE ${this.table} SET child_id = ? WHERE id = ?`,
+        [childId, reservationId]
+      );
+      await connection.query(
+        `UPDATE parents SET last_name = ?, first_name = ?, email = ?, address = ?, phone_number = ? WHERE id = (SELECT parent_id FROM ${this.table} WHERE id = ?)`,
+        [
+          parentUpdateInfo.lastName,
+          parentUpdateInfo.firstName,
+          parentUpdateInfo.email,
+          parentUpdateInfo.address,
+          parentUpdateInfo.phoneNumber,
+          reservationId,
+        ]
+      );
+      await connection.commit();
+    } catch (error) {
+      await connection.rollback();
+      throw error;
+    } finally {
+      connection.release();
+    }
+  }
+
+  async updateStatusId({ status, id }) {
+    const [rows] = await this.database.query(
+      ` UPDATE ${this.table} SET status = ? WHERE id = ?`,
+      [status, id]
+    );
+    return [rows];
+  }
+
+  async updateChildInfo(reservationId, childInfo) {
+    const [child] = await this.database.query(
+      `SELECT child_id FROM reservation WHERE id = ?`,
+      [reservationId]
+    );
+    if (!child || child.length === 0 || !child[0].child_id) {
+      throw new Error("Child not found for this reservation");
+    }
+    const childId = child[0].child_id;
+    await this.database.query(
+      `UPDATE child 
+       SET 
+         first_name = ?, 
+         last_name = ?, 
+         date_of_birth = CASE WHEN ? = '' THEN NULL ELSE ? END, 
+         walker = ?, 
+         name_of_doctor = ?, 
+         allergies = ? 
+       WHERE id = ?`,
+      [
+        childInfo.first_name || null,
+        childInfo.last_name || null,
+        childInfo.date_of_birth,
+        childInfo.date_of_birth,
+        childInfo.walker || null,
+        childInfo.name_of_doctor || null,
+        childInfo.allergies || null,
+        childId,
+      ]
+    );
+  }
+
+  // D
   async delete(id) {
     const [rows] = await this.database.query(
       `DELETE FROM ${this.table} where id = ?`,
       [id]
     );
-
     return [rows];
   }
 }

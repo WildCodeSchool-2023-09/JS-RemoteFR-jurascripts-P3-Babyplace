@@ -9,29 +9,6 @@
     align-items: center;
     gap: 12px;
 
-    .child_doc {
-      width: 100%;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      margin: 0 0 1.8rem;
-
-      button {
-        padding: 0.4rem;
-        border-radius: 0.8rem;
-        border: 0.2px solid $height;
-        font-weight: 600;
-        background: transparent;
-        cursor: pointer;
-
-        &:first-child {
-          background: $height;
-          color: $primary;
-          font-weight: 800;
-        }
-      }
-    }
-
     form {
       width: 80%;
       margin: 0 auto;
@@ -51,7 +28,6 @@
 
           svg {
             overflow: visible;
-
             width: 1.5rem;
 
             .path {

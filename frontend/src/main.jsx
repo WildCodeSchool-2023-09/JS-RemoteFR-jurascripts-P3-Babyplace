@@ -75,6 +75,22 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "reservation/:id/details",
+        element: isParentAuthentificated() ? (
+          <Reservation />
+        ) : (
+          <Navigate to="/" />
+        ),
+      },
+      {
+        path: "/reservation/update-child",
+        element: isParentAuthentificated() ? (
+          <Reservation />
+        ) : (
+          <Navigate to="/" />
+        ),
+      },
+      {
         path: "/parents",
         element: <Layout />,
         children: [
@@ -113,7 +129,7 @@ const router = createBrowserRouter([
             ),
           },
           {
-            path: "reservation/creation",
+            path: "reservation/creation/:reservationId",
             element: isParentAuthentificated() ? (
               <ReservationTunnel />
             ) : (
@@ -145,7 +161,7 @@ const router = createBrowserRouter([
             ),
           },
           {
-            path: "crechedetails/:price",
+            path: "crechedetails/:id",
             element: isParentAuthentificated() ? (
               <CrecheDetails />
             ) : (
@@ -153,7 +169,7 @@ const router = createBrowserRouter([
             ),
           },
           {
-            path: "folders",
+            path: "folders/:id",
             element: isParentAuthentificated() ? (
               <Folders />
             ) : (
@@ -161,15 +177,15 @@ const router = createBrowserRouter([
             ),
           },
           {
-            path: "dossierparent",
+            path: "dossierparent/:id",
             element: <DossierParents />,
           },
           {
-            path: "dossierenfant",
+            path: "dossierenfant/:id",
             element: <DossierEnfants />,
           },
           {
-            path: "dossierinscription",
+            path: "dossierinscription/:id",
             element: <DossierInscription />,
           },
         ],

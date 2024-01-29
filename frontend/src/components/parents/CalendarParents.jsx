@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
@@ -15,6 +16,7 @@ function CalendarParents() {
   const [arrivalTime, setArrivalTime] = useState(null);
   const [departureTime, setDepartureTime] = useState(null);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [reservationId, setReservationId] = useState();
   const navigate = useNavigate();
 
   const calculateTotalPrice = (start, end) => {
@@ -41,24 +43,37 @@ function CalendarParents() {
     }
   }, [arrivalTime, departureTime]);
 
-  const handleSubmit = () => {
-    axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/api/reservation`, {
-        startTime: arrivalTime,
-        endTime: departureTime,
-        reservationDateStart: chooseDate,
-        prices: totalPrice,
-      })
-      .then(() => {
-        console.info("Succès !");
-        if (totalPrice > 0) {
-          const totalPriceFormated = totalPrice.replace(".", "-");
-          navigate(`/parents/crechedetails/${totalPriceFormated}`);
+  const handleSubmit = async () => {
+    try {
+      const parentId = localStorage.getItem("parentId");
+      if (!parentId) {
+        console.error("parentId is null");
+        return;
+      }
+
+      const price = calculateTotalPrice(arrivalTime, departureTime);
+
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/reservation`,
+        {
+          parentId,
+          startTime: arrivalTime,
+          endTime: departureTime,
+          reservationDateStart: chooseDate,
+          reservationDateEnd: chooseDate,
+          prices: price,
         }
-      })
-      .catch((error) => {
-        console.error("Erreur", error);
-      });
+      );
+      const newReservationId = response.data.insertId;
+      setReservationId(newReservationId);
+      localStorage.setItem("reservationId", newReservationId);
+
+      if (price > 0) {
+        navigate(`/parents/crechedetails/${newReservationId}`);
+      }
+    } catch (error) {
+      console.error("Erreur", error);
+    }
   };
 
   const eightAM = dayjs().set("hour", 8).startOf("hour");

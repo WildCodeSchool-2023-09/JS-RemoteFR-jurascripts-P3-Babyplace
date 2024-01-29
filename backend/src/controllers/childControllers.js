@@ -1,41 +1,64 @@
-// Import access to database tables
+/* eslint-disable consistent-return */
 const tables = require("../tables");
 
-// The B of BREAD - Browse (Read All) operation
+const ReservationManager = require("../models/ReservationManager");
+
+const reservationManager = new ReservationManager();
+
+// B
 const browse = async (req, res, next) => {
   try {
-    // Fetch all child from the database
     const child = await tables.child.readAll();
-
-    // Respond with the child in JSON format
     res.json(child);
   } catch (err) {
-    // Pass any errors to the error-handling middleware
     next(err);
   }
 };
 
-// The R of BREAD - Read operation
+// R
 const read = async (req, res, next) => {
   try {
-    // Fetch a specific child from the database based on the provided ID
     const child = await tables.child.read(req.params.id);
-
-    // If the child is not found, respond with HTTP 404 (Not Found)
-    // Otherwise, respond with the child in JSON format
     if (child == null) {
       res.sendStatus(404);
     } else {
       res.json(child);
     }
   } catch (err) {
-    // Pass any errors to the error-handling middleware
     next(err);
   }
 };
 
-// The E of BREAD - Edit (Update) operation
-// This operation is not yet implemented
+const readByParentId = async (req, res, next) => {
+  try {
+    const child = await tables.child.readByParentId(req.params.id);
+    if (child == null) {
+      res.sendStatus(404);
+    } else {
+      res.json(child);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+const readChildReservation = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const child = await reservationManager.readChildReservation(id);
+    if (child) {
+      res.json(child);
+    } else {
+      res.status(404).json({ message: "No child found for this reservation." });
+    }
+  } catch (err) {
+    console.error("Error fetching child reservation details:", err);
+    res.status(500).json({ message: "Server error" });
+    next(err);
+  }
+};
+
+// E
 const edit = async (req, res, next) => {
   try {
     const child = req.body;
@@ -54,25 +77,43 @@ const edit = async (req, res, next) => {
   }
 };
 
-// The A of BREAD - Add (Create) operation
-const add = async (req, res, next) => {
-  // Extract the child data from the request body
-  const child = req.body;
-
+const updateChildInfo = async (req, res) => {
+  const { id } = req.params;
+  const childInfo = req.body;
   try {
-    // Insert the child into the database
-    const insertId = await tables.child.create(child);
+    await reservationManager.updateChildInfo(id, childInfo);
+    res.status(200).json({
+      message: "Child information updated successfully for reservation.",
+    });
+  } catch (error) {
+    console.error("Error updating child information:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
 
-    // Respond with HTTP 201 (Created) and the ID of the newly inserted child
+// A
+const add = async (req, res, next) => {
+  const { reservationId, ...childData } = req.body;
+  try {
+    const parentId = await reservationManager.getParentIdByReservationId(
+      reservationId
+    );
+    if (!parentId) {
+      return res
+        .status(404)
+        .json({ message: "Parent ID not found for the given reservation ID." });
+    }
+    const insertId = await tables.child.create({ ...childData, parentId });
+
     res.status(201).json({ insertId });
   } catch (err) {
-    res.status(500).json({ message: "Added a baby" });
+    console.error("Error adding child:", err);
+    res.status(500).json({ message: "Could not add the child" });
     next(err);
   }
 };
 
-// The D of BREAD - Destroy (Delete) operation
-// This operation is not yet implemented
+// D
 const destroy = async (req, res, next) => {
   try {
     const [result] = await tables.child.delete(req.params.id);
@@ -88,11 +129,13 @@ const destroy = async (req, res, next) => {
   }
 };
 
-// Ready to export the controller functions
 module.exports = {
   browse,
   read,
   edit,
   add,
   destroy,
+  readByParentId,
+  readChildReservation,
+  updateChildInfo,
 };

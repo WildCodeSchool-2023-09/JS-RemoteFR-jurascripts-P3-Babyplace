@@ -1,7 +1,7 @@
-import { jwtDecode } from "jwt-decode";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { IoSettingsOutline } from "react-icons/io5";
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   MdOutlineHealthAndSafety,
   MdAttractions,
@@ -15,24 +15,39 @@ function CrecheDetails() {
   const [popup, setPopup] = useState(false);
   const [button, setButton] = useState(false);
   const [mode, setMode] = useState(false);
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [profile, setProfile] = useState({ sub: 0 });
+  const [totalPrice, setTotalPrice] = useState(null);
+  const navigate = useNavigate();
+  const { id } = useParams();
+
   useEffect(() => {
-    const token = localStorage.getItem("parentToken");
-    if (token) {
-      console.info(jwtDecode(token));
-      setProfile(jwtDecode(token));
+    async function fetchData() {
+      const pricesUrl = `${
+        import.meta.env.VITE_BACKEND_URL
+      }/api/reservation/${id}/prices`;
+
+      axios
+        .get(pricesUrl)
+        .then((response) => {
+          const priceFromApi = response.data.price;
+          const priceFormatted = priceFromApi.replace("-", ".");
+          const basicPrice = parseFloat(priceFormatted);
+          const maintenanceFee = button ? 3.5 : 0;
+          const foodFee = mode ? 7 : 0;
+          const newTotal = basicPrice + maintenanceFee + foodFee + 0.5;
+          setTotalPrice(newTotal);
+        })
+        .catch((error) => {
+          console.error(
+            "Erreur lors de la récupération du prix depuis l'API",
+            error
+          );
+        });
     }
-  }, []);
 
-  const calculationTotalPrice = (basicPrice, maintenance, food) => {
-    const maintenanceFee = maintenance ? 3.5 : 0;
-    const foodFee = food ? 7 : 0;
-
-    return basicPrice + maintenanceFee + foodFee;
-  };
-
-  const { price } = useParams();
+    if (id) {
+      fetchData();
+    }
+  }, [id, button, mode]);
 
   const switchButton = () => {
     setButton(!button);
@@ -50,13 +65,33 @@ function CrecheDetails() {
     setPopup(false);
   };
 
-  // prix formaté + 0.5€ + 3.5€ + 7€ et le link url "-" qui devient le "." et le prix total.
-  useEffect(() => {
-    const priceFormated = price.replace("-", ".");
-    setTotalPrice(
-      calculationTotalPrice(parseFloat(priceFormated) + 0.5, button, mode)
-    );
-  }, [price, button, mode]);
+  async function updatePrice(newPrice, reservationId) {
+    try {
+      await axios.put(
+        `${
+          import.meta.env.VITE_BACKEND_URL
+        }/api/reservation/${reservationId}/prices`,
+        {
+          prices: newPrice,
+        }
+      );
+      return true;
+    } catch (error) {
+      console.error("Erreur lors de la mise à jour du prix", error);
+      return false;
+    }
+  }
+
+  async function handleNextClick() {
+    if (id) {
+      const updateSuccess = await updatePrice(totalPrice, id);
+
+      if (updateSuccess) {
+        const reservationId = localStorage.getItem("reservationId");
+        navigate(`/reservation/${reservationId}/details`);
+      }
+    }
+  }
 
   return (
     <section className="crechedetails">
@@ -138,12 +173,13 @@ function CrecheDetails() {
               <li className="prix"> {totalPrice}€* </li>
               <li className="note">8 h de garde*</li>
             </ul>
-
-            <Link to={`/parents/reservation/${profile.sub}`}>
-              <button type="button" className="btn-detail">
-                Suivant
-              </button>
-            </Link>
+            <button
+              type="submit"
+              className="btn-detail"
+              onClick={handleNextClick}
+            >
+              Suivant
+            </button>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-// import { Link } from "react-router-dom";
+/* eslint-disable no-unused-vars */
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -6,6 +6,7 @@ import { logo } from "../../assets";
 import "../../styles/reservation.scss";
 
 function Reservation() {
+  const [parentId, setParentId] = useState("");
   const [firstNameParent, setFirstNameParent] = useState("");
   const [lastNameParent, setLastNameParent] = useState("");
   const [firstNameBaby, setFirstNameBaby] = useState("");
@@ -14,53 +15,61 @@ function Reservation() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const { id } = useParams();
   const navigate = useNavigate();
-  let parentId = 0;
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/api/parents/${id}`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/reservation/${id}/details`)
       .then((response) => {
         const result = response.data;
-        parentId = result.id;
-        setLastNameParent(result.last_name);
-        setFirstNameParent(result.first_name);
-        setEmail(result.email);
-        console.info(result);
+        setParentId(result.parent_id);
+        setLastNameParent(result.last_name || "");
+        setFirstNameParent(result.parent_first_name || "");
+        setFirstNameBaby(result.child_first_name || "");
+        setEmail(result.email || "");
+        setAddress(result.address || "");
+        setPhoneNumber(result.phone_number || "");
       })
       .catch((error) => {
         console.error("Erreur lors de la récupération des données:", error);
       });
-  }, []);
+  }, [id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/api/child`, {
-        // id du parent pour lier les deux tables
-        firstName: firstNameBaby,
-        lastName: lastNameParent,
-      })
-      .then(() => {
-        console.info("Succès pour l'enfant !");
-      })
-      .catch((error) => {
-        console.error("Erreur", error);
-      });
-    await axios
-      .put(`${import.meta.env.VITE_BACKEND_URL}/api/parents/${parentId}`, {
-        firstName: firstNameParent,
-        lastName: lastNameParent,
-        email,
-        address,
-        phoneNumber,
-      })
-      .then(() => {
-        console.info("Succès pour le parent !");
-      })
-      .catch((error) => {
-        console.error("Erreur", error);
-      });
-    navigate("/parents/reservation/creation");
+    try {
+      const { data: childData } = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/child`,
+        {
+          firstName: firstNameBaby,
+          lastName: lastNameParent,
+          reservationId: id,
+        }
+      );
+
+      const childId = childData.insertId;
+
+      await axios.put(
+        `${import.meta.env.VITE_BACKEND_URL}/api/reservation/${id}/details`,
+        {
+          reservationId: id,
+          childId,
+          parentUpdateInfo: {
+            lastName: lastNameParent,
+            firstName: firstNameParent,
+            email,
+            address,
+            phoneNumber,
+          },
+        }
+      );
+
+      navigate(`/parents/reservation/creation/${id}`);
+    } catch (error) {
+      console.error(
+        "Erreur lors de la mise à jour de la réservation ou la création de l'enfant :",
+        error
+      );
+    }
   };
 
   return (
@@ -111,7 +120,7 @@ function Reservation() {
           type="number"
           name="phoneNumber"
           autoComplete="tel-national"
-          placeholder="Téléphone mobile"
+          placeholder="Téléphone"
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
         />

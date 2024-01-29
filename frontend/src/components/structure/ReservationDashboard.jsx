@@ -1,7 +1,8 @@
 import axios from "axios";
+import moment from "moment";
 import React, { useEffect, useState } from "react";
+import { edit, refusal, success } from "../../assets";
 import "../../styles/ReservationDashboard.scss";
-import { success, refusal, edit } from "../../assets";
 
 function ReservationDashboard() {
   const [cards, setCards] = useState([]);
@@ -21,7 +22,6 @@ function ReservationDashboard() {
         console.error("Erreur de la récupération des reservations:", error);
       });
   }, []);
-  // console.info("tableau cards", cards);
 
   const handleUpdateCardStatus = (cardId, newStatus) => {
     let newStatusValue = newStatus;
@@ -98,16 +98,21 @@ function ReservationDashboard() {
             <p>
               Date:{" "}
               <span className="color-status">
-                {card.reservationDateStart.split("T")[0]}
+                {moment(card.reservationDateStart).format("YYYY-MM-DD")}
               </span>
             </p>
             <p>
               Heure d'arrivée:{" "}
-              <span className="color-status">{card.startTime}</span>
+              <span className="color-status">
+                {moment(card.startTime, "HH:mm:ss").format("HH:mm")}
+              </span>
             </p>
             <p>
               Heure de départ:{" "}
-              <span className="color-status">{card.endTime}</span>
+              <span className="color-status">
+                {" "}
+                {moment(card.endTime, "HH:mm:ss").format("HH:mm")}
+              </span>
             </p>
             <p>
               Total Prix: <span className="color-status">{card.prices} €</span>

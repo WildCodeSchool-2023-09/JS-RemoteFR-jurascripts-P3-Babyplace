@@ -1,7 +1,6 @@
 const tables = require("../tables");
 
 // B
-
 const browse = async (req, res, next) => {
   try {
     const assignements = await tables.employees_assignments.readAll();

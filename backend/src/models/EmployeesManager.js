@@ -5,7 +5,7 @@ class EmployeesManager extends AbstractManager {
     super({ table: "employees" });
   }
 
-  // Create
+  // C
   async create({
     structureId,
     firstName,
@@ -21,24 +21,21 @@ class EmployeesManager extends AbstractManager {
     return rows.insertId;
   }
 
-  // Read
-
+  // R
   async read(id) {
     const [rows] = await this.database.query(
       `SELECT * FROM ${this.table} WHERE id = ?`,
       [id]
     );
-
     return rows[0];
   }
 
   async readAll() {
     const [rows] = await this.database.query(`SELECT * FROM ${this.table}`);
-
     return rows;
   }
 
-  // Update
+  // U
   async update({
     firstName,
     lastName,
@@ -53,7 +50,7 @@ class EmployeesManager extends AbstractManager {
     return [rows];
   }
 
-  // Delete
+  // D
   async delete(id) {
     const [rows] = await this.database.query(
       `DELETE FROM ${this.table} WHERE id = ?`,

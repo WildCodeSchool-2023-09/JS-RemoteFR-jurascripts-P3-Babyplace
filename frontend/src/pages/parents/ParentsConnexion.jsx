@@ -79,7 +79,7 @@ function ParentsConnexion() {
                   {" "}
                   <input
                     ref={emailRef}
-                    autoComplete="off"
+                    autoComplete="on"
                     type="mail"
                     id="email-co"
                     placeholder="Email"
@@ -94,6 +94,7 @@ function ParentsConnexion() {
                   <input
                     type="password"
                     id="password-co"
+                    autoComplete="on"
                     placeholder="Mot de Passe"
                     ref={passwordRef}
                     onChange={(e) => setValidPwd(e.target.value)}
