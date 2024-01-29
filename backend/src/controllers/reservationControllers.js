@@ -1,12 +1,9 @@
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable consistent-return */
-// Import access to database tables
 const tables = require("../tables");
 const ReservationManager = require("../models/ReservationManager");
 
 const reservationManager = new ReservationManager();
 
-// The B of BREAD - Browse (Read All) operation
+// B
 const browse = async (req, res, next) => {
   try {
     const reservation = await tables.reservation.readAll();
@@ -16,7 +13,7 @@ const browse = async (req, res, next) => {
   }
 };
 
-// The R of BREAD - Read operation
+// R
 const read = async (req, res, next) => {
   try {
     const reservation = await tables.reservation.read(req.params.id);
@@ -134,7 +131,7 @@ const getParentId = async (req, res) => {
 };
 
 const getReservationStatus = async (req, res) => {
-  const { id } = req.params; // Récupérer l'ID de la réservation depuis les paramètres de la requête
+  const { id } = req.params;
   try {
     const status = await reservationManager.getReservationIdStatus(id);
     if (status === null) {
@@ -147,7 +144,7 @@ const getReservationStatus = async (req, res) => {
   }
 };
 
-// The E of BREAD - Edit (Update) operation
+// E
 const edit = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -199,8 +196,8 @@ const updateReservationAndParentDetails = async (req, res) => {
 };
 
 const updateReservationStatus = async (req, res) => {
-  const { id } = req.params; // Récupérer l'ID de la réservation depuis les paramètres de la requête
-  const { status } = req.body; // Récupérer le nouveau statut depuis le corps de la requête
+  const { id } = req.params;
+  const { status } = req.body;
 
   try {
     const [result] = await reservationManager.updateStatusId({ status, id });
@@ -216,7 +213,7 @@ const updateReservationStatus = async (req, res) => {
   }
 };
 
-// The A of BREAD - Add (Create) operation
+// A
 const add = async (req, res, next) => {
   const reservation = req.body;
   try {
@@ -228,7 +225,7 @@ const add = async (req, res, next) => {
   }
 };
 
-// The D of BREAD - Destroy (Delete) operation
+// D
 const destroy = async (req, res, next) => {
   const { id } = req.params;
   try {
@@ -248,18 +245,18 @@ const destroy = async (req, res, next) => {
 module.exports = {
   browse,
   read,
-  readForCalendar,
-  readForListRequests,
   edit,
   add,
   destroy,
-  updatePrices,
+  readForCalendar,
+  readForListRequests,
   getReservationByParentId,
   getReservationPrice,
   getId,
   getReservationDetailsById,
-  updateReservationAndParentDetails,
   getParentId,
   getReservationStatus,
+  updatePrices,
+  updateReservationAndParentDetails,
   updateReservationStatus,
 };

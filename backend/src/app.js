@@ -1,5 +1,3 @@
-// Load the express module to create a web application
-
 const express = require("express");
 
 const app = express();

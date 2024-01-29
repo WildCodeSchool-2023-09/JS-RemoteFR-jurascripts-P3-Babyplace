@@ -5,7 +5,7 @@ class ReservationManager extends AbstractManager {
     super({ table: "reservation" });
   }
 
-  // The C of CRUD - Create operation
+  // C
   async create({
     parentId,
     reservationDateStart,
@@ -30,7 +30,7 @@ class ReservationManager extends AbstractManager {
     return rows.insertId;
   }
 
-  // The R of CRUD - Read operations
+  // R
   async read(id) {
     const [rows] = await this.database.query(
       `SELECT * FROM ${this.table} WHERE id = ?`,
@@ -136,7 +136,6 @@ class ReservationManager extends AbstractManager {
   `,
       [reservationId]
     );
-
     if (checkRows[0] && checkRows[0].child_id) {
       const [rows] = await this.database.query(
         `
@@ -156,7 +155,6 @@ class ReservationManager extends AbstractManager {
       );
       return rows[0];
     }
-
     const [rows] = await this.database.query(
       `
       SELECT
@@ -198,7 +196,7 @@ class ReservationManager extends AbstractManager {
     return rows[0];
   }
 
-  // The U of CRUD - Update operation
+  // U
   async updateAll({
     status,
     rejectionReason,
@@ -249,15 +247,12 @@ class ReservationManager extends AbstractManager {
     parentUpdateInfo
   ) {
     const connection = await this.database.getConnection();
-
     try {
       await connection.beginTransaction();
-
       await connection.query(
         `UPDATE ${this.table} SET child_id = ? WHERE id = ?`,
         [childId, reservationId]
       );
-
       await connection.query(
         `UPDATE parents SET last_name = ?, first_name = ?, email = ?, address = ?, phone_number = ? WHERE id = (SELECT parent_id FROM ${this.table} WHERE id = ?)`,
         [
@@ -269,7 +264,6 @@ class ReservationManager extends AbstractManager {
           reservationId,
         ]
       );
-
       await connection.commit();
     } catch (error) {
       await connection.rollback();
@@ -292,13 +286,10 @@ class ReservationManager extends AbstractManager {
       `SELECT child_id FROM reservation WHERE id = ?`,
       [reservationId]
     );
-
     if (!child || child.length === 0 || !child[0].child_id) {
       throw new Error("Child not found for this reservation");
     }
-
     const childId = child[0].child_id;
-
     await this.database.query(
       `UPDATE child 
        SET 
@@ -322,7 +313,7 @@ class ReservationManager extends AbstractManager {
     );
   }
 
-  // The D of CRUD - Delete operation
+  // D
   async delete(id) {
     const [rows] = await this.database.query(
       `DELETE FROM ${this.table} where id = ?`,

@@ -34,32 +34,6 @@ class disponibilitiesManager extends AbstractManager {
     return rows;
   }
 
-  // U
-  async update({
-    employeeId,
-    availableDate,
-    startTime,
-    endTime,
-    numberOfPlaces,
-    id,
-  }) {
-    const [rows] = await this.database.query(
-      `UPDATE ${this.table} SET employee_id=?, available_date=?, start_time=?, end_time=?, number_of_places=? WHERE id=?`,
-      [employeeId, availableDate, startTime, endTime, numberOfPlaces, id]
-    );
-    return [rows];
-  }
-
-  // D
-  async delete(id) {
-    const [rows] = await this.database.query(
-      `DELETE FROM ${this.table} WHERE id = ?`,
-      [id]
-    );
-    return [rows];
-  }
-
-  // Employee disponibilities avaible for a specific date and time
   async getAvailableEmployees() {
     const [rows] = await this.database.query(
       `SELECT * 
@@ -81,10 +55,34 @@ class disponibilitiesManager extends AbstractManager {
     return rows;
   }
 
-  // Decrement places
+  // U
+  async update({
+    employeeId,
+    availableDate,
+    startTime,
+    endTime,
+    numberOfPlaces,
+    id,
+  }) {
+    const [rows] = await this.database.query(
+      `UPDATE ${this.table} SET employee_id=?, available_date=?, start_time=?, end_time=?, number_of_places=? WHERE id=?`,
+      [employeeId, availableDate, startTime, endTime, numberOfPlaces, id]
+    );
+    return [rows];
+  }
+
   async decrementPlaces(id) {
     const [rows] = await this.database.query(
       `UPDATE ${this.table} SET number_of_places = number_of_places - 1 WHERE id = ?`,
+      [id]
+    );
+    return [rows];
+  }
+
+  // D
+  async delete(id) {
+    const [rows] = await this.database.query(
+      `DELETE FROM ${this.table} WHERE id = ?`,
       [id]
     );
     return [rows];

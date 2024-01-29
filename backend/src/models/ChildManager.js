@@ -5,7 +5,7 @@ class ChildManager extends AbstractManager {
     super({ table: "child" });
   }
 
-  // The C of CRUD - Create operation
+  // C
   async create({
     firstName,
     lastName,
@@ -32,7 +32,7 @@ class ChildManager extends AbstractManager {
     return rows.insertId;
   }
 
-  // The R of CRUD - Read operations
+  // R
   async read(id) {
     const [rows] = await this.database.query(
       `SELECT * FROM ${this.table} WHERE id = ?`,
@@ -54,7 +54,7 @@ class ChildManager extends AbstractManager {
     return rows[0];
   }
 
-  // The U of CRUD - Update operation
+  // U
   async update({
     firstName,
     lastName,
@@ -82,7 +82,7 @@ class ChildManager extends AbstractManager {
     return [rows];
   }
 
-  // The D of CRUD - Delete operation
+  // D
   async delete(id) {
     const [rows] = await this.database.query(
       `DELETE FROM ${this.table} where id = ?`,

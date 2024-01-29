@@ -1,7 +1,6 @@
 const tables = require("../tables");
 
 // B
-
 const browse = async (req, res, next) => {
   try {
     const disponibilities = await tables.employees_disponibilities.readAll();
@@ -27,6 +26,21 @@ const read = async (req, res, next) => {
   }
 };
 
+const getAvailableEmployees = async (req, res, next) => {
+  try {
+    const { date, startTime, endTime } = req.query;
+    const availableEmployees =
+      await tables.employees_disponibilities.getAvailableEmployees(
+        date,
+        startTime,
+        endTime
+      );
+    res.json(availableEmployees);
+  } catch (err) {
+    next(err);
+  }
+};
+
 // E
 const edit = async (req, res, next) => {
   try {
@@ -36,6 +50,22 @@ const edit = async (req, res, next) => {
       id,
       ...disponibility,
     });
+
+    if (result.affectedRows === 0) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(204);
+    }
+  } catch (err) {
+    res.sendStatus(500);
+    next(err);
+  }
+};
+
+const decrementPlaces = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const [result] = await tables.employees_disponibilities.decrementPlaces(id);
 
     if (result.affectedRows === 0) {
       res.sendStatus(404);
@@ -75,39 +105,6 @@ const destroy = async (req, res, next) => {
   } catch (err) {
     res.status(500).json({ message: "Couldn't delete" });
     next();
-  }
-};
-
-// Available employees
-const getAvailableEmployees = async (req, res, next) => {
-  try {
-    const { date, startTime, endTime } = req.query;
-    const availableEmployees =
-      await tables.employees_disponibilities.getAvailableEmployees(
-        date,
-        startTime,
-        endTime
-      );
-    res.json(availableEmployees);
-  } catch (err) {
-    next(err);
-  }
-};
-
-// Decrement number_of_places
-const decrementPlaces = async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const [result] = await tables.employees_disponibilities.decrementPlaces(id);
-
-    if (result.affectedRows === 0) {
-      res.sendStatus(404);
-    } else {
-      res.sendStatus(204);
-    }
-  } catch (err) {
-    res.sendStatus(500);
-    next(err);
   }
 };
 

@@ -1,12 +1,11 @@
 /* eslint-disable consistent-return */
-// Import access to database tables
 const tables = require("../tables");
 
 const ReservationManager = require("../models/ReservationManager");
 
 const reservationManager = new ReservationManager();
 
-// The B of BREAD - Browse (Read All) operation
+// B
 const browse = async (req, res, next) => {
   try {
     const child = await tables.child.readAll();
@@ -16,7 +15,7 @@ const browse = async (req, res, next) => {
   }
 };
 
-// The R of BREAD - Read operation
+// R
 const read = async (req, res, next) => {
   try {
     const child = await tables.child.read(req.params.id);
@@ -59,7 +58,7 @@ const readChildReservation = async (req, res, next) => {
   }
 };
 
-// The E of BREAD - Edit (Update) operation
+// E
 const edit = async (req, res, next) => {
   try {
     const child = req.body;
@@ -79,7 +78,7 @@ const edit = async (req, res, next) => {
 };
 
 const updateChildInfo = async (req, res) => {
-  const { id } = req.params; // ID de la réservation
+  const { id } = req.params;
   const childInfo = req.body;
   try {
     await reservationManager.updateChildInfo(id, childInfo);
@@ -92,7 +91,7 @@ const updateChildInfo = async (req, res) => {
   }
 };
 
-// The A of BREAD - Add (Create) operation
+// A
 const add = async (req, res, next) => {
   const { reservationId, ...childData } = req.body;
   try {
@@ -114,7 +113,7 @@ const add = async (req, res, next) => {
   }
 };
 
-// The D of BREAD - Destroy (Delete) operation
+// D
 const destroy = async (req, res, next) => {
   try {
     const [result] = await tables.child.delete(req.params.id);
@@ -130,7 +129,6 @@ const destroy = async (req, res, next) => {
   }
 };
 
-// Ready to export the controller functions
 module.exports = {
   browse,
   read,
