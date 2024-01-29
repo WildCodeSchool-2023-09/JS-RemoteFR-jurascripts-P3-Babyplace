@@ -32,7 +32,7 @@ function NavBar() {
     {
       id: 3,
       icons: <IoNotifications className="icons" />,
-      link: `/parents/folders`,
+      link: `/parents/folders/${profile.sub}`,
     },
     {
       id: 4,
