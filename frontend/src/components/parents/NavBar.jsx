@@ -15,17 +15,17 @@ function NavBar() {
 
   const navbar = [
     {
-      id: 1,
+      id: 2,
       icons: <IoPerson className="icons" />,
       link: `/parents/profile/${profile.sub}`,
     },
     {
-      id: 2,
+      id: 3,
       icons: <IoSearch className="icons" />,
       link: `/parents/creche`,
     },
     {
-      id: 3,
+      id: 4,
       icons: <IoFolderOpen className="icons" />,
       link: `/parents/folders/${profile.sub}`,
     },
