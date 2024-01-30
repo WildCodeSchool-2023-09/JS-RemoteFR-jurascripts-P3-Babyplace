@@ -1,34 +1,33 @@
-import "../../styles/navbar.scss";
+import { jwtDecode } from "jwt-decode";
+import { useEffect, useState } from "react";
+import { IoFolderOpen, IoPerson, IoSearch } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import {
-  IoPerson,
-  IoSearch,
-  IoNotifications,
-  IoHomeSharp,
-} from "react-icons/io5";
-import { useState } from "react";
+import "../../styles/navbar.scss";
 
 function NavBar() {
+  const [profile, setProfile] = useState({ sub: 0 });
+  useEffect(() => {
+    const token = localStorage.getItem("parentToken");
+    if (token) {
+      setProfile(jwtDecode(token));
+    }
+  }, []);
+
   const navbar = [
     {
-      id: 1,
-      icons: <IoHomeSharp className="icons" />,
-      link: "/parents/connexion",
-    },
-    {
       id: 2,
-      icons: <IoSearch className="icons" />,
-      link: "/parents/creche",
+      icons: <IoPerson className="icons" />,
+      link: `/parents/profile/${profile.sub}`,
     },
     {
       id: 3,
-      icons: <IoNotifications className="icons" />,
-      link: "/parents/folders",
+      icons: <IoSearch className="icons" />,
+      link: `/parents/creche`,
     },
     {
       id: 4,
-      icons: <IoPerson className="icons" />,
-      link: "/parents/profile",
+      icons: <IoFolderOpen className="icons" />,
+      link: `/parents/folders/${profile.sub}`,
     },
   ];
 

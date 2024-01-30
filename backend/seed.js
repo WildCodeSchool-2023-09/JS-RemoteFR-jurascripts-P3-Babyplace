@@ -1,22 +1,11 @@
-/* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
-
-// Load environment variables from .env file
 require("dotenv").config();
 
-// Import database client
 const database = require("./database/client");
 
 const seed = async () => {
   try {
-    // Declare an array to store the query promises
-    // See why here: https://eslint.org/docs/latest/rules/no-await-in-loop
     const queries = [];
 
-    /* ************************************************************************* */
-
-    // Generating Seed Data
-
-    // Insert initial data into the database baby_place
     await database.query("delete from users");
     queries.push(
       database.query(
@@ -39,23 +28,50 @@ const seed = async () => {
     await database.query("delete from parents");
     queries.push(
       database.query(
-        "insert into parents (user_id, first_name, last_name, birth_name, terms_accepted, date_acceptance_terms, marital_status, address, address_complements, zip_code, city, phone_number, email, profession) values ('2','Papa', 'Poule', 'Poule', '1', '2024-01-01 00:00:00', 'Married', '12 impasse de la rue imaginaire', '', '33000', 'Bordeaux', '06.07.08.09.10', 'papapoule@papaoule.fr', 'Papa à domicile')"
+        "insert into parents (user_id, first_name, last_name, birth_name, terms_accepted, date_acceptance_terms, marital_status, address, address_complements, zip_code, city, phone_number, email, profession) values ('2','Papa', 'Poule', 'Poule', '1', '2024-01-01 00:00:00', 'Married', '12 impasse de la rue imaginaire', '', '33000', 'Bordeaux', '0607080910', 'papapoule@papaoule.fr', 'Papa à domicile')"
+      )
+    );
+    await database.query("delete from child");
+    queries.push(
+      database.query(
+        "insert into child (parent_id, first_name, last_name, date_of_birth, walker ) values ('1', 'Bébé', 'Wilder', '2023-01-01', '1')"
+      )
+    );
+    await database.query("delete from reservation");
+    queries.push(
+      database.query(
+        "insert into reservation (parent_id,child_id, status, reservation_date_start, reservation_date_end, start_time, end_time, prices ) values ('1','1', 'waiting', '2024-01-24', '2024-01-24', '08:00:00', '18:00:00', '35.00')"
+      )
+    );
+    queries.push(
+      database.query(
+        "insert into reservation (parent_id,child_id, status, reservation_date_start, reservation_date_end, start_time, end_time, prices ) values ('1','1', 'waiting', '2024-01-30', '2024-01-31', '09:00:00', '17:00:00', '28.00')"
       )
     );
 
-    /* ************************************************************************* */
+    await database.query("delete from employees");
+    queries.push(
+      database.query(
+        "insert into employees (structure_id, first_name, last_name, qualification, max_children_capacity) values ('1','Carole', 'Toto', 'Employee', '3')"
+      )
+    );
+    queries.push(
+      database.query(
+        "insert into employees (structure_id, first_name, last_name, qualification, max_children_capacity) values ('1','Nadine', 'Toto', 'Employee', '3')"
+      )
+    );
+    queries.push(
+      database.query(
+        "insert into employees (structure_id, first_name, last_name, qualification, max_children_capacity) values ('1','Nicole', 'Toto', 'Employee', '3')"
+      )
+    );
 
-    // Wait for all the insertion queries to complete
     await Promise.all(queries);
-
-    // Close the database connection
     database.end();
-
     console.info(`${database.databaseName} filled from ${__filename} 🌱`);
   } catch (err) {
     console.error("Error filling the database:", err.message);
   }
 };
 
-// Run the seed function
 seed();

@@ -2,73 +2,7 @@
 
 .InscriptionDoc {
   background: $primary;
-  min-height: 100svh;
-
-  .parent_box {
-    background: $bg-gen;
-    width: 100svw;
-    display: flex;
-    flex-direction: column;
-
-    .parent {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: $primary;
-      font-size: 20px;
-      line-height: 18px;
-      width: 90%;
-      margin: 0 auto;
-
-      .icon {
-        font-size: 18px;
-        margin: 1.2rem 2.5rem 0 0;
-      }
-      h1 {
-        display: flex;
-        flex-direction: column;
-        margin-top: 20px;
-
-        span {
-          margin-top: 10px;
-        }
-      }
-    }
-
-    .linksTo {
-      width: 90%;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-around;
-
-      a {
-        text-decoration: none;
-        color: $primary;
-        border: 1px solid $clr-accepted;
-        width: 77px;
-        height: 77px;
-        flex-shrink: 0;
-        display: inline-flex;
-        align-items: center;
-        justify-content: space-around;
-        border-radius: 26px;
-        font-size: 13px;
-        margin: 40px 0;
-
-        &:first-child {
-          background: $childColor;
-        }
-
-        &:nth-child(2) {
-          background: $parentColor;
-        }
-
-        &:last-child {
-          background: $incriptionColor;
-        }
-      }
-    }
-  }
+  min-height: calc(100svh - 60px);
 
   h2 {
     margin: 35px;
@@ -121,7 +55,7 @@
     .send {
       padding: 0.123rem 0.77rem;
       border: 1px solid $six;
-      background: $bg-gen;
+      background: $orangeFred;
       border-radius: 0.78rem;
       color: $primary;
       margin: 0 38% 12px;

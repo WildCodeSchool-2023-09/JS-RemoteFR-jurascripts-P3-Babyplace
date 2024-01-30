@@ -28,7 +28,7 @@ function Login() {
       if (response.status === 200) {
         const auth = await response.json();
 
-        localStorage.setItem("auth", auth.token);
+        localStorage.setItem("structureToken", auth.token);
 
         navigate("/pro/dashboard/reservationdashboard", { replace: true });
       } else {
@@ -62,12 +62,14 @@ function Login() {
           <input
             className="inputConnexion"
             type="email"
+            autoComplete="on"
             placeholder="Email"
             ref={emailRef}
           />
           <input
             className="inputConnexion"
             type="password"
+            autoComplete="on"
             placeholder="Mot de passe"
             ref={passwordRef}
           />

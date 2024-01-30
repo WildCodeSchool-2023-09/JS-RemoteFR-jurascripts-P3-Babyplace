@@ -14,6 +14,18 @@ class assignmentsManager extends AbstractManager {
     return rows.insertId;
   }
 
+  async createAssignment({ reservationId, employeeId }) {
+    const [rows] = await this.database.query(
+      `INSERT INTO ${this.table} (reservation_id, employee_id) VALUES (?, ?)`,
+      [reservationId, employeeId]
+    );
+    return {
+      insertId: rows.insertId,
+      reservationId,
+      employeeId,
+    };
+  }
+
   // R
   async read(id) {
     const [rows] = await this.database.query(

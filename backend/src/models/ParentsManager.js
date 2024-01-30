@@ -2,14 +2,12 @@ const AbstractManager = require("./AbstractManager");
 
 class ParentsManager extends AbstractManager {
   constructor() {
-    // Call the constructor of the parent class (AbstractManager)
-    // and pass the table name "item" as configuration
     super({ table: "parents" });
   }
 
-  // The C of CRUD - Create operation
-
+  // C
   async create({
+    userId,
     firstName,
     lastName,
     birthName,
@@ -24,10 +22,10 @@ class ParentsManager extends AbstractManager {
     email,
     profession,
   }) {
-    // Execute the SQL INSERT query to add a new parents to the "parents" table
     const [result] = await this.database.query(
-      `INSERT INTO ${this.table} ( first_name, last_name, birth_name, terms_accepted, date_acceptance_terms, marital_status, address, address_complements, zip_code, city, phone_number, email, profession) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+      `INSERT INTO ${this.table} (user_id, first_name, last_name, birth_name, terms_accepted, date_acceptance_terms, marital_status, address, address_complements, zip_code, city, phone_number, email, profession) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
       [
+        userId,
         firstName,
         lastName,
         birthName,
@@ -43,35 +41,31 @@ class ParentsManager extends AbstractManager {
         profession,
       ]
     );
-
-    // Return the ID of the newly inserted parents
     return result.insertId;
   }
 
-  // The Rs of CRUD - Read operations
-
-  async read(id) {
-    // Execute the SQL SELECT query to retrieve a specific parents by its ID
-    const [rows] = await this.database.query(
-      `SELECT * FROM ${this.table} WHERE id = ?`,
-      [id]
+  async createForReservation({ firstName, lastName }) {
+    await this.database.query(
+      `INSERT INTO ${this.table} ( first_name, last_name ) VALUES (?,?)`,
+      [firstName, lastName]
     );
+  }
 
-    // Return the first row of the result, which represents the parents
+  // R
+  async read(userId) {
+    const [rows] = await this.database.query(
+      `SELECT * FROM ${this.table} WHERE user_id = ?`,
+      [userId]
+    );
     return rows[0];
   }
 
   async readAll() {
-    // Execute the SQL SELECT query to retrieve all parents from the "parents" table
     const [rows] = await this.database.query(`SELECT * FROM ${this.table}`);
-
-    // Return the array of parents
     return rows;
   }
 
-  // The U of CRUD - Update operation
-  // TODO: Implement the update operation to modify an existing parents
-
+  // U
   async update({
     firstName,
     lastName,
@@ -110,9 +104,7 @@ class ParentsManager extends AbstractManager {
     return [rows];
   }
 
-  // The D of CRUD - Delete operation
-  // TODO: Implement the delete operation to remove an parents by its ID
-
+  // D
   async delete(id) {
     const [rows] = await this.database.query(
       `DELETE FROM ${this.table} WHERE id = ?`,

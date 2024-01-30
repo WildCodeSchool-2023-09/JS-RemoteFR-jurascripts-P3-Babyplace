@@ -24,6 +24,9 @@ import DossierInscription from "./pages/parents/DossierInscription";
 import DossierParents from "./pages/parents/DossierParents";
 import Layout from "./pages/parents/Layout";
 import LayoutProfile from "./pages/parents/LayoutProfile";
+import NoticeReservation from "./pages/parents/NoticeReservation";
+import NotifAccept from "./pages/parents/NotifAccept";
+import NotifRefused from "./pages/parents/NotifRefused";
 import ParentsConnexion from "./pages/parents/ParentsConnexion";
 import ParentsInscription from "./pages/parents/ParentsInscription";
 import ParentsTutorial from "./pages/parents/ParentsTutorial";
@@ -31,11 +34,14 @@ import Dashboard from "./pages/structure/Dashboard";
 import Login from "./pages/structure/Login";
 import Register from "./pages/structure/Register";
 
-const isAuthenticated = () => {
-  const structureToken = localStorage.getItem("auth");
-  const parentToken = localStorage.getItem("userToken");
+const isParentAuthentificated = () => {
+  const parentToken = localStorage.getItem("parentToken");
+  return !!parentToken;
+};
 
-  return !!structureToken || !!parentToken;
+const isStructureAuthentificated = () => {
+  const structureToken = localStorage.getItem("structureToken");
+  return !!structureToken;
 };
 
 const router = createBrowserRouter([
@@ -53,20 +59,40 @@ const router = createBrowserRouter([
         element: <ParentsInscription />,
       },
       {
+        path: "/parents/notification",
+        element: <NoticeReservation />,
+      },
+      {
         path: "/parents/connexion",
         element: <ParentsConnexion />,
       },
       {
         path: "/parents/rules",
-        element: isAuthenticated() ? <ParentsTutorial /> : <Navigate to="/" />,
+        element: <ParentsTutorial />,
+      },
+      {
+        path: "reservation/:id/details",
+        element: isParentAuthentificated() ? (
+          <Reservation />
+        ) : (
+          <Navigate to="/" />
+        ),
+      },
+      {
+        path: "/reservation/update-child",
+        element: isParentAuthentificated() ? (
+          <Reservation />
+        ) : (
+          <Navigate to="/" />
+        ),
       },
       {
         path: "/parents",
         element: <Layout />,
         children: [
           {
-            path: "profile",
-            element: isAuthenticated() ? (
+            path: "profile/:id",
+            element: isParentAuthentificated() ? (
               <LayoutProfile />
             ) : (
               <Navigate to="/" />
@@ -76,15 +102,31 @@ const router = createBrowserRouter([
                 path: "",
                 element: <Profile />,
               },
+              {
+                path: "reservations",
+                element: <NoticeReservation />,
+              },
             ],
           },
           {
-            path: "reservation",
-            element: isAuthenticated() ? <Reservation /> : <Navigate to="/" />,
+            path: "accepte",
+            element: <NotifAccept />,
           },
           {
-            path: "reservation/creation",
-            element: isAuthenticated() ? (
+            path: "refuse",
+            element: <NotifRefused />,
+          },
+          {
+            path: "reservation/:id",
+            element: isParentAuthentificated() ? (
+              <Reservation />
+            ) : (
+              <Navigate to="/" />
+            ),
+          },
+          {
+            path: "reservation/creation/:reservationId",
+            element: isParentAuthentificated() ? (
               <ReservationTunnel />
             ) : (
               <Navigate to="/" />
@@ -92,37 +134,55 @@ const router = createBrowserRouter([
           },
           {
             path: "creche",
-            element: isAuthenticated() ? <Creche /> : <Navigate to="/" />,
+            element: isParentAuthentificated() ? (
+              <Creche />
+            ) : (
+              <Navigate to="/" />
+            ),
           },
           {
             path: "crechenotfound",
-            element: isAuthenticated() ? <CrecheNoRDV /> : <Navigate to="/" />,
+            element: isParentAuthentificated() ? (
+              <CrecheNoRDV />
+            ) : (
+              <Navigate to="/" />
+            ),
           },
           {
             path: "agendaparents",
-            element: <AgendaParents />,
+            element: isParentAuthentificated() ? (
+              <AgendaParents />
+            ) : (
+              <Navigate to="/" />
+            ),
           },
           {
-            path: "crechedetails",
-            element: <CrecheDetails />,
+            path: "crechedetails/:id",
+            element: isParentAuthentificated() ? (
+              <CrecheDetails />
+            ) : (
+              <Navigate to="/" />
+            ),
           },
           {
-            path: "folders",
-            element: isAuthenticated() ? <Folders /> : <Navigate to="/" />,
-            children: [
-              {
-                path: "dossierparent",
-                element: <DossierParents />,
-              },
-              {
-                path: "dossierenfant",
-                element: <DossierEnfants />,
-              },
-              {
-                path: "dossierinscription",
-                element: <DossierInscription />,
-              },
-            ],
+            path: "folders/:id",
+            element: isParentAuthentificated() ? (
+              <Folders />
+            ) : (
+              <Navigate to="/" />
+            ),
+          },
+          {
+            path: "dossierparent/:id",
+            element: <DossierParents />,
+          },
+          {
+            path: "dossierenfant/:id",
+            element: <DossierEnfants />,
+          },
+          {
+            path: "dossierinscription/:id",
+            element: <DossierInscription />,
           },
         ],
       },
@@ -136,7 +196,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/pro/dashboard",
-        element: isAuthenticated() ? <Dashboard /> : <Navigate to="/" />,
+        element: isStructureAuthentificated() ? (
+          <Dashboard />
+        ) : (
+          <Navigate to="/" />
+        ),
       },
       {
         path: "/pro/dashboard",

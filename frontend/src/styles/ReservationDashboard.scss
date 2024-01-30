@@ -19,7 +19,6 @@
     margin: auto;
     margin-bottom: 1rem;
     padding: 16px;
-    width: 80%;
     box-shadow:
       rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
       rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
@@ -40,42 +39,97 @@
 
     p {
       margin: 1rem;
+      text-align: center;
+      font-weight: bold;
+
+      .color-status {
+        display: flex;
+        font-weight: normal;
+        text-align: center;
+        &.waiting {
+          background-color: $clr-bg-active;
+          color: $clr-white;
+          padding: 0px 15px;
+          border-radius: 0.5rem;
+        }
+        &.accepted {
+          background-color: $clr-accepted;
+          color: $clr-white;
+          padding: 0px 12px;
+          border-radius: 0.5rem;
+        }
+        &.refused {
+          background-color: $clr-rejected;
+          color: $clr-white;
+          padding: 0px 12px;
+          border-radius: 0.5rem;
+        }
+      }
     }
 
-    .btn-accept {
-      margin-top: 8px;
-      padding: 8px 12px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      background-color: $clr-accepted;
-      color: $clr-white;
-      margin-right: 8px;
+    .btn_accept_refuse {
+      display: flex;
+      flex-direction: column;
+
+      .btn-accept {
+        display: flex;
+        gap: 0.3rem;
+        margin-top: 8px;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 1rem;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        background-color: $clr-accepted;
+        color: $clr-white;
+        // margin-right: 8px;
+
+        .icon-button {
+          width: 19px;
+        }
+      }
+      .btn-reject {
+        display: flex;
+        gap: 0.3rem;
+        margin-top: 8px;
+        padding: 8px 15px;
+        border: none;
+        border-radius: 1rem;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        background-color: $clr-rejected;
+        color: $clr-white;
+
+        .icon-button {
+          width: 20px;
+          margin-right: 3px;
+        }
+      }
     }
-    .btn-reject {
-      margin-top: 8px;
-      padding: 8px 12px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      background-color: $clr-rejected;
-      color: $clr-white;
-      margin-right: 8px;
-    }
+
     .btn-modify {
+      display: flex;
+      gap: 0.3rem;
       margin-top: 8px;
-      padding: 8px 12px;
+      padding: 10px 13px;
       border: none;
-      border-radius: 4px;
+      border-radius: 1rem;
       cursor: pointer;
       background-color: $clr-bg-active;
       color: $clr-white;
       margin-right: 8px;
+
+      .icon-button {
+        width: 17px;
+      }
     }
   }
+
   .filters-btn {
-    margin-top: 3rem;
-    margin-bottom: 2rem;
+    margin-top: 5rem;
+    margin-bottom: 1rem;
     button {
       margin: 0.5rem;
       padding: 0.3rem;
@@ -102,11 +156,20 @@
         color: $clr-white;
       }
       &:nth-child(3) {
+        color: grey;
+        border: 2px solid grey;
+        padding: 0.3rem 0.6rem;
+      }
+      &:nth-child(3):hover {
+        background-color: grey;
+        color: $clr-white;
+      }
+      &:nth-child(4) {
         color: #2dcd7a;
         border: 2px solid #2dcd7a;
         padding: 0.3rem 0.6rem;
       }
-      &:nth-child(3):hover {
+      &:nth-child(4):hover {
         background-color: #2dcd7a;
         color: $clr-white;
       }
@@ -120,5 +183,17 @@
         color: $clr-white;
       }
     }
+
+    .filters-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+  }
+}
+@media screen and (min-width: 1600px) {
+  .content-main {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
   }
 }

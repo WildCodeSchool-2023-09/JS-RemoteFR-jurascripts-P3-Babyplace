@@ -1,5 +1,4 @@
-@use "_variables.scss";
-@use "_mixins.scss";
+@import "variables.scss";
 
 .parentTutorialContainer {
   display: flex;
@@ -26,7 +25,7 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 5rem;
-    color: whitesmoke;
+    color: $primary;
 
     .parentTitle {
       font-size: 1.5rem;
@@ -41,7 +40,7 @@
     .parentsText {
       font-size: 1rem;
       text-align: center;
-      color: whitesmoke;
+      color: $primary;
     }
 
     .parentButton {
@@ -54,12 +53,12 @@
       .previous {
         background-color: transparent;
         border: 0;
-        color: whitesmoke;
+        color: $primary;
         font-size: 1rem;
         margin-left: 2rem;
 
         a {
-          color: whitesmoke;
+          color: $primary;
           text-decoration: none;
         }
       }
@@ -67,7 +66,7 @@
       .next {
         background-color: transparent;
         border: 0;
-        color: whitesmoke;
+        color: $primary;
         font-size: 1rem;
         margin-right: 2rem;
 
@@ -75,14 +74,14 @@
           margin-left: 0.5rem;
           padding: 10px 15px;
           text-align: center;
-          border: 0.1rem solid black;
+          border: 0.1rem solid $four;
           background-color: rgb(59, 10, 59);
-          color: whitesmoke;
+          color: $primary;
           border-radius: 5rem;
         }
         .btn:hover {
-          background-color: whitesmoke;
-          color: black;
+          background-color: $primary;
+          color: $four;
         }
       }
     }

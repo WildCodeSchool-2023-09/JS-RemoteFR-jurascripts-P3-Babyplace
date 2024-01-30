@@ -1,23 +1,18 @@
-@use "_variables.scss";
-@use "_mixins.scss";
+@import "variables.scss";
 
 .parentConnexionContainer {
-  display: block;
-  width: 100vw;
-  justify-content: center;
-  align-items: center;
   min-height: 100svh;
 
   .parentContainer {
     .titleParentConnexion {
       display: flex;
       flex-direction: column;
-      color: whitesmoke;
+      color: $primary;
       gap: 1.3rem;
     }
 
     .logoParent {
-      width: 50%;
+      width: 200px;
       margin: auto;
       height: auto;
       margin-top: 1rem;
@@ -25,7 +20,7 @@
 
     .parent {
       text-align: center;
-      font-size: 1.5rem;
+      font-size: 1.2rem;
     }
 
     .spaceContainer {
@@ -33,10 +28,10 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 0.1rem;
+      gap: 3rem;
 
       .spaceConnexion {
-        color: #f6f6f6;
+        color: $primary;
         margin-top: 0.3rem;
         font-size: 0.8rem;
       }
@@ -51,14 +46,17 @@
         margin: auto;
         opacity: 100%;
 
-        label {
+        form {
           display: flex;
           flex-direction: column;
-          padding-bottom: 1rem;
           gap: 1rem;
+          label {
+            display: flex;
+            flex-direction: column;
+          }
 
-          input[type="mail"],
-          input[type="password"] {
+          input {
+            width: 8;
             border-radius: 0.5rem;
             background-color: transparent;
             text-align: center;
@@ -112,7 +110,7 @@
         color: antiquewhite;
         font-size: 0.8rem;
         a {
-          color: black;
+          color: $four;
           font-size: 0.8rem;
         }
       }
@@ -140,13 +138,13 @@
     text-align: center;
     justify-content: center;
     text-decoration: none;
-    border: 0.1rem solid black;
+    border: 0.1rem solid $four;
     background-color: rgb(59, 10, 59);
     color: violet;
     border-radius: 5rem;
 
     a {
-      color: whitesmoke;
+      color: $primary;
       text-decoration: none;
     }
   }

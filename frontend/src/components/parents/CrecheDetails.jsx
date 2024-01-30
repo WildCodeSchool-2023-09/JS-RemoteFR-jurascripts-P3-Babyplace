@@ -1,19 +1,53 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { IoSettingsOutline } from "react-icons/io5";
+import { useNavigate, useParams } from "react-router-dom";
 import {
-  background,
-  balade,
-  infe,
-  info,
-  wifi,
-  tea,
-} from "../../assets/parents/creche";
+  MdOutlineHealthAndSafety,
+  MdAttractions,
+  MdOutlineFoodBank,
+} from "react-icons/md";
+import { background1, info } from "../../assets/parents/creche";
+
 import "../../styles/crecheDetails.scss";
 
 function CrecheDetails() {
+  const [popup, setPopup] = useState(false);
   const [button, setButton] = useState(false);
   const [mode, setMode] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(null);
+  const navigate = useNavigate();
+  const { id } = useParams();
+
+  useEffect(() => {
+    async function fetchData() {
+      const pricesUrl = `${
+        import.meta.env.VITE_BACKEND_URL
+      }/api/reservation/${id}/prices`;
+
+      axios
+        .get(pricesUrl)
+        .then((response) => {
+          const priceFromApi = response.data.price;
+          const priceFormatted = priceFromApi.replace("-", ".");
+          const basicPrice = parseFloat(priceFormatted);
+          const maintenanceFee = button ? 3.5 : 0;
+          const foodFee = mode ? 7 : 0;
+          const newTotal = basicPrice + maintenanceFee + foodFee + 0.5;
+          setTotalPrice(newTotal);
+        })
+        .catch((error) => {
+          console.error(
+            "Erreur lors de la récupération du prix depuis l'API",
+            error
+          );
+        });
+    }
+
+    if (id) {
+      fetchData();
+    }
+  }, [id, button, mode]);
 
   const switchButton = () => {
     setButton(!button);
@@ -23,8 +57,6 @@ function CrecheDetails() {
     setMode(!mode);
   };
 
-  const [popup, setPopup] = useState(false);
-
   const openPopup = () => {
     setPopup(true);
   };
@@ -33,27 +65,39 @@ function CrecheDetails() {
     setPopup(false);
   };
 
-  const calculationTotalPrice = (basicPrice, maintenance, food) => {
-    const maintenanceFee = maintenance ? 3.5 : 0;
-    const foodFee = food ? 7 : 0;
+  async function updatePrice(newPrice, reservationId) {
+    try {
+      await axios.put(
+        `${
+          import.meta.env.VITE_BACKEND_URL
+        }/api/reservation/${reservationId}/prices`,
+        {
+          prices: newPrice,
+        }
+      );
+      return true;
+    } catch (error) {
+      console.error("Erreur lors de la mise à jour du prix", error);
+      return false;
+    }
+  }
 
-    return basicPrice + maintenanceFee + foodFee;
-  };
+  async function handleNextClick() {
+    if (id) {
+      const updateSuccess = await updatePrice(totalPrice, id);
 
-  // prix x nb of hours :
-  const basicPrice = 3.5 * 8 + 0.5;
-  const total = calculationTotalPrice(basicPrice, button, mode);
+      if (updateSuccess) {
+        const reservationId = localStorage.getItem("reservationId");
+        navigate(`/reservation/${reservationId}/details`);
+      }
+    }
+  }
 
   return (
     <section className="crechedetails">
-      <h1 className="creche-title">
-        <Link to="/parents/agendaparents">
-          <img src={infe} alt="inferieur icon" />
-        </Link>
-        Crèche Picoti Picota
-      </h1>
+      <h1 className="creche-title">Crèche Picoti Picota</h1>
       <div className="creche-container">
-        <img src={background} alt="creche" className="creche-img" />
+        <img src={background1} alt="creche" className="creche-img" />
 
         <div className="creche-description">
           <h2 className="creche-reservation">Demande de Réservation</h2>
@@ -73,22 +117,22 @@ function CrecheDetails() {
           </h2>
           <ul className="creche-date">
             <li>
-              Date : lundi 14 janvier
+              Date : Lundi 12 février 2024
               <span>
                 <IoSettingsOutline />
               </span>
             </li>
             <li>
-              Horaire : 9-17h
+              Horaire : 9h-17h
               <span>
                 <IoSettingsOutline />
               </span>
             </li>
           </ul>
           <div className="activities">
-            <img src={balade} alt="balade" /> <span>Repas bio</span>
-            <img src={tea} alt="tea" /> <span>Accueil Handicap</span>
-            <img src={wifi} alt="tea" />
+            <MdAttractions /> <span>Repas bio</span>
+            <MdOutlineFoodBank /> <span>Accueil Handicap</span>
+            <MdOutlineHealthAndSafety />
             <span>Horaires Tarifs</span>
           </div>
           <div className="indemnities">
@@ -126,15 +170,16 @@ function CrecheDetails() {
           </div>
           <div className="tarif-button">
             <ul className="price">
-              <li className="prix"> {total}€* </li>
+              <li className="prix"> {totalPrice}€* </li>
               <li className="note">8 h de garde*</li>
             </ul>
-
-            <Link to="/parents/reservation">
-              <button type="button" className="btn-detail">
-                Suivant
-              </button>
-            </Link>
+            <button
+              type="submit"
+              className="btn-detail"
+              onClick={handleNextClick}
+            >
+              Suivant
+            </button>
           </div>
         </div>
       </div>

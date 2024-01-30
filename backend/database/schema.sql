@@ -26,8 +26,8 @@ create table users (
 create table parents (
   id int auto_increment primary key,
   user_id int unique,
-  first_name varchar(100) not null,
-  last_name varchar(100) not null,
+  first_name varchar(100),
+  last_name varchar(100),
   birth_name varchar(100),
   terms_accepted boolean,
   date_acceptance_terms datetime,
@@ -38,21 +38,19 @@ create table parents (
   city varchar(100),
   phone_number varchar(15),
   email varchar(100),
-  profession varchar(100),
-  constraint fk_parents_users foreign key (user_id) references users(id) ON DELETE CASCADE ON UPDATE CASCADE
+  profession varchar(100)
 );
 
 create table child (
   id int auto_increment primary key,
-  parents_id int,
-  first_name varchar(100) not null,
-  last_name varchar(100) not null,
-  date_of_birth date not null,
+  parent_id int,
+  first_name varchar(100),
+  last_name varchar(100),
+  date_of_birth date,
   walker boolean,
   name_of_doctor varchar(100),
   allergies text,
-  alimentation enum('All', 'Vegan', 'Vegetarian', 'Halal', 'Kosher'),
-  constraint fk_child_parents foreign key (parents_id) references parents(id) ON DELETE CASCADE ON UPDATE CASCADE
+  alimentation enum('All', 'Vegan', 'Vegetarian', 'Halal', 'Kosher')
 );
 
 create table structures (
@@ -69,8 +67,7 @@ create table structures (
   activities text,
   welcomes text,
   experiences text,
-  prices decimal(10,2),
-  constraint fk_structures_users foreign key (user_id) references users(id) ON DELETE CASCADE ON UPDATE CASCADE
+  prices decimal(10,2)
 );
 
 create table employees (
@@ -79,10 +76,7 @@ create table employees (
   first_name varchar(100) not null,
   last_name varchar(100) not null,
   qualification varchar(100),
-  max_children_capacity int,
-  constraint fk_employees_structures foreign key (structure_id) references structures(id)
-  ON DELETE CASCADE
-  ON UPDATE CASCADE
+  max_children_capacity int
 );
 
 create table documents (
@@ -105,36 +99,26 @@ create table reservation (
   available_place_id int,
   status enum('in_progress', 'waiting', 'accepted', 'refused'),
   rejection_reason text,
-  reservation_date date,
+  reservation_date_start date,
+  reservation_date_end date,
   start_time time,
   end_time time,
-  created_date datetime default current_timestamp,
-  constraint fk_reservation_parents foreign key (parent_id) references parents(id),
-  constraint fk_reservation_documents foreign key (document_id) references documents(id),
-  constraint fk_reservation_child foreign key (child_id) references child(id)
+  prices decimal(10,2),
+  created_date datetime default current_timestamp
 );
 
 create table employees_disponibilities (
   id int auto_increment primary key,
   employee_id int,
-  available_date date,
+  start_date date,
+  end_date date,
   start_time time,
   end_time time,
-  number_of_places int,
-  constraint fk_employees_disponibilities_employees foreign key (employee_id) references employees(id)
-  ON DELETE CASCADE
-  ON UPDATE CASCADE
+  number_of_places int
 );
 
 create table employees_assignments (
   id int auto_increment primary key,
   reservation_id int,  
-employee_id int,
-constraint fk_employees_assignements_employees foreign key (employee_id) references employees(id)
-ON DELETE CASCADE
-ON UPDATE CASCADE
+  employee_id int
 );
-
-alter table documents 
-add constraint fk_documents_reservation foreign key (reservation_folder_id) references reservation(id) ON DELETE CASCADE
-ON UPDATE CASCADE;

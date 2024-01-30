@@ -7,8 +7,20 @@
   .calendar-main {
     margin: auto;
     width: 95%;
-    .fc-event {
+    .fc-event:not([style*="background-color"]) {
       background: $bg-gen;
+      z-index: 1;
+    }
+    .employee-1 {
+      background: linear-gradient(red, yellow);
+    }
+
+    .employee-2 {
+      background: linear-gradient(blue, violet);
+    }
+
+    .employee-3 {
+      background: linear-gradient(green, cyan);
     }
     .fc-timegrid-slot {
       height: 3.5rem;
@@ -30,5 +42,38 @@
     .fc-button:active {
       background: $height;
     }
+  }
+}
+
+.modal {
+  background-color: whitesmoke;
+  width: 30%;
+  height: 30%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid antiquewhite;
+  select {
+    margin-bottom: 30px;
+    width: 80%;
+    padding: 15px;
+    outline: none;
+  }
+  button {
+    width: 30%;
+    border-radius: 5px;
+    padding: 15px;
+    border: none;
+    background-color: rgba($color: orange, $alpha: 0.8);
+    font-size: 18px;
+    font-weight: bolder;
+    border-style: none;
+    color: white;
+    cursor: pointer;
   }
 }

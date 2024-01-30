@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { home, logo } from "../../assets";
 import "../../styles/reservation_tunnel.scss";
 
 function ReservationTunnel() {
+  const { reservationId } = useParams();
   return (
     <div className="reservation_tunnel">
       <img src={logo} alt="the logo of website" className="logo_website" />
@@ -17,8 +18,10 @@ function ReservationTunnel() {
         Cependant, il faut que vous complétiez votre dossier afin de finaliser
         votre demande !
       </p>
-      <Link to="/parents/folders" className="link-res">
-        <button type="button">Compléter mon dossier</button>
+      <Link to={`/parents/folders/${reservationId}`} className="link-res">
+        <button type="button">
+          Compléter mon dossier <span className="fleche">⮕</span>
+        </button>
       </Link>
 
       <div className="later_text">

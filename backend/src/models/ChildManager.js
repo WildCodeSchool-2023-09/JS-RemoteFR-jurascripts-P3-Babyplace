@@ -2,13 +2,10 @@ const AbstractManager = require("./AbstractManager");
 
 class ChildManager extends AbstractManager {
   constructor() {
-    // Call the constructor of the parent class (AbstractManager)
-    // and pass the table name "child" as configuration
     super({ table: "child" });
   }
 
-  // The C of CRUD - Create operation
-
+  // C
   async create({
     firstName,
     lastName,
@@ -17,10 +14,10 @@ class ChildManager extends AbstractManager {
     nameOfDoctor,
     allergies,
     alimentation,
+    parentId,
   }) {
-    // Execute the SQL INSERT query to add a new item to the "child" table
     const [rows] = await this.database.query(
-      `INSERT INTO ${this.table} (first_name, last_name, date_of_birth, walker, name_of_doctor, allergies, alimentation) VALUES (?,?,?,?,?,?,?)`,
+      `INSERT INTO ${this.table} (first_name, last_name, date_of_birth, walker, name_of_doctor, allergies, alimentation, parent_id) VALUES (?,?,?,?,?,?,?,?)`,
       [
         firstName,
         lastName,
@@ -29,37 +26,35 @@ class ChildManager extends AbstractManager {
         nameOfDoctor,
         allergies,
         alimentation,
+        parentId,
       ]
     );
-
-    // Return the ID of the newly inserted child
     return rows.insertId;
   }
 
-  // The Rs of CRUD - Read operations
-
+  // R
   async read(id) {
-    // Execute the SQL SELECT query to retrieve a specific child by its ID
     const [rows] = await this.database.query(
       `SELECT * FROM ${this.table} WHERE id = ?`,
       [id]
     );
-
-    // Return the first row of the result, which represents the child
     return rows[0];
   }
 
   async readAll() {
-    // Execute the SQL SELECT query to retrieve all items from the "child" table
     const [rows] = await this.database.query(`SELECT * FROM ${this.table}`);
-
-    // Return the array of items
     return rows;
   }
 
-  // The U of CRUD - Update operation
-  // TODO: Implement the update operation to modify an existing child
+  async readByParentId(parentId) {
+    const [rows] = await this.database.query(
+      `SELECT * FROM ${this.table} WHERE parent_id = ?`,
+      [parentId]
+    );
+    return rows[0];
+  }
 
+  // U
   async update({
     firstName,
     lastName,
@@ -87,9 +82,7 @@ class ChildManager extends AbstractManager {
     return [rows];
   }
 
-  // The D of CRUD - Delete operation
-  // TODO: Implement the delete operation to remove an child by its ID
-
+  // D
   async delete(id) {
     const [rows] = await this.database.query(
       `DELETE FROM ${this.table} where id = ?`,

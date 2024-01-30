@@ -1,7 +1,6 @@
 const tables = require("../tables");
 
 // B
-
 const browse = async (req, res, next) => {
   try {
     const assignements = await tables.employees_assignments.readAll();
@@ -72,10 +71,23 @@ const destroy = async (req, res, next) => {
   }
 };
 
+const addOne = async (req, res, next) => {
+  const assignement = req.body;
+  try {
+    const result = await tables.employees_assignments.createAssignment(
+      assignement
+    );
+    res.status(201).json(result);
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   browse,
   read,
   edit,
   add,
   destroy,
+  addOne,
 };

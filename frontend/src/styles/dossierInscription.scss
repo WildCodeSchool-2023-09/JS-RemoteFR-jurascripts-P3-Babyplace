@@ -1,13 +1,13 @@
 @import "./variables.scss";
 
 .InscriptionDoc {
-  h2 {
-    margin: 40px 20px;
-  }
   .Inscription_doc {
-    min-height: 76svh;
-    width: 80%;
     margin: 0 auto;
+    margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    
     form {
       display: flex;
       flex-direction: column;
@@ -17,6 +17,38 @@
         justify-content: space-around;
         align-items: center;
         margin: 0.33rem;
+
+        label {
+          cursor: pointer;
+          stroke-dasharray: 70.5096664428711 9999999;
+          stroke-dashoffset: -262.2723388671875;
+          input {
+            display: none;
+          }
+
+          svg {
+            overflow: visible;
+
+            width: 1.5rem;
+
+            .path {
+              fill: none;
+              stroke: $orangeFred;
+              stroke-width: 5;
+              stroke-linecap: round;
+              stroke-linejoin: round;
+              transition:
+                stroke-dasharray 0.5s ease,
+                stroke-dashoffset 0.5s ease;
+              stroke-dasharray: 241 9999999;
+              stroke-dashoffset: 0;
+            }
+          }
+          & input:checked ~ svg .path {
+            stroke-dasharray: 70.5096664428711 9999999;
+            stroke-dashoffset: -262.2723388671875;
+          }
+        }
 
         input {
           padding: 0.35rem;
@@ -32,7 +64,7 @@
     .send {
       padding: 0.123rem 0.77rem;
       border: 1px solid $six;
-      background: $bg-gen;
+      background: $orangeFred;
       border-radius: 0.78rem;
       color: $primary;
       margin: 0 38% 12px;

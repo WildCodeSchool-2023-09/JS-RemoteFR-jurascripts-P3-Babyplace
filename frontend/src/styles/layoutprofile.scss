@@ -1,10 +1,11 @@
+@import "variables.scss";
 .headbar {
   position: relative;
   height: 100px;
   display: flex;
   align-items: center;
   gap: 40px;
-  background: white;
+  background: $primary;
   box-shadow: 0px 25px 20px -20px rgba(222, 219, 219, 0.45);
   .picture {
     display: flex;
@@ -13,7 +14,7 @@
     margin-left: 20px;
     border: 5px solid transparent;
     border-radius: 9999px;
-    background: linear-gradient(to right, white, white),
+    background: linear-gradient(to right, $primary, $primary),
       linear-gradient(
         to right,
         rgba(71, 79, 255) 2.49%,

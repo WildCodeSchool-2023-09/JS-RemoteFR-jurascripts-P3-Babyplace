@@ -1,5 +1,4 @@
-@use "_variables.scss";
-@use "_mixins.scss";
+@import "variables.scss";
 
 .structureInscriptionContainer {
   display: flex;
@@ -13,12 +12,12 @@
 
   .titleStructureInscription {
     display: flex;
-    color: whitesmoke;
+    color: $primary;
     margin-bottom: 3vh;
   }
 
   .pro {
-    border: 2px solid whitesmoke;
+    border: 2px solid $primary;
     border-radius: 100px;
     padding: 0.5vh 1vw;
     margin: 0 1vw;
@@ -26,7 +25,7 @@
 
   .subtitleStructureInscription {
     color: grey;
-    background-color: whitesmoke;
+    background-color: $primary;
     width: 15vw;
     font-size: calc(15px + 0.5vw);
     padding-inline: 5px;
@@ -34,7 +33,7 @@
   }
 
   .dhInscription {
-    color: whitesmoke;
+    color: $primary;
     font-size: calc(15px + 0.5vw);
     font-weight: bold;
   }
@@ -50,7 +49,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #ffffff;
+    background-color: $primary;
     padding: 20px;
 
     .spaceInscription {
@@ -70,7 +69,7 @@
       width: 50%;
       margin-bottom: 2vh;
       a {
-        color: black;
+        color: $four;
       }
     }
     .linksInscription {
@@ -80,19 +79,19 @@
       justify-content: space-between;
     }
     .forgetPwdLink {
-      color: black;
+      color: $four;
       margin-right: 2vw;
     }
 
     .inscriptionLink {
-      color: black;
+      color: $four;
     }
 
     .structureInscriptionBtn {
       width: 50%;
       text-transform: uppercase;
-      color: whitesmoke;
-      background-color: #9c69e2;
+      color: $primary;
+      background-color: $ten;
       padding: 1vh 1vw;
       border: none;
       border-radius: 5px;
