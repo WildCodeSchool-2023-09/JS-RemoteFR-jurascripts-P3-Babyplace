@@ -1,11 +1,19 @@
-import "../../styles/parents_tutorials.scss";
-import React, { useState } from "react";
+import { jwtDecode } from "jwt-decode";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { tutorial } from "../../constants/dataGen";
 import { logo, parents } from "../../assets";
+import { tutorial } from "../../constants/dataGen";
+import "../../styles/parents_tutorials.scss";
 
 function ParentsTutorial() {
   const [tutorialText, setTutorialText] = useState(0);
+  const [profile, setProfile] = useState({ sub: 0 });
+  useEffect(() => {
+    const token = localStorage.getItem("parentToken");
+    if (token) {
+      setProfile(jwtDecode(token));
+    }
+  }, []);
 
   const handleNextClick = () => {
     setTutorialText(tutorialText + 1);
@@ -24,7 +32,7 @@ function ParentsTutorial() {
         <p className="parentsText">{tutorial[tutorialText].text}</p>
         <div className="parentButton">
           <button className="previous" type="submit">
-            <Link to="/parents/creche">Passer</Link>
+            <Link to={`/parents/profile/${profile.sub}`}>Passer</Link>
           </button>
           <div className="next">
             Suivant
@@ -33,7 +41,7 @@ function ParentsTutorial() {
                 &gt;
               </button>
             ) : (
-              <Link to="/parents/creche">
+              <Link to={`/parents/profile/${profile.sub}`}>
                 <button className="btn" type="submit">
                   &gt;
                 </button>

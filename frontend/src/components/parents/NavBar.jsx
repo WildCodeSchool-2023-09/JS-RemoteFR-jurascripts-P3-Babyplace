@@ -1,11 +1,6 @@
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
-import {
-  IoHomeSharp,
-  IoNotifications,
-  IoPerson,
-  IoSearch,
-} from "react-icons/io5";
+import { IoFolderOpen, IoPerson, IoSearch } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import "../../styles/navbar.scss";
 
@@ -20,24 +15,19 @@ function NavBar() {
 
   const navbar = [
     {
-      id: 1,
-      icons: <IoHomeSharp className="icons" />,
-      link: `/parents/connexion`,
+      id: 2,
+      icons: <IoPerson className="icons" />,
+      link: `/parents/profile/${profile.sub}`,
     },
     {
-      id: 2,
+      id: 3,
       icons: <IoSearch className="icons" />,
       link: `/parents/creche`,
     },
     {
-      id: 3,
-      icons: <IoNotifications className="icons" />,
-      link: `/parents/folders/${profile.sub}`,
-    },
-    {
       id: 4,
-      icons: <IoPerson className="icons" />,
-      link: `/parents/profile/${profile.sub}`,
+      icons: <IoFolderOpen className="icons" />,
+      link: `/parents/folders/${profile.sub}`,
     },
   ];
 

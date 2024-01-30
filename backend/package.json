@@ -1,6 +1,7 @@
 {
   "scripts": {
     "dev": "nodemon index.js",
+    "db:calendar": "node generateCalendar.js",
     "db:migrate": "node migrate.js",
     "db:seed": "node seed.js",
     "build": "node migrate.js",
