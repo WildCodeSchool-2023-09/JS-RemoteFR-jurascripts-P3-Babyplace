@@ -66,16 +66,16 @@ function ReservationDashboard() {
       <div className="filters-btn">
         <span className="filters-title">Toutes les réservations :</span>
         <button type="button" onClick={() => changeFilter("all")}>
-          Tous
+          Toutes
         </button>
         <button type="button" onClick={() => changeFilter("pending")}>
-          Demande en Attente
+          Demandes en attente
         </button>
         <button type="button" onClick={() => changeFilter("accepted")}>
-          Accepté
+          Acceptées
         </button>
         <button type="button" onClick={() => changeFilter("rejected")}>
-          Refusé
+          Refusées
         </button>
       </div>
       <div className="cards-ctn">
