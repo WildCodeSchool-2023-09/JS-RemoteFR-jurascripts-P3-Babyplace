@@ -13,18 +13,6 @@ export const navLinks = [
     img: iconsNavbar.agenda,
     url: "/pro/dashboard/agenda",
   },
-  {
-    id: 3,
-    title: "Email",
-    img: iconsNavbar.email,
-    url: "/pro/dashboard/reservationdashboard",
-  },
-  {
-    id: 4,
-    title: "Compte",
-    img: iconsNavbar.gears,
-    url: "/pro/dashboard/agenda",
-  },
 ];
 
 export const tutorial = [
