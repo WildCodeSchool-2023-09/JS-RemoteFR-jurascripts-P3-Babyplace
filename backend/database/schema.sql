@@ -1,16 +1,3 @@
-drop database if exists baby_place;
-create database baby_place;
-use baby_place;
-drop table if exists employees_assignments;
-drop table if exists employees_disponibilities;
-drop table if exists reservation;
-drop table if exists documents;
-drop table if exists employees;
-drop table if exists structures;
-drop table if exists child;
-drop table if exists parents;
-drop table if exists users;
-
 create table users (
   id int auto_increment primary key,
   email varchar(100) unique not null,
