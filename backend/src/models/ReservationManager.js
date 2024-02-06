@@ -75,7 +75,7 @@ class ReservationManager extends AbstractManager {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const [rows] = await this.database.query(
-      `SELECT * FROM ${this.table} WHERE reservation_date_start >= ?`,
+      `SELECT * FROM ${this.table} WHERE reservation_date_start >= ? and status <> 'in_progress'`,
       [today]
     );
     return Promise.all(
