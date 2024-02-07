@@ -3,13 +3,13 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 import { MobileTimePicker } from "@mui/x-date-pickers/MobileTimePicker";
-import { frFR } from "@mui/x-date-pickers/locales";
 import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { frFR } from "@mui/x-date-pickers/locales";
+import axios from "axios";
 import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
-import "../../styles/calendarparents.scss";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "../../styles/calendarparents.scss";
 
 function CalendarParents() {
   const [chooseDate, setChooseDate] = useState(null);
@@ -59,8 +59,8 @@ function CalendarParents() {
           parentId,
           startTime: arrivalTime,
           endTime: departureTime,
-          reservationDateStart: chooseDate,
-          reservationDateEnd: chooseDate,
+          reservationDateStart: dayjs(chooseDate).format("YYYY-MM-DD"),
+          reservationDateEnd: dayjs(chooseDate).format("YYYY-MM-DD"),
           prices: price,
         }
       );
