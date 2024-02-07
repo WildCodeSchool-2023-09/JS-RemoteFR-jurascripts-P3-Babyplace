@@ -28,7 +28,7 @@ function Calendar() {
   const handleEventClick = useCallback(async ({ event }) => {
     setSelectedEvent(event);
     const response = await fetch(
-      `http://localhost:3310/api/available-employees?date=${
+      `${import.meta.env.VITE_BACKEND_URL}/api/available-employees?date=${
         event.start.toISOString().split("T")[0]
       }&startTime=${event.start.toISOString().split("T")[1]}&endTime=${
         event.end.toISOString().split("T")[1]
@@ -62,7 +62,9 @@ function Calendar() {
       return;
     }
 
-    const url = `http://localhost:3310/api/disponibilities/${selectedEvent.id}/decrement`;
+    const url = `${import.meta.env.VITE_BACKEND_URL}/api/disponibilities/${
+      selectedEvent.id
+    }/decrement`;
 
     const updateResponse = await fetch(url, {
       method: "PUT",
@@ -77,16 +79,19 @@ function Calendar() {
       return;
     }
 
-    const response = await fetch(`http://localhost:3310/api/assignments`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        reservationId: selectedEvent.id,
-        employeeId: selectedEmployee,
-      }),
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_BACKEND_URL}/api/assignments`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          reservationId: selectedEvent.id,
+          employeeId: selectedEmployee,
+        }),
+      }
+    );
 
     if (!response.ok) {
       console.error("Error:", response.status, response.statusText);
