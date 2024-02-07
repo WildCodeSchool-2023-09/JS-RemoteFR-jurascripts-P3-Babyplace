@@ -46,7 +46,7 @@ function Folders() {
       <section className="folders">
         <img src={avatar} alt="a man who smile" />
         <h2>
-          Satoru Gojo <br /> Papa Poule
+          Charles Proust <br /> Papa Poule
         </h2>
         <h3>Mettez toutes les chances de votre côté</h3>
         <p className="profile_sentence">
