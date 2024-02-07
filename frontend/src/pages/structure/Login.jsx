@@ -30,7 +30,7 @@ function Login() {
 
         localStorage.setItem("structureToken", auth.token);
 
-        navigate("/pro/dashboard/reservationdashboard", { replace: true });
+        navigate("/pro/dashboard/", { replace: true });
       } else {
         console.info(response);
       }
