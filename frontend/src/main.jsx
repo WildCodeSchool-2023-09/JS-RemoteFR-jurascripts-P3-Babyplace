@@ -195,19 +195,15 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
-        path: "/pro/dashboard",
+        path: "/pro",
         element: isStructureAuthentificated() ? (
           <Dashboard />
         ) : (
           <Navigate to="/" />
         ),
-      },
-      {
-        path: "/pro/dashboard",
-        element: <Dashboard />,
         children: [
           {
-            path: "reservationdashboard",
+            path: "dashboard",
             element: <ReservationDashboard />,
           },
           {
