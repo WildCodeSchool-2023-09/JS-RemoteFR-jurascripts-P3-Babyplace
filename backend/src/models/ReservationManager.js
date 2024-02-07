@@ -58,6 +58,16 @@ class ReservationManager extends AbstractManager {
           `SELECT * FROM parents WHERE id = ?`,
           [event.parent_id]
         );
+        const [employee] = await this.database.query(
+          `SELECT first_name FROM employees 
+           INNER JOIN employees_assignments ON employees_assignments.employee_id = employees.id 
+           INNER JOIN reservation ON reservation.id = employees_assignments.reservation_id 
+           WHERE reservation.id = ?`,
+          [event.id]
+        );
+        const employeeName = employee[0]
+          ? `${employee[0].first_name}`
+          : "Veuillez affecter un employé";
         return {
           id: event.id,
           parent_name: `${parent[0].first_name} ${parent[0].last_name}`,
@@ -66,6 +76,7 @@ class ReservationManager extends AbstractManager {
           reservationDateEnd: event.reservation_date_end,
           startTime: event.start_time,
           endTime: event.end_time,
+          employee: employeeName,
         };
       })
     );

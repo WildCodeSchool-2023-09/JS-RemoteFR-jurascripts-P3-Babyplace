@@ -36,7 +36,6 @@ function Calendar() {
     );
     const employees = await response.json();
 
-    // Utiliser un objet comme une carte pour supprimer les doublons
     const employeeMap = employees.reduce((map, employee) => {
       const newMap = { ...map };
       newMap[employee.employee_id] = employee;
@@ -47,7 +46,7 @@ function Calendar() {
 
     function openModal() {
       if (uniqueEmployees.length > 0) {
-        setSelectedEmployee(uniqueEmployees[0].employee_id); // Set the selected employee to the first employee
+        setSelectedEmployee(uniqueEmployees[0].employee_id);
         setModalIsOpen(true);
       }
     }
@@ -56,7 +55,6 @@ function Calendar() {
   }, []);
 
   const handleAssignClick = useCallback(async () => {
-    // Vérifier si selectedEmployee est null avant de faire la requête
     if (selectedEmployee === null) {
       console.error("Selected employee is null");
       return;
@@ -102,18 +100,14 @@ function Calendar() {
       (employee) => employee.employee_id === Number(selectedEmployee)
     );
 
-    // Vérifier si selectedEmployeeData est undefined
     if (!selectedEmployeeData) {
       console.error("No employee found with id:", selectedEmployee);
       return;
     }
 
     const calendarApi = calendarRef.current.getApi();
-
-    // Find the event in currentEvents
     const event = calendarApi.getEventById(selectedEvent.id);
 
-    // Update the employee name and add the corresponding CSS class
     if (event) {
       event.setExtendedProp(
         "employeeName",
@@ -132,15 +126,13 @@ function Calendar() {
   }, []);
 
   const eventContent = useCallback((args) => {
-    const className = args.event.extendedProps.classNames;
-    const employeeName =
-      args.event.extendedProps.employeeName || "Veuillez affecter un employé";
+    const className = `employee-${args.event.extendedProps.employeeName}`;
+    const employeeNames = args.event.extendedProps.employeeName;
+
     return {
       html: `
-      <div class="${className}" style="width: 100%; height: 100%; display: flex; flex-direction: column;">
-        <div style="text-align: center; padding: 5px;"><b>${args.event.title}</b></div>
-        <div style="flex-grow: 1; display: flex; justify-content: center; align-items: center;">${employeeName}</div>
-      </div>
+      <div class="${className}" style="width: 100%; height: 100%; display: flex; flex-direction: column; padding: 5px;">
+        <div style="text-align: center; padding: 5px;"><b>${args.event.title}</b></div> ${employeeNames} </div>
     `,
     };
   }, []);
@@ -150,7 +142,7 @@ function Calendar() {
       <div className="calendar-main">
         <FullCalendar
           ref={calendarRef}
-          key={currentEvents.length} // Ajoutez cette ligne
+          key={currentEvents.length}
           plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
           headerToolbar={{
             left: "prev,next today",
@@ -184,7 +176,7 @@ function Calendar() {
               style={{
                 overlay: {
                   backgroundColor: "rgba(0, 0, 0, 0.6)",
-                  zIndex: 10000, // Augmentez cette valeur si nécessaire
+                  zIndex: 10000,
                 },
               }}
             >

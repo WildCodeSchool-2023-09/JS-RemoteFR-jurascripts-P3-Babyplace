@@ -1,12 +1,21 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { iconsNavbar } from "../../assets";
 import { navLinks } from "../../constants/dataGen";
 import Logout from "../../pages/structure/Logout";
 import "../../styles/sidebar.scss";
 
 function Sidebar() {
-  const [activeLinkIndex, setActiveLinkIndex] = useState(0);
+  const location = useLocation();
+  const [activeLinkIndex, setActiveLinkIndex] = useState();
+
+  useEffect(() => {
+    const currentPath = location.pathname;
+    const currentLinkIndex = navLinks.findIndex(
+      (navLink) => navLink.url === currentPath
+    );
+    setActiveLinkIndex(currentLinkIndex);
+  }, [location]);
 
   const handleClickLink = (index) => {
     setActiveLinkIndex(index);

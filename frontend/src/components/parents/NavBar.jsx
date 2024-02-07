@@ -1,7 +1,7 @@
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 import { IoFolderOpen, IoPerson, IoSearch } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "../../styles/navbar.scss";
 
 function NavBar() {
@@ -31,19 +31,25 @@ function NavBar() {
     },
   ];
 
+  const location = useLocation();
   const [activeLinkIndex, setActiveLinkIndex] = useState(0);
 
-  const handleActive = (e) => {
-    setActiveLinkIndex(e);
-  };
+  useEffect(() => {
+    const currentPath = location.pathname;
+    const currentLinkIndex = navbar.findIndex(
+      (navLink) => navLink.link === currentPath
+    );
+    setActiveLinkIndex(currentLinkIndex);
+  }, [location, navbar]);
+
   return (
     <nav className="navbar_parents">
-      {navbar.map((icons) => (
+      {navbar.map((icons, index) => (
         <Link
           to={icons.link}
           key={icons.id}
-          className={` ${icons.id === activeLinkIndex ? "active" : ""}`}
-          onClick={() => handleActive(icons.id)}
+          className={` ${index === activeLinkIndex ? "active" : ""}`}
+          onClick={() => setActiveLinkIndex(index)}
         >
           {icons.icons}
         </Link>
