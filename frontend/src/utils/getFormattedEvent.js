@@ -22,9 +22,9 @@ const getFormattedEvents = async () => {
       title: event.child_name,
       start,
       end,
+      employeeName: event.employee,
     };
   });
-
   return formattedEvents;
 };
 

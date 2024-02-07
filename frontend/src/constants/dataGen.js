@@ -5,13 +5,13 @@ export const navLinks = [
     id: 1,
     title: "Liste des demandes",
     img: iconsNavbar.reservation,
-    url: "/pro/dashboard/reservationdashboard",
+    url: "/pro/dashboard",
   },
   {
     id: 2,
     title: "Agenda",
     img: iconsNavbar.agenda,
-    url: "/pro/dashboard/agenda",
+    url: "/pro/agenda",
   },
 ];
 

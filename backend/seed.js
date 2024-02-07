@@ -34,7 +34,7 @@ const seed = async () => {
     await database.query("delete from child");
     queries.push(
       database.query(
-        "insert into child (parent_id, first_name, last_name, date_of_birth, walker ) values ('1', 'Bébé', 'Wilder', '2023-01-01', '1')"
+        "insert into child (parent_id, first_name, last_name, date_of_birth, walker ) values ('1', 'Bébé', 'Toto', '2023-01-01', '1')"
       )
     );
     await database.query("delete from reservation");
@@ -52,17 +52,17 @@ const seed = async () => {
     await database.query("delete from employees");
     queries.push(
       database.query(
-        "insert into employees (structure_id, first_name, last_name, qualification, max_children_capacity) values ('1','Carole', 'Toto', 'Employee', '3')"
+        "insert into employees (structure_id, first_name, last_name, qualification, max_children_capacity) values ('1','Carole', 'B', 'Employee', '3')"
       )
     );
     queries.push(
       database.query(
-        "insert into employees (structure_id, first_name, last_name, qualification, max_children_capacity) values ('1','Nadine', 'Toto', 'Employee', '3')"
+        "insert into employees (structure_id, first_name, last_name, qualification, max_children_capacity) values ('1','Nadine', 'V', 'Employee', '3')"
       )
     );
     queries.push(
       database.query(
-        "insert into employees (structure_id, first_name, last_name, qualification, max_children_capacity) values ('1','Nicole', 'Toto', 'Employee', '3')"
+        "insert into employees (structure_id, first_name, last_name, qualification, max_children_capacity) values ('1','Nicole', 'K', 'Employee', '3')"
       )
     );
 
