@@ -58,7 +58,7 @@ function Folders() {
               Dossier <br /> Enfants
             </p>{" "}
             <span>
-              70% <br /> complété{" "}
+              10% <br /> complété{" "}
             </span>
           </div>
         </Link>
@@ -68,7 +68,7 @@ function Folders() {
               Dossier <br /> Parents
             </p>{" "}
             <span>
-              50% <br /> complété{" "}
+              20% <br /> complété{" "}
             </span>
           </div>
         </Link>
@@ -78,7 +78,7 @@ function Folders() {
               Dossier <br /> d'inscription
             </p>{" "}
             <span>
-              40% <br /> complété{" "}
+              10% <br /> complété{" "}
             </span>
           </div>
         </Link>
