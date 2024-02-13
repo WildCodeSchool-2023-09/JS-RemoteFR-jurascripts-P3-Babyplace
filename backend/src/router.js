@@ -2,7 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 
-const { hashPassword, verifyToken } = require("./services/auth");
+const { hashPassword } = require("./services/auth");
 
 const usersControllers = require("./controllers/usersControllers");
 const assignmentsControllers = require("./controllers/assignmentsControllers");
@@ -69,7 +69,7 @@ router.delete("/employees/:id", employeesControllers.destroy);
 
 // parents
 router.get("/parents", parentsControllers.browse);
-router.get("/parents/:user_id", parentsControllers.read);
+router.get("/parents/:user_id", parentsControllers.readByUserId);
 router.put("/parents/:id", parentsControllers.edit);
 router.post("/parents", parentsControllers.add);
 router.post("/parent", parentsControllers.addForReservation);
@@ -111,9 +111,9 @@ router.delete("/reservation/:id", reservationControllers.destroy);
 
 // structures
 router.get("/structures", structuresControllers.browse);
-router.get("/structures/:id", structuresControllers.read);
+router.get("/structures/:user_id", structuresControllers.readByUserId);
 router.put("/structures/:id", structuresControllers.edit);
-router.post("/structures", verifyToken, structuresControllers.add);
+router.post("/structures", structuresControllers.add);
 router.delete("/structures/:id", structuresControllers.destroy);
 
 module.exports = router;

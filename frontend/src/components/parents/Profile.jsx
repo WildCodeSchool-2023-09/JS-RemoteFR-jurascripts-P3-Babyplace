@@ -9,7 +9,6 @@ function Profile() {
   useEffect(() => {
     const token = localStorage.getItem("parentToken");
     if (token) {
-      console.info(jwtDecode(token));
       setProfile(jwtDecode(token));
     }
   }, []);
@@ -17,6 +16,9 @@ function Profile() {
 
   const handleLogout = () => {
     localStorage.removeItem("parentToken");
+    localStorage.removeItem("user");
+    localStorage.removeItem("parent");
+    localStorage.removeItem("parentId");
     navigate("/");
   };
   return (

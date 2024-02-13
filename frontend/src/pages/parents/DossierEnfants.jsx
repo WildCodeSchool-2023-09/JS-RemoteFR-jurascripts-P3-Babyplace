@@ -47,13 +47,6 @@ function DossierEnfants() {
     aptitude: "",
     autorisation: "",
   });
-  // const [uploadedFiles, setUploadedFiles] = useState({
-  //   assurance: null,
-  //   acteNaissance: null,
-  //   aptitude: null,
-  //   autorisation: null,
-  //   vaccination: null,
-  // });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -89,22 +82,6 @@ function DossierEnfants() {
   const triggerFileUpload = () => {
     document.getElementById("fileUpload").click();
   };
-
-  // const handleFileChange = (e, documentType) => {
-  //   const file = e.target.files[0];
-  //   if (file && file.type === "application/pdf") {
-  //     setUploadedFiles((prevFiles) => ({
-  //       ...prevFiles,
-  //       [documentType]: {
-  //         name: file.name,
-  //         url: URL.createObjectURL(file),
-  //         type: file.type,
-  //       },
-  //     }));
-  //   } else {
-  //     console.error("Le fichier doit être au format PDF");
-  //   }
-  // };
 
   const handleInputBlur = (e) => {
     const { name, value } = e.target;
@@ -258,12 +235,7 @@ function DossierEnfants() {
             />
           </div>
 
-          <input
-            type="file"
-            id="fileUpload"
-            style={{ display: "none" }}
-            // onChange={handleFileChange}
-          />
+          <input type="file" id="fileUpload" style={{ display: "none" }} />
 
           <div className="input">
             <label htmlFor="checkboxAssurance">

@@ -24,6 +24,11 @@ const read = async (req, res, next) => {
   }
 };
 
+const readByUserId = async (req, res) => {
+  const structure = await tables.structures.readByUserId(req.params.user_id);
+  res.json(structure);
+};
+
 // E
 const edit = async (req, res, next) => {
   try {
@@ -74,4 +79,5 @@ module.exports = {
   edit,
   add,
   destroy,
+  readByUserId,
 };
