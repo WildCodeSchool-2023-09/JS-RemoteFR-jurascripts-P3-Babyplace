@@ -13,7 +13,7 @@ const browse = async (req, res, next) => {
 // R
 const read = async (req, res, next) => {
   try {
-    const parents = await tables.parents.read(req.params.user_id);
+    const parents = await tables.parents.read(req.params.id);
     if (parents == null) {
       res.sendStatus(404);
     } else {
@@ -22,6 +22,11 @@ const read = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+};
+
+const readByUserId = async (req, res) => {
+  const parent = await tables.parents.readByUserId(req.params.user_id);
+  res.json(parent);
 };
 
 // E
@@ -86,4 +91,5 @@ module.exports = {
   add,
   destroy,
   addForReservation,
+  readByUserId,
 };

@@ -7,6 +7,11 @@ function Logout() {
 
   const handleLogout = () => {
     localStorage.removeItem("structureToken");
+    localStorage.removeItem("parentToken");
+    localStorage.removeItem("user");
+    localStorage.removeItem("parent");
+    localStorage.removeItem("parentId");
+    localStorage.removeItem("structure");
     navigate("/");
   };
 

@@ -13,9 +13,6 @@ function ReservationDashboard() {
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/listofrequests`)
       .then((response) => {
         const result = response.data;
-        //----------------------------------------------------------------------------
-        console.info("get table resa", result);
-        //----------------------------------------------------------------------------
         setCards(result);
       })
       .catch((error) => {

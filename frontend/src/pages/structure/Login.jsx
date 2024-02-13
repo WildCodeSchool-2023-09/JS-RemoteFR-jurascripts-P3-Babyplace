@@ -1,42 +1,50 @@
 import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
 import { connexion } from "../../assets";
 import "../../styles/login.scss";
 
 function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/users/login`,
-        {
-          method: "post",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: emailRef.current.value,
-            password: passwordRef.current.value,
-            profile: "Structure",
-          }),
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/login`, {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+        profile: "Structure",
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
         }
-      );
+        return response.json();
+      })
+      .then((auth) => {
+        if (auth.token && (auth.user || auth.structure)) {
+          localStorage.setItem("structureToken", auth.token);
+          if (auth.user) {
+            localStorage.setItem("user", JSON.stringify(auth.user));
+          }
+          if (auth.structure) {
+            localStorage.setItem("structure", JSON.stringify(auth.structure));
+          }
 
-      if (response.status === 200) {
-        const auth = await response.json();
-
-        localStorage.setItem("structureToken", auth.token);
-
-        navigate("/pro/dashboard/", { replace: true });
-      } else {
-        console.info(response);
-      }
-    } catch (err) {
-      console.error(err);
-    }
+          window.location.href = "/pro/dashboard/";
+        } else {
+          console.error("Invalid server response:", auth);
+        }
+      })
+      .catch((error) => {
+        console.error(
+          "There has been a problem with your fetch operation:",
+          error
+        );
+      });
   };
 
   return (

@@ -65,6 +65,14 @@ class ParentsManager extends AbstractManager {
     return rows;
   }
 
+  async readByUserId(userId) {
+    const [rows] = await this.database.query(
+      `SELECT * FROM ${this.table} WHERE user_id = ?`,
+      [userId]
+    );
+    return rows[0];
+  }
+
   // U
   async update({
     firstName,
