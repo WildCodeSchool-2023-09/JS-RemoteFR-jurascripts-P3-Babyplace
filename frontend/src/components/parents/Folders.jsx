@@ -25,7 +25,6 @@ function Folders() {
 
   const handleUpdateStatusClick = (event) => {
     event.preventDefault();
-    console.info("Updating status for reservation ID:", id);
     if (id) {
       axios
         .put(

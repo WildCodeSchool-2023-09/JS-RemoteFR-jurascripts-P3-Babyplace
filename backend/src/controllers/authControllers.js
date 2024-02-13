@@ -2,6 +2,11 @@ const argon2 = require("argon2");
 const jwt = require("jsonwebtoken");
 
 const tables = require("../tables");
+const ParentsManager = require("../models/ParentsManager");
+const StructureManager = require("../models/StructureManager");
+
+const parentsManager = new ParentsManager();
+const structureManager = new StructureManager();
 
 const login = async (req, res, next) => {
   try {
@@ -19,9 +24,22 @@ const login = async (req, res, next) => {
       const token = await jwt.sign({ sub: user.id }, process.env.APP_SECRET, {
         expiresIn: "1h",
       });
+      const parent = await parentsManager.readByUserId(user.id);
+      const structure = await structureManager.readByUserId(user.id);
+
+      if (
+        (parent && req.body.profile !== "Parent") ||
+        (structure && req.body.profile !== "Structure")
+      ) {
+        res.sendStatus(422);
+        return;
+      }
+
       res.json({
         token,
         user,
+        parent,
+        structure,
       });
     } else {
       res.sendStatus(422);
@@ -35,6 +53,10 @@ const logout = async (req, res, next) => {
   try {
     localStorage.removeItem("structureToken");
     localStorage.removeItem("parentToken");
+    localStorage.removeItem("user");
+    localStorage.removeItem("parent");
+    localStorage.removeItem("parentId");
+
     res.status(200).json({ message: "Déconnexion réussie" });
   } catch (error) {
     console.error("Erreur lors de la déconnexion :", error);

@@ -35,7 +35,27 @@ function Register() {
       );
 
       if (response.status === 201) {
-        navigate("/pro/login");
+        const userData = await response.json();
+
+        const structureResponse = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/api/structures`,
+          {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              userId: userData.insertId,
+              email: emailRef.current.value.toString(),
+            }),
+          }
+        );
+
+        if (structureResponse.status === 201) {
+          navigate("/pro/login");
+        } else {
+          console.info(structureResponse);
+        }
       } else {
         console.info(response);
       }

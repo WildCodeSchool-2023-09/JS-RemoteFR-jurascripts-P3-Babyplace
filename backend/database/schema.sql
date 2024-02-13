@@ -43,7 +43,7 @@ create table child (
 create table structures (
   id int auto_increment primary key,
   user_id int unique,
-  name varchar(100) not null,
+  name varchar(100),
   description text,
   address varchar(100),
   address_complements varchar(100),

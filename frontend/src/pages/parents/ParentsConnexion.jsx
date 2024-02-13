@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { home, logo } from "../../assets";
 import "../../styles/parents_connexion.scss";
 
@@ -21,15 +21,9 @@ function ParentsConnexion() {
     updateButton();
   }, [validPwd]);
 
-  // Hook pour la navigation
-  const navigate = useNavigate();
-
-  // Gestionnaire de soumission du formulaire
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     try {
-      // Appel à l'API pour demander une connexion
       const response = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/api/users/login`,
         {
@@ -43,19 +37,18 @@ function ParentsConnexion() {
         }
       );
 
-      // Redirection vers la page de connexion si la création réussit
       if (response.status === 200) {
         const auth = await response.json();
-        // stocker le token dans le local storage
         localStorage.setItem("parentToken", auth.token);
+        localStorage.setItem("parentId", auth.parentId);
+        localStorage.setItem("user", JSON.stringify(auth.user));
+        localStorage.setItem("parent", JSON.stringify(auth.parent));
 
-        navigate("/parents/rules", { replace: true });
+        window.location.href = "/parents/rules";
       } else {
-        // Log des détails de la réponse en cas d'échec
         console.info(response);
       }
     } catch (err) {
-      // Log des erreurs possibles
       console.error(err);
     }
   };

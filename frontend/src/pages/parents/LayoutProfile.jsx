@@ -8,7 +8,6 @@ function LayoutProfile() {
   const [profile, setProfile] = useState([]);
 
   const { id } = useParams();
-  console.info(id);
 
   useEffect(() => {
     axios
@@ -17,14 +16,12 @@ function LayoutProfile() {
         const result = response.data;
         setProfile(result);
         localStorage.setItem("parentId", result.id);
-        console.info(result);
       })
       .catch((error) => {
         console.error("Erreur lors de la récupération des données:", error);
       });
   }, []);
 
-  console.info(profile);
   return (
     <>
       <header className="headbar">
